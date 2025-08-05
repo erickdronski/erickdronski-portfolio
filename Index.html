@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Erick Dronski | Portfolio</title>
+  <style>
+    :root {
+      --bg-dark: #121212;
+      --bg-light: #f2f2f2;
+      --text-dark: #f5f5f5;
+      --text-light: #1a1a1a;
+      --card-dark: #1e1e1e;
+      --card-light: #ffffff;
+      --accent: #3A8DFF;
+    }
+
+    html[data-theme='dark'] {
+      --bg: var(--bg-dark);
+      --text: var(--text-dark);
+      --card: var(--card-dark);
+    }
+
+    html[data-theme='light'] {
+      --bg: var(--bg-light);
+      --text: var(--text-light);
+      --card: var(--card-light);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 2rem;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .brand {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    .subheading {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
+    .theme-toggle {
+      display: flex;
+      gap: 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .socials {
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 1.2rem;
+      font-size: 1.4rem;
+    }
+
+    .socials a {
+      color: var(--text);
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+
+    .socials a:hover {
+      transform: scale(1.2);
+    }
+
+    .tiles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .tile {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: transform 0.2s, background 0.3s;
+      cursor: pointer;
+    }
+
+    .tile:hover {
+      transform: translateY(-5px);
+    }
+
+    .tile-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent);
+    }
+
+    .tile-label {
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    @media (max-width: 600px) {
+      .brand {
+        font-size: 2rem;
+      }
+      .theme-toggle {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <div class="brand">Erick Dronski</div>
+      <div class="subheading">My Professional Portfolio</div>
+    </div>
+    <div class="theme-toggle" onclick="toggleTheme()">
+      <span id="sun" style="display: none;">☀️</span>
+      <span id="moon">🌙</span>
+    </div>
+  </header>
+
+  <div class="socials">
+    <a href="https://x.com/YOURHANDLE" target="_blank" title="X">𝕏</a>
+    <a href="https://linkedin.com/in/YOURHANDLE" target="_blank" title="LinkedIn">🔗</a>
+    <a href="https://instagram.com/YOURHANDLE" target="_blank" title="Instagram">📷</a>
+    <a href="https://www.codecademy.com/profiles/YOURUSERNAME" target="_blank" title="Codecademy">💻</a>
+    <a href="https://github.com/erickdronski" target="_blank" title="GitHub">🐙</a>
+  </div>
+
+  <div class="tiles">
+    <div class="tile" onclick="location.href='resume.html'">
+      <div class="tile-icon">📄</div>
+      <div class="tile-label">Resume</div>
+    </div>
+    <div class="tile" onclick="location.href='gallery.html'">
+      <div class="tile-icon">🖼️</div>
+      <div class="tile-label">Gallery</div>
+    </div>
+    <div class="tile" onclick="location.href='about.html'">
+      <div class="tile-icon">👤</div>
+      <div class="tile-label">About Me</div>
+    </div>
+    <div class="tile" onclick="location.href='projects.html'">
+      <div class="tile-icon">💡</div>
+      <div class="tile-label">Projects</div>
+    </div>
+    <div class="tile" onclick="location.href='courses.html'">
+      <div class="tile-icon">🎓</div>
+      <div class="tile-label">Courses</div>
+    </div>
+    <div class="tile" onclick="location.href='contact.html'">
+      <div class="tile-icon">✉️</div>
+      <div class="tile-label">Contact</div>
+    </div>
+    <div class="tile" onclick="location.href='other.html'">
+      <div class="tile-icon">➕</div>
+      <div class="tile-label">Other</div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Erick Dronski. Built with ❤️ on GitHub Pages.
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      document.getElementById('sun').style.display = isDark ? 'inline' : 'none';
+      document.getElementById('moon').style.display = isDark ? 'none' : 'inline';
+    }
+  </script>
+</body>
+</html>
