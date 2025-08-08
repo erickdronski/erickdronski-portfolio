@@ -89,6 +89,7 @@
     .slideshow{position:relative; aspect-ratio: 16/10; background:linear-gradient(135deg, #0f172a 0%, #111827 100%); border-radius:24px; overflow:hidden; border:1px solid rgba(255,255,255,.08); box-shadow:var(--shadow)}
     .slide{position:absolute; inset:0; opacity:0; transition:opacity .6s ease}
     .slide.active{opacity:1}
+    .placeholder{position:absolute; inset:0; display:grid; place-items:center; color:var(--muted); padding:16px; text-align:center}
     .hero-text h1{font-size: clamp(36px, 6vw, 68px); margin:0 0 14px}
     .subtitle{font-size: clamp(16px, 2.2vw, 22px); color:var(--muted)}
 
@@ -111,6 +112,7 @@
     textarea{min-height:140px}
     .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:12px; border:1px solid rgba(255,255,255,.16); background:var(--brand); color:#fff; font-weight:600; cursor:pointer}
     .btn.secondary{background:transparent;color:var(--text)}
+    .btn[disabled]{opacity:.5; cursor:not-allowed}
 
     /* ====== FOOTER ====== */
     footer{padding:30px 0; border-top:1px solid rgba(255,255,255,.08); color:var(--muted)}
@@ -135,17 +137,21 @@
     }
   </style>
 </head>
-<body class="dark">
+<body>
   <!-- SOCIAL RAIL -->
   <aside class="social-rail" aria-label="Social links">
     <a href="https://www.instagram.com/erickdronski" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor"/><circle cx="12" cy="12" r="4" stroke="currentColor"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor"/><circle cx="12" cy="12" r="4" stroke="currentColor"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+    </a>
     <a href="https://x.com/dronskierick" target="_blank" rel="noopener" title="X" aria-label="X">
-      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h4.6l5.3 7.1L18.4 3H21l-7.2 9.6L21 21h-4.6l-5.6-7.5L5.6 21H3l7.7-10.3L3 3z"/></svg></a>
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h4.6l5.3 7.1L18.4 3H21l-7.2 9.6L21 21h-4.6l-5.6-7.5L5.6 21H3l7.7-10.3L3 3z"/></svg>
+    </a>
     <a href="https://www.linkedin.com/in/erickdronski" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">
-      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5zM3 9h4v12H3zM10 9h3.8v1.7h.1c.5-.9 1.7-1.8 3.5-1.8 3.7 0 4.3 2.4 4.3 5.6V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4V9z"/></svg></a>
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5zM3 9h4v12H3zM10 9h3.8v1.7h.1c.5-.9 1.7-1.8 3.5-1.8 3.7 0 4.3 2.4 4.3 5.6V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4V9z"/></svg>
+    </a>
     <a href="https://www.tiktok.com/@dr0nski" target="_blank" rel="noopener" title="TikTok" aria-label="TikTok">
-      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M21 8.5c-2.3 0-4.3-1.2-5.5-3v10.1a5.6 5.6 0 1 1-4.8-5.6v3.1a2.8 2.8 0 1 0 2.2 2.7V2h3a6.9 6.9 0 0 0 5.1 2.3v4.2z"/></svg></a>
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M21 8.5c-2.3 0-4.3-1.2-5.5-3v10.1a5.6 5.6 0 1 1-4.8-5.6v3.1a2.8 2.8 0 1 0 2.2 2.7V2h3a6.9 6.9 0 0 0 5.1 2.3v4.2z"/></svg>
+    </a>
   </aside>
 
   <header>
@@ -215,8 +221,7 @@
       <h2 class="section-title">About Me</h2>
       <div class="about">
         <div class="headshot" id="headshot" aria-label="Headshot placeholder">
-          <!-- Drop your headshot in /assets/headshot.jpg or update the src below -->
-          <img src="assets:headshot.jpg" alt="Headshot of Erick Dronski" onerror="this.style.display='none'" />
+          <img id="headshotImg" src="" alt="Headshot of Erick Dronski" style="display:none" />
         </div>
         <article>
           <p>We never really know where life will take us. Moments and situations define us, and the choices we make along with the experiences we collect shape the next chapter. What we think is the “right” path often isn’t the one we end up walking.</p>
@@ -232,8 +237,9 @@
     <!-- RESUME -->
     <section id="resume" aria-label="Resume">
       <h2 class="section-title">Resume / CV</h2>
-      <p>Download my latest resume as a PDF below. (Drag your PDF to <code>/assets/erick-dronski-resume.pdf</code> then this button will work.)</p>
-      <a class="btn" href="assets:erick-dronski-resume.pdf" download>⬇ Download Resume (PDF)</a>
+      <p>Download my latest resume as a PDF below. (Drop a PDF into <code>/assets/</code> — the button will auto-detect any file with “resume” in the name.)</p>
+      <a id="resumeBtn" class="btn" href="#" download disabled>⬇ Download Resume (PDF)</a>
+      <div id="resumeStatus" style="margin-top:8px;color:var(--muted)"></div>
     </section>
 
     <!-- PROJECTS -->
@@ -289,6 +295,14 @@
     // ====== UTIL ======
     const $ = (sel, ctx=document) => ctx.querySelector(sel)
     const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel))
+    const cacheBust = () => `?v=${Date.now()}`
+    async function urlExists(url){
+      try{
+        const res = await fetch(url + cacheBust(), { method:'HEAD', cache:'no-store' })
+        return res.ok
+      }catch{ return false }
+    }
+    function encodePath(p){ return p.replace(/ /g, '%20') }
 
     // ====== YEAR ======
     $('#year').textContent = new Date().getFullYear()
@@ -359,45 +373,131 @@
     }
     buildTicker()
 
-    // ====== GALLERY + SLIDESHOW ======
-    // Replace these with your real gallery image paths (drag files into /assets/ and list them here)
-    const galleryImages = [
-      'assets:gallery-1.jpg',
-      'assets:gallery-2.jpg',
-      'assets:gallery-3.jpg',
-      'assets:gallery-4.jpg'
-    ]
-    function buildGallery(){
+    // ====== AUTO-DETECT: RESUME PDF ======
+    async function wireResume(){
+      const btn = $('#resumeBtn'); const status = $('#resumeStatus')
+      const candidates = [
+        'assets/erick-dronski-resume.pdf',
+        'assets/Erick-Dronski-Resume.pdf',
+        'assets/erick;dronski;resume.pdf',
+        'assets/Erick_Dronski_Resume.pdf',
+        'assets/ErickDronskiResume.pdf',
+        'assets/resume.pdf',
+        'assets/Erick Dronski Resume.pdf'
+      ].map(encodePath)
+      for(const path of candidates){
+        if(await urlExists(path)){
+          btn.href = path + cacheBust(); btn.download = path.split('/').pop(); btn.removeAttribute('disabled')
+          status.textContent = ''
+          return
+        }
+      }
+      status.textContent = 'No resume found yet — place a PDF in /assets with “resume” in the name.'
+    }
+
+    // ====== AUTO-DETECT: HEADSHOT ======
+    async function wireHeadshot(){
+      const img = $('#headshotImg')
+      const bases = ['headshot','Headshot','erick','Erick-Dronski','erick-dronski']
+      const exts = ['jpg','jpeg','png','webp']
+      for(const b of bases){
+        for(const e of exts){
+          const path = encodePath(`assets/${b}.${e}`)
+          if(await urlExists(path)){
+            img.src = path + cacheBust(); img.style.display='block'; return
+          }
+        }
+      }
+      // leave hidden if nothing found
+    }
+
+    // ====== AUTO-DETECT: GALLERY ======
+    async function collectGallery(){
+      const found = []
+      const exts = ['jpg','jpeg','png','webp']
+      // probe gallery-1..gallery-24 with multiple extensions
+      for(let i=1;i<=24;i++){
+        let added = false
+        for(const e of exts){
+          const path = encodePath(`assets/gallery-${i}.${e}`)
+          if(await urlExists(path)) { found.push(path); added = true; break }
+        }
+        // stop early if we miss 5 in a row (likely end)
+        if(i>6 && !added && !found.length){ /* keep scanning a bit at start */ }
+      }
+      // Also try generic names if numbering not used
+      const extras = ['cover','hero','portfolio','work-1','work-2']
+      for(const name of extras){
+        for(const e of exts){
+          const path = encodePath(`assets/${name}.${e}`)
+          if(await urlExists(path)) found.push(path)
+        }
+      }
+      return found
+    }
+
+    function buildGalleryGrid(images){
       const grid = $('#galleryGrid')
       if(!grid) return
-      grid.innerHTML = galleryImages.map((src,i)=>`<a href="#home" data-idx="${i}" class="card"><img src="${src}" alt="Gallery image ${i+1}" onerror="this.parentElement.textContent='Upload your images to /assets and update galleryImages[]'"/></a>`).join('')
-      // clicking a thumbnail jumps to hero and shows that slide
+      if(!images.length){
+        grid.innerHTML = '<div class="card">Add images to /assets as <code>gallery-1.jpg</code>, <code>gallery-2.jpg</code>… (jpg/jpeg/png/webp) to populate the gallery.</div>'
+        return
+      }
+      grid.innerHTML = images.map((src,i)=>`<a href="#home" data-idx="${i}" class="card"><img src="${src + cacheBust()}" alt="Gallery image ${i+1}"/></a>`).join('')
       $$('#galleryGrid a').forEach(a=>a.addEventListener('click', (e)=>{
-        e.preventDefault();
-        currentSlide = parseInt(a.dataset.idx,10) || 0; showSlide(currentSlide)
-        location.hash = '#home'
+        e.preventDefault(); currentSlide = parseInt(a.dataset.idx,10) || 0; showSlide(currentSlide); location.hash = '#home'
       }))
     }
 
     let currentSlide = 0
     let slideTimer
-    function buildSlideshow(){
+    function buildSlideshow(images){
       const holder = $('#slideshow')
-      holder.innerHTML = galleryImages.map((src,i)=>`<img class="slide ${i===0?'active':''}" src="${src}" alt="Slide ${i+1}"/>`).join('')
-      startSlides()
-    }
-    function showSlide(i){
-      const slides = $$('.slide')
-      slides.forEach(s=>s.classList.remove('active'))
-      slides[i % slides.length].classList.add('active')
-    }
-    function nextSlide(){ currentSlide = (currentSlide+1) % galleryImages.length; showSlide(currentSlide) }
-    function startSlides(){
-      if(slideTimer) clearInterval(slideTimer)
-      slideTimer = setInterval(nextSlide, 3500)
+      if(!images.length){
+        holder.innerHTML = '<div class="placeholder">Add images to /assets as <code>gallery-1.jpg</code>, <code>gallery-2.jpg</code>… to enable the slideshow.</div>'
+        return
+      }
+      holder.innerHTML = images.map((src,i)=>`<img class="slide ${i===0?'active':''}" src="${src + cacheBust()}" alt="Slide ${i+1}"/>`).join('')
+      currentSlide = 0; startSlides(images)
     }
 
-    buildGallery(); buildSlideshow()
+    function showSlide(i){
+      const slides = $$('.slide')
+      if(!slides.length) return
+      const index = ((i % slides.length) + slides.length) % slides.length
+      slides.forEach(s=>s.classList.remove('active'))
+      slides[index].classList.add('active')
+    }
+
+    function nextSlide(images){
+      if(!images || !images.length) return
+      currentSlide = (currentSlide+1) % images.length
+      showSlide(currentSlide)
+    }
+
+    function startSlides(images){
+      const slides = $$('.slide')
+      if(slideTimer) clearInterval(slideTimer)
+      if(slides.length > 1){ slideTimer = setInterval(()=>nextSlide(images), 3500) }
+    }
+
+    // ====== INIT ======
+    ;(async function init(){
+      buildTicker()
+      wireResume()
+      wireHeadshot()
+      const gallery = await collectGallery()
+      buildSlideshow(gallery)
+      buildGalleryGrid(gallery)
+
+      // Self-tests
+      console.groupCollapsed('Self-tests')
+      console.assert($('#ticker'), 'Ticker exists')
+      console.assert($('#resumeBtn'), 'Resume button exists')
+      console.assert($('#slideshow'), 'Slideshow container exists')
+      console.log('Detected gallery images:', gallery)
+      console.groupEnd()
+    })()
 
     // ====== CONTACT FORM (EmailJS optional) ======
     /*
@@ -414,7 +514,6 @@
       const data = Object.fromEntries(new FormData(e.currentTarget))
       try{
         if(EMAILJS_PUBLIC_KEY && EMAILJS_TEMPLATE_ID){
-          // dynamic import to avoid console errors if not configured
           const { default: emailjs } = await import('https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js')
           emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY })
           await emailjs.send('default_service', EMAILJS_TEMPLATE_ID, {
@@ -424,7 +523,6 @@
             to_email: 'esdronski@gmail.com'
           })
         } else {
-          // Fallback: open mail client
           window.location.href = `mailto:esdronski@gmail.com?subject=Website%20message%20from%20${encodeURIComponent(data.name)}&body=${encodeURIComponent(data.message + '\n\nReply to: ' + data.email)}`
         }
         $('#thanks').style.display = 'block'; e.currentTarget.reset()
