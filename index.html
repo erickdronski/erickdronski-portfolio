@@ -216,7 +216,7 @@
       <div class="about">
         <div class="headshot" id="headshot" aria-label="Headshot placeholder">
           <!-- Drop your headshot in /assets/headshot.jpg or update the src below -->
-          <img src="assets/headshot.jpg" alt="Headshot of Erick Dronski" onerror="this.style.display='none'" />
+          <img src="assets:headshot.jpg" alt="Headshot of Erick Dronski" onerror="this.style.display='none'" />
         </div>
         <article>
           <p>We never really know where life will take us. Moments and situations define us, and the choices we make along with the experiences we collect shape the next chapter. What we think is the “right” path often isn’t the one we end up walking.</p>
@@ -233,7 +233,7 @@
     <section id="resume" aria-label="Resume">
       <h2 class="section-title">Resume / CV</h2>
       <p>Download my latest resume as a PDF below. (Drag your PDF to <code>/assets/erick-dronski-resume.pdf</code> then this button will work.)</p>
-      <a class="btn" href="assets/erick-dronski-resume.pdf" download>⬇ Download Resume (PDF)</a>
+      <a class="btn" href="assets:erick-dronski-resume.pdf" download>⬇ Download Resume (PDF)</a>
     </section>
 
     <!-- PROJECTS -->
@@ -362,10 +362,10 @@
     // ====== GALLERY + SLIDESHOW ======
     // Replace these with your real gallery image paths (drag files into /assets/ and list them here)
     const galleryImages = [
-      'assets/gallery-1.jpg',
-      'assets/gallery-2.jpg',
-      'assets/gallery-3.jpg',
-      'assets/gallery-4.jpg'
+      'assets:gallery-1.jpg',
+      'assets:gallery-2.jpg',
+      'assets:gallery-3.jpg',
+      'assets:gallery-4.jpg'
     ]
     function buildGallery(){
       const grid = $('#galleryGrid')
