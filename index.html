@@ -299,8 +299,24 @@
     const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel))
     const cacheBust = () => `?v=${Date.now()}`
     async function urlExists(url){
+      // generic fetch-based existence check (used for PDFs)
       const tryHead = async () => {
         try{ const res = await fetch(url + cacheBust(), { method:'HEAD', cache:'no-store' }); return res.ok }catch{ return false }
+      }
+      const tryGet = async () => {
+        try{ const res = await fetch(url + cacheBust(), { method:'GET', cache:'no-store' }); return res.ok }catch{ return false }
+      }
+      return (await tryHead()) || (await tryGet())
+    }
+    function imageExists(url){
+      // more reliable for GitHub Pages than fetch/HEAD for images
+      return new Promise(resolve => {
+        const img = new Image()
+        img.onload = () => resolve(true)
+        img.onerror = () => resolve(false)
+        img.src = url + cacheBust()
+      })
+    }); return res.ok }catch{ return false }
       }
       const tryGet = async () => {
         try{ const res = await fetch(url + cacheBust(), { method:'GET', cache:'no-store' }); return res.ok }catch{ return false }
@@ -422,8 +438,8 @@
       for(const base of bases){
         for(const e of exts){
           const path = encodePath(`${base}.${e}`)
-          console.log('Probing', path)
-          if(await urlExists(path)){
+          console.log('Probing (img)', path)
+          if(await imageExists(path)){
             img.src = path + cacheBust(); img.style.display='block'
             console.log('Headshot found at', path)
             console.groupEnd()
@@ -440,26 +456,24 @@
       const found = []
       const exts = ['jpg','jpeg','png','webp']
       console.groupCollapsed('Gallery autodetect')
-      // probe gallery-1..24 under /assets and root (as a fallback)
       for(let i=1;i<=24;i++){
         let added = false
         for(const e of exts){
           const p1 = encodePath(`assets/gallery-${i}.${e}`)
           const p2 = encodePath(`gallery-${i}.${e}`)
           for(const path of [p1,p2]){
-            if(await urlExists(path)) { found.push(path); added = true; console.log('Found', path); break }
+            if(await imageExists(path)) { found.push(path); added = true; console.log('Found (img)', path); break }
           }
           if(added) break
         }
       }
-      // Also try a few generic names if numbering not used
       const extras = ['cover','hero','portfolio','work-1','work-2']
       for(const name of extras){
         for(const e of exts){
           const p1 = encodePath(`assets/${name}.${e}`)
           const p2 = encodePath(`${name}.${e}`)
           for(const path of [p1,p2]){
-            if(await urlExists(path)) { found.push(path); console.log('Found', path) }
+            if(await imageExists(path)) { found.push(path); console.log('Found (img)', path) }
           }
         }
       }
