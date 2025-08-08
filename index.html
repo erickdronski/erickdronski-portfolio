@@ -1,184 +1,326 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" id="top">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Erick Dronski — Portfolio</title>
-  <link rel="icon" href="https://twemoji.maxcdn.com/v/latest/svg/1f60e.svg" />
+  <meta name="description" content="Portfolio of Erick Dronski — About, Resume, Projects, Gallery, and Contact." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Favicon: sunglasses smiley (SVG data URI) -->
+  <link rel="icon" type="image/svg+xml" href='data:image/svg+xml;utf8,
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+    <defs>
+      <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="%23ffe680"/>
+        <stop offset="100%" stop-color="%23ffcc33"/>
+      </linearGradient>
+    </defs>
+    <circle cx="32" cy="32" r="28" fill="url(%23g)" stroke="%23e0a800" stroke-width="2"/>
+    <rect x="12" y="22" width="16" height="8" rx="3" fill="%23000"/>
+    <rect x="36" y="22" width="16" height="8" rx="3" fill="%23000"/>
+    <rect x="28" y="24" width="8" height="4" fill="%23000"/>
+    <path d="M18 42c4 4 10 6 14 6s10-2 14-6" fill="none" stroke="%23000" stroke-width="3" stroke-linecap="round"/>
+  </svg>'/>
   <style>
-    body {
-      background-color: #0b1220;
-      color: #e6edf7;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    img{max-width:100%;display:block}
+    button,input,select,textarea{font:inherit}
+    a{color:inherit;text-decoration:none}
+
+    :root{
+      --bg:#0b1220; --panel:#0f172a; --text:#e6edf7; --muted:#9fb3c8; --brand:#5ab0ff; --accent:#22c55e; --danger:#ef4444; --bezel:20px; --shadow:0 10px 30px rgba(0,0,0,.35);
     }
-    header {
-      text-align: center;
-      padding: 1rem;
-      position: sticky;
-      top: 0;
-      background: #0b1220;
-      z-index: 10;
-    }
-    nav a {
-      color: #e6edf7;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    nav a:hover {
-      color: #5ab0ff;
-    }
-    .hero {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    .hero-image img, .about-image img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 12px;
-      display: block;
-      margin: 0 auto;
-    }
-    .placeholder {
-      background: #222;
-      color: #aaa;
-      padding: 2rem;
-      text-align: center;
-      border-radius: 12px;
-    }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      padding: 1rem;
-    }
-    .gallery-item img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-    }
-    footer {
-      background: #0f172a;
-      color: #9fb3c8;
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
+    .light{ --bg:#f7fafc; --panel:#fff; --text:#0b1220; --muted:#5b6b7f; --brand:#2563eb; --accent:#16a34a; --danger:#dc2626; --shadow:0 10px 25px rgba(0,0,0,.08)}
+    html{scroll-behavior:smooth}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+    header{position:sticky;top:0;z-index:50;background:linear-gradient(to bottom, rgba(11,18,32,.9), rgba(11,18,32,.7) 60%, transparent)}
+
+    .ticker-wrap{overflow:hidden;border-bottom:1px solid rgba(255,255,255,.07);backdrop-filter:blur(6px)}
+    .ticker{display:flex;gap:40px;white-space:nowrap;animation:ticker 30s linear infinite}
+    .ticker:hover{animation-play-state:paused}
+    .ticker-item{display:flex;gap:10px;align-items:center;font-weight:600}
+    .up{color:var(--accent)} .down{color:var(--danger)} .bullet{opacity:.35}
+    @keyframes ticker{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+
+    .nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:10px 0}
+    .nav-center{justify-self:center;display:flex;gap:26px;font-weight:600}
+    .nav-center a:hover{color:var(--brand)}
+    .nav-right{justify-self:end;display:flex;gap:14px;align-items:center}
+    .icon-btn{width:38px;height:38px;border-radius:12px;border:1px solid rgba(255,255,255,.12);display:grid;place-items:center;background:var(--panel);box-shadow:var(--shadow);cursor:pointer}
+    .icon{font-size:18px}
+
+    .social-rail{position:fixed;left:20px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:14px;z-index:40}
+    .social-rail a{width:42px;height:42px;border-radius:12px;background:var(--panel);display:grid;place-items:center;border:1px solid rgba(255,255,255,.12);box-shadow:var(--shadow)}
+
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:60px 0 30px}
+    .hero-image{position:relative; aspect-ratio: 16/10; background:linear-gradient(135deg,#0f172a,#111827); border-radius:24px; overflow:hidden; border:1px solid rgba(255,255,255,.08); box-shadow:var(--shadow)}
+    .hero-image img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center}
+    .placeholder{position:absolute; inset:0; display:grid; place-items:center; color:var(--muted); padding:16px; text-align:center}
+    .hero-text h1{font-size:clamp(36px,6vw,68px);margin:0 0 14px}
+    .subtitle{font-size:clamp(16px,2.2vw,22px);color:var(--muted)}
+
+    .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;padding:40px 0}
+    .tile{background:var(--panel);border-radius:var(--bezel);padding:22px;border:1px solid rgba(255,255,255,.10);box-shadow:var(--shadow);display:flex;justify-content:space-between;align-items:center}
+    .tile:hover{outline:2px solid var(--brand)}
+
+    section{padding:60px 0}
+    .section-title{font-size:28px;margin:0 0 18px}
+    .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+    .card{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+    .card img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center;border-radius:12px}
+
+    .about{display:grid;grid-template-columns:.8fr 1.2fr;gap:26px}
+    .headshot{aspect-ratio:1/1;border-radius:18px;overflow:hidden;background:#111827;border:1px solid rgba(255,255,255,.08)}
+    #headshotImg{width:100%;height:100%;object-fit:cover;object-position:center}
+
+    form{display:grid;gap:14px;max-width:640px}
+    input,textarea{background:var(--panel);border:1px solid rgba(255,255,255,.14);color:var(--text);padding:12px 14px;border-radius:12px}
+    textarea{min-height:140px}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:var(--brand);color:#fff;font-weight:600;cursor:pointer}
+    .btn.secondary{background:transparent;color:var(--text)}
+    .btn[disabled]{opacity:.5;cursor:not-allowed}
+
+    footer{padding:30px 0;border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
+    .footer-row{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+
+    .party-overlay{position:fixed;inset:0;pointer-events:none;opacity:0;transition:opacity .3s ease;mix-blend-mode:screen}
+    .party .party-overlay{opacity:.9}
+    .spot{position:absolute;width:45vmax;height:45vmax;filter:blur(40px);border-radius:50%;background:radial-gradient(circle,rgba(0,255,255,.65),rgba(0,0,0,0) 60%);animation:roam 8s linear infinite}
+    .spot:nth-child(2){background:radial-gradient(circle,rgba(255,0,255,.65),rgba(0,0,0,0) 60%);animation-duration:11s}
+    .spot:nth-child(3){background:radial-gradient(circle,rgba(255,255,0,.65),rgba(0,0,0,0) 60%);animation-duration:13s}
+    @keyframes roam{0%{transform:translate(-10%,-10%)}25%{transform:translate(70%,-20%)}50%{transform:translate(10%,60%)}75%{transform:translate(80%,40%)}100%{transform:translate(-10%,-10%)}}
+
+    /* Diagnostics toggle */
+    #diagToggle{position:fixed;right:16px;bottom:16px;z-index:9999;cursor:pointer;background:var(--panel);border:1px solid rgba(255,255,255,.12);padding:8px 10px;border-radius:10px}
+    #diagPanel{display:none;position:fixed;right:16px;bottom:60px;z-index:9999;background:var(--panel);border:1px solid rgba(255,255,255,.12);padding:12px;border-radius:12px;max-width:360px;max-height:50vh;overflow:auto;font-size:12px}
+
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .social-rail{display:none}
+      .nav{grid-template-columns:1fr}
+      .nav-center{justify-self:start;overflow:auto;white-space:nowrap}
+      .nav-right{justify-self:start}
     }
   </style>
 </head>
 <body>
+  <aside class="social-rail" aria-label="Social links">
+    <a href="https://www.instagram.com/erickdronski" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor"/><circle cx="12" cy="12" r="4" stroke="currentColor"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+    </a>
+    <a href="https://x.com/dronskierick" target="_blank" rel="noopener" title="X" aria-label="X">
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h4.6l5.3 7.1L18.4 3H21l-7.2 9.6L21 21h-4.6l-5.6-7.5L5.6 21H3l7.7-10.3L3 3z"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/erickdronski" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5zM3 9h4v12H3zM10 9h3.8v1.7h.1c.5-.9 1.7-1.8 3.5-1.8 3.7 0 4.3 2.4 4.3 5.6V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4V9z"/></svg>
+    </a>
+    <a href="https://www.tiktok.com/@dr0nski" target="_blank" rel="noopener" title="TikTok" aria-label="TikTok">
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M21 8.5c-2.3 0-4.3-1.2-5.5-3v10.1a5.6 5.6 0 1 1-4.8-5.6v3.1a2.8 2.8 0 1 0 2.2 2.7V2h3a6.9 6.9 0 0 0 5.1 2.3v4.2z"/></svg>
+    </a>
+  </aside>
 
-<header>
-  <div class="ticker">
-    <marquee behavior="scroll" direction="left">
-      <span style="color:lime">$Coffee intake ↑ 25%</span> &nbsp;&nbsp;
-      <span style="color:lime">$Laundry backlog ↑ 80%</span> &nbsp;&nbsp;
-      <span style="color:lime">$Netflix watchlist ↑ 300%</span> &nbsp;&nbsp;
-      <span style="color:lime">$Tabs open ↑ 500%</span> &nbsp;&nbsp;
-      <span style="color:lime">$Deadline pressure ↑ 90%</span> &nbsp;&nbsp;
-      <span style="color:lime">$Dad jokes ↑ 12%</span> &nbsp;&nbsp;
-      <span style="color:red">$Crypto portfolio ↓ 99%</span> &nbsp;&nbsp;
-      <span style="color:lime">$Impulse Amazon orders ↑ 55%</span> &nbsp;&nbsp;
-      <span style="color:lime">$Ideas in backlog ↑ 200%</span> &nbsp;&nbsp;
-      <span style="color:lime">$Pet cuddles ↑ 60%</span> &nbsp;&nbsp;
-      <span style="color:lime">$Emails unread ↑ 110%</span>
-    </marquee>
+  <header>
+    <div class="ticker-wrap"><div class="container"><div class="ticker" id="ticker"></div></div></div>
+    <nav class="container nav" aria-label="Primary">
+      <div></div>
+      <div class="nav-center">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#resume">Resume / CV</a>
+        <a href="#projects">Portfolio / Projects</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="nav-right">
+        <button class="icon-btn" id="lightBtn" title="Light mode" aria-label="Light mode"><span class="icon">☀️</span></button>
+        <button class="icon-btn" id="darkBtn" title="Dark mode" aria-label="Dark mode"><span class="icon">🌙</span></button>
+        <button class="icon-btn" id="partyBtn" title="Party mode" aria-label="Party mode"><span class="icon">🎉</span></button>
+      </div>
+    </nav>
+  </header>
+
+  <div class="party-overlay" aria-hidden="true">
+    <div class="spot" style="top:10%; left:5%"></div>
+    <div class="spot" style="top:50%; left:30%"></div>
+    <div class="spot" style="top:20%; left:60%"></div>
   </div>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#resume">Resume / CV</a>
-    <a href="#projects">Portfolio / Projects</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
 
-<!-- ===== HERO SECTION ===== -->
-<section class="hero" id="home">
-  <div class="hero-image">
-    <img src="assets/gallery-1.jpg" alt="Hero Image"
-         onerror="this.outerHTML='<div class=\'placeholder\'>Hero image not found</div>';">
-  </div>
-  <div class="hero-text">
-    <h1>Erick Dronski</h1>
-    <p>“Unicorn @ <span class="company">[Your Company Name Here]</span>”</p>
-  </div>
-</section>
+  <main id="home" class="container">
+    <!-- HERO (static image) -->
+    <section class="hero" aria-label="Intro">
+      <div class="hero-image">
+        <img src="assets/gallery-1.jpg" alt="Hero image"
+             onerror="this.outerHTML='\n        <div class=\'placeholder\'>Add <code>assets/gallery-1.jpg</code> to show the hero image.</div>\n        '"/>
+      </div>
+      <div class="hero-text">
+        <h1>Erick Dronski</h1>
+        <div class="subtitle">“Unicorn @ <span style="color:var(--brand)">[Your Company Name Here]</span>”</div>
+      </div>
+    </section>
 
-<!-- ===== ABOUT SECTION ===== -->
-<section class="about" id="about">
-  <div class="about-image">
-    <img src="assets/headshot.jpg" alt="Headshot"
-         onerror="this.outerHTML='<div class=\'placeholder\'>Headshot not found</div>';">
-  </div>
-  <div class="about-text">
-    <h2>About Me</h2>
-    <p>
-      We never really know where life will take us. Moments and situations define us, and the choices we make along with the experiences we collect shape the next chapter. 
-      What we think is the “right” path often isn’t the one we end up walking...
-      <!-- rest of your about me text -->
-    </p>
-  </div>
-</section>
+    <hr style="border-color: rgba(255,255,255,.1); border-width:0 0 1px;"/>
 
-<!-- ===== RESUME SECTION ===== -->
-<section id="resume">
-  <h2>Resume</h2>
-  <a id="resumeLink" href="#" target="_blank" download>Download Resume</a>
-</section>
+    <!-- QUICK TILES -->
+    <section aria-label="Quick links">
+      <div class="tiles">
+        <a class="tile" href="#resume"><span>Resume / CV</span><span>↗</span></a>
+        <a class="tile" href="#about"><span>About Me</span><span>↗</span></a>
+        <a class="tile" href="#projects"><span>Portfolio / Projects</span><span>↗</span></a>
+        <a class="tile" href="#gallery"><span>Gallery</span><span>↗</span></a>
+        <a class="tile" href="#contact"><span>Contact</span><span>↗</span></a>
+      </div>
+    </section>
 
-<!-- ===== GALLERY SECTION ===== -->
-<section class="gallery" id="gallery">
-  <h2>Gallery</h2>
-  <div class="gallery-grid" id="galleryGrid"></div>
-</section>
+    <!-- ABOUT -->
+    <section id="about" aria-label="About">
+      <h2 class="section-title">About Me</h2>
+      <div class="about">
+        <div class="headshot" aria-label="Headshot">
+          <img id="headshotImg" src="assets/headshot.jpg" alt="Headshot of Erick Dronski"
+               onerror="this.outerHTML='\n            <div class=\'placeholder\'>Add <code>assets/headshot.jpg</code> to show the headshot.</div>\n          '" />
+        </div>
+        <article>
+          <p>We never really know where life will take us. Moments and situations define us, and the choices we make along with the experiences we collect shape the next chapter. What we think is the “right” path often isn’t the one we end up walking.</p>
+          <p>I’m grateful to say my journey has been anything but ordinary. Every twist and turn, both personally and professionally, has taught me to zoom out and ask: What will I take from this moment? How will it translate into the next thing I’m building? How does it fit into the trends, patterns, and constant changes in the world around me?</p>
+          <p>I started in banking, picturing myself as the Patagonia vest guy networking on the golf course. But life had other plans. I shifted into SaaS as an Account Executive, then into IT as a Strategic Consultant, all while exploring social media — partly for personal reasons, partly because my wife happens to be a social media and photography savant.</p>
+          <p>Somehow, all these experiences blended perfectly. They shaped the skills I’ve built, the work I’ve done, and most importantly the people I’ve been able to connect with around the world. Along the way, my presence grew: 17K+ connections on LinkedIn, 55K+ followers on TikTok, and a steadily growing audience on X. But more valuable than numbers has been the conversations, stories, and ideas shared with others.</p>
+          <p>I’m not a content wizard. I don’t have some secret formula. I just put myself out there. And now, I’m still building, still learning, and this site is just another step in that journey.</p>
+          <p>If you’ve made it this far, I hope you explore, learn more about me, and maybe even connect. After all, the best chapters are the ones we write together.</p>
+        </article>
+      </div>
+    </section>
 
-<!-- ===== CONTACT SECTION ===== -->
-<section id="contact">
-  <h2>Contact</h2>
-  <form action="mailto:esdronski@gmail.com" method="post" enctype="text/plain">
-    <input type="text" name="name" placeholder="Your Name" required><br>
-    <input type="email" name="email" placeholder="Your Email" required><br>
-    <textarea name="message" placeholder="Your Message" required></textarea><br>
-    <button type="submit">Send</button>
-  </form>
-</section>
+    <!-- RESUME -->
+    <section id="resume" aria-label="Resume">
+      <h2 class="section-title">Resume / CV</h2>
+      <p>Drop a PDF into <code>/assets/</code> — the button will auto-detect any file with “resume” in the name.</p>
+      <a id="resumeBtn" class="btn" href="#" download disabled>⬇ Download Resume (PDF)</a>
+      <div id="resumeStatus" style="margin-top:8px;color:var(--muted)"></div>
+    </section>
 
-<footer>
-  <p>© 2025 Erick Dronski — All rights reserved.</p>
-</footer>
+    <!-- PROJECTS -->
+    <section id="projects" aria-label="Portfolio / Projects">
+      <h2 class="section-title">Portfolio / Projects</h2>
+      <div class="card-grid">
+        <div class="card"><h3>Project One</h3><p>Short description of a standout project. Link to GitHub or a live demo.</p></div>
+        <div class="card"><h3>Project Two</h3><p>Highlight your role, tech used, and the impact/outcomes.</p></div>
+        <div class="card"><h3>Project Three</h3><p>Keep it tight and results-focused. Add visuals in the Gallery.</p></div>
+      </div>
+    </section>
 
-<script>
-  // Auto-detect resume
-  fetch('assets/')
-    .then(() => {
-      document.getElementById('resumeLink').href = 'assets/erick-dronski-resume.pdf';
-    });
+    <!-- GALLERY -->
+    <section id="gallery" aria-label="Gallery">
+      <h2 class="section-title">Gallery</h2>
+      <div class="card-grid" id="galleryGrid"></div>
+    </section>
 
-  // Build gallery
-  const galleryGrid = document.getElementById('galleryGrid');
-  for (let i = 2; i <= 6; i++) {
-    const img = new Image();
-    img.src = `assets/gallery-${i}.jpg`;
-    img.alt = `Gallery image ${i}`;
-    img.onload = () => {
-      const wrapper = document.createElement('div');
-      wrapper.className = 'gallery-item';
-      wrapper.appendChild(img);
-      galleryGrid.appendChild(wrapper);
-    };
-    img.onerror = () => {
-      console.warn(`Gallery image ${i} not found, skipping.`);
-    };
-  }
-</script>
+    <!-- CONTACT -->
+    <section id="contact" aria-label="Contact">
+      <h2 class="section-title">Contact</h2>
+      <p>Write me a message and I’ll get back to you. This form can deliver to <strong>esdronski@gmail.com</strong> using EmailJS (no server needed).</p>
+      <form id="contactForm">
+        <input type="text" name="name" placeholder="Your name" required />
+        <input type="email" name="email" placeholder="Your email" required />
+        <textarea name="message" placeholder="Your message" required></textarea>
+        <button class="btn" type="submit">Send Message ✉️</button>
+      </form>
+      <div id="thanks" style="display:none; margin-top:14px">
+        <p>✅ Your message has been sent — excited to get back to you!</p>
+        <a class="btn secondary" href="#home">← Back to Home</a>
+      </div>
+    </section>
+  </main>
 
+  <footer>
+    <div class="container footer-row">
+      <div>© <span id="year"></span> Erick Dronski — Built for humans.</div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <a href="#top">Back to top ↑</a>
+        <span style="opacity:.35">·</span>
+        <a href="https://x.com/dronskierick" target="_blank" rel="noopener">X</a>
+        <a href="https://www.linkedin.com/in/erickdronski" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.tiktok.com/@dr0nski" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://www.instagram.com/erickdronski" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Diagnostics toggle + panel -->
+  <button id="diagToggle" title="Diagnostics">⚙️</button>
+  <div id="diagPanel"></div>
+
+  <script>
+    // ---------- Utilities ----------
+    const $ = (s,ctx=document)=>ctx.querySelector(s)
+    const $$ = (s,ctx=document)=>Array.from(ctx.querySelectorAll(s))
+    const cacheBust = () => `?v=${Date.now()}`
+    const encodePath = p => p.replace(/ /g,'%20')
+
+    async function urlExists(url){
+      const tryHead = async()=>{ try{const r=await fetch(url+cacheBust(),{method:'HEAD',cache:'no-store'}); return r.ok }catch{return false} }
+      const tryGet  = async()=>{ try{const r=await fetch(url+cacheBust(),{method:'GET', cache:'no-store'}); return r.ok }catch{return false} }
+      return (await tryHead()) || (await tryGet())
+    }
+    function imageExists(url){ return new Promise(res=>{ const i=new Image(); i.onload=()=>res(true); i.onerror=()=>res(false); i.src=url+cacheBust() }) }
+
+    // ---------- Year ----------
+    $('#year').textContent = new Date().getFullYear()
+
+    // ---------- Theme ----------
+    const root=document.documentElement
+    const setMode=m=>{ if(m==='light'){root.classList.add('light');localStorage.setItem('mode','light')} else {root.classList.remove('light');localStorage.setItem('mode','dark')} }
+    setMode(localStorage.getItem('mode')||'dark')
+    $('#lightBtn').addEventListener('click',()=>setMode('light'))
+    $('#darkBtn').addEventListener('click',()=>setMode('dark'))
+
+    // ---------- Party Mode ----------
+    let partyInterval=null
+    const partyOn=()=>{ document.body.classList.add('party'); burstConfetti(180); if(!partyInterval){partyInterval=setInterval(()=>burstConfetti(60),3000)} }
+    const partyOff=()=>{ document.body.classList.remove('party'); if(partyInterval){clearInterval(partyInterval); partyInterval=null} }
+    let partying=false
+    $('#partyBtn').addEventListener('click',()=>{ partying=!partying; partying?partyOn():partyOff() })
+    function burstConfetti(n=120){ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; const colors=['#22d3ee','#a78bfa','#f472b6','#22c55e','#f59e0b','#38bdf8']; for(let i=0;i<n;i++){ const piece=document.createElement('div'); piece.className='confetti'; piece.style.left=(50+(Math.random()*40-20))+'%'; piece.style.background=colors[Math.floor(Math.random()*colors.length)]; piece.style.transform=`translateX(-50%) rotate(${Math.random()*360}deg)`; piece.style.width=(4+Math.random()*6)+'px'; piece.style.height=(8+Math.random()*10)+'px'; piece.style.borderRadius=(Math.random()>.7?'50%':'2px'); document.body.appendChild(piece); const x=(Math.random()*2-1)*300; const y=-(400+Math.random()*600); const duration=1200+Math.random()*1200; piece.animate([{transform:piece.style.transform,bottom:'-20px',opacity:1},{transform:`translateX(${x}px) rotate(${Math.random()*720}deg)`,bottom:y+'px',opacity:0}],{duration,easing:'cubic-bezier(.2,.7,.2,1)'}).onfinish=()=>piece.remove() } }
+
+    // ---------- Ticker ----------
+    const tickerItems=[
+      {text:'$Coffee intake ↑ 25%',cls:'up'}, {text:'$Laundry backlog ↑ 80%',cls:'up'}, {text:'$Netflix watchlist ↑ 300%',cls:'up'},
+      {text:'$Tabs open ↑ 500%',cls:'up'}, {text:'$Deadline pressure ↑ 90%',cls:'up'}, {text:'$Dad jokes ↑ 12%',cls:'up'},
+      {text:'$Crypto portfolio ↓ 99%',cls:'down'}, {text:'$Impulse Amazon orders ↑ 55%',cls:'up'}, {text:'$Ideas in backlog ↑ 200%',cls:'up'},
+      {text:'$Pet cuddles ↑ 60%',cls:'up'}, {text:'$Emails unread ↑ 110%',cls:'up'}]
+    function buildTicker(){ const el=$('#ticker'); const row=()=>tickerItems.map(i=>`<span class="ticker-item ${i.cls}">${i.text}<span class="bullet"> • </span></span>`).join(''); el.innerHTML=row()+row() }
+    buildTicker()
+
+    // ---------- Resume autodetect ----------
+    async function wireResume(){
+      const btn=$('#resumeBtn'), status=$('#resumeStatus')
+      const candidates=['assets/erick-dronski-resume.pdf','assets/Erick-Dronski-Resume.pdf','assets/erick;dronski;resume.pdf','assets/Erick_Dronski_Resume.pdf','assets/ErickDronskiResume.pdf','assets/resume.pdf','assets/Erick Dronski Resume.pdf'].map(encodePath)
+      for(const path of candidates){ if(await urlExists(path)){ btn.href=path+cacheBust(); btn.download=path.split('/').pop(); btn.removeAttribute('disabled'); status.textContent=''; diag.resume=path; return } }
+      status.textContent='No resume found in /assets (name should include “resume”).'; diag.resume=null
+    }
+
+    // ---------- Build Gallery from fixed names (2..6) ----------
+    async function buildGallery(){
+      const grid=$('#galleryGrid'); const found=[]; for(let i=2;i<=6;i++){ const p=`assets/gallery-${i}.jpg`; if(await imageExists(p)){ found.push(p) } }
+      if(!found.length){ grid.innerHTML='<div class="card">Add images to /assets as <code>gallery-2.jpg</code> … <code>gallery-6.jpg</code>.</div>'; diag.gallery=[]; return }
+      grid.innerHTML=found.map((src,i)=>`<div class="card"><img src="${src+cacheBust()}" alt="Gallery image ${i+2}"/></div>`).join(''); diag.gallery=found
+    }
+
+    // ---------- Diagnostics UI ----------
+    const diag={resume:null, headshot:'assets/headshot.jpg', gallery:[]}
+    function refreshDiag(){ const panel=$('#diagPanel'); const list=diag.gallery.map(g=>`<li><a href="${g}" target="_blank">${g}</a></li>`).join('') || '<li>(none)</li>'; panel.innerHTML=`<strong>Diagnostics</strong><div style="margin-top:6px"></div><div>Resume: ${diag.resume?`<a href="${diag.resume}" target="_blank">${diag.resume}</a>`:'Not found'}</div><div>Headshot: <a href="assets/headshot.jpg" target="_blank">assets/headshot.jpg</a></div><div>Hero: <a href="assets/gallery-1.jpg" target="_blank">assets/gallery-1.jpg</a></div><div>Gallery:</div><ul>${list}</ul>` }
+    $('#diagToggle').addEventListener('click',()=>{ const p=$('#diagPanel'); p.style.display=p.style.display==='block'?'none':'block' })
+
+    // ---------- Init ----------
+    (async function init(){
+      await wireResume(); await buildGallery(); refreshDiag()
+    })()
+
+    // ---------- Contact (mailto fallback) ----------
+    $('#contactForm').addEventListener('submit', async (e)=>{ e.preventDefault(); const data=Object.fromEntries(new FormData(e.currentTarget)); window.location.href=`mailto:esdronski@gmail.com?subject=Website%20message%20from%20${encodeURIComponent(data.name)}&body=${encodeURIComponent(data.message+'\n\nReply to: '+data.email)}`; $('#thanks').style.display='block'; e.currentTarget.reset() })
+  </script>
 </body>
 </html>
