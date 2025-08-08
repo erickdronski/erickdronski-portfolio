@@ -87,7 +87,7 @@
     /* ====== HERO ====== */
     .hero{display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center; padding:60px 0 30px}
     .slideshow{position:relative; aspect-ratio: 16/10; background:linear-gradient(135deg, #0f172a 0%, #111827 100%); border-radius:24px; overflow:hidden; border:1px solid rgba(255,255,255,.08); box-shadow:var(--shadow)}
-    .slide{position:absolute; inset:0; opacity:0; transition:opacity .6s ease}
+    .slide{position:absolute; inset:0; opacity:0; transition:opacity .6s ease; width:100%; height:100%; object-fit:cover; object-position:center}
     .slide.active{opacity:1}
     .placeholder{position:absolute; inset:0; display:grid; place-items:center; color:var(--muted); padding:16px; text-align:center}
     .hero-text h1{font-size: clamp(36px, 6vw, 68px); margin:0 0 14px}
@@ -103,8 +103,10 @@
     .section-title{font-size:28px;margin:0 0 18px}
     .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
     .card{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+    .card img{width:100%; aspect-ratio: 4/3; object-fit:cover; object-position:center; border-radius:12px}
     .about{display:grid; grid-template-columns: .8fr 1.2fr; gap:26px}
     .headshot{aspect-ratio:1/1;border-radius:18px;overflow:hidden;background:#111827;border:1px solid rgba(255,255,255,.08)}
+    #headshotImg{width:100%; height:100%; object-fit:cover; object-position:center}
 
     /* ====== CONTACT ====== */
     form{display:grid; gap:14px; max-width:640px}
@@ -297,10 +299,13 @@
     const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel))
     const cacheBust = () => `?v=${Date.now()}`
     async function urlExists(url){
-      try{
-        const res = await fetch(url + cacheBust(), { method:'HEAD', cache:'no-store' })
-        return res.ok
-      }catch{ return false }
+      const tryHead = async () => {
+        try{ const res = await fetch(url + cacheBust(), { method:'HEAD', cache:'no-store' }); return res.ok }catch{ return false }
+      }
+      const tryGet = async () => {
+        try{ const res = await fetch(url + cacheBust(), { method:'GET', cache:'no-store' }); return res.ok }catch{ return false }
+      }
+      return (await tryHead()) || (await tryGet())
     }
     function encodePath(p){ return p.replace(/ /g, '%20') }
 
@@ -383,56 +388,82 @@
         'assets/Erick_Dronski_Resume.pdf',
         'assets/ErickDronskiResume.pdf',
         'assets/resume.pdf',
-        'assets/Erick Dronski Resume.pdf'
+        'assets/Erick Dronski Resume.pdf',
+        // fallbacks in case the user accidentally put the file at repo root
+        'erick-dronski-resume.pdf',
+        'Erick-Dronski-Resume.pdf',
+        'Erick_Dronski_Resume.pdf',
+        'ErickDronskiResume.pdf',
+        'resume.pdf',
+        'Erick Dronski Resume.pdf'
       ].map(encodePath)
+      console.groupCollapsed('Resume autodetect')
       for(const path of candidates){
+        console.log('Probing', path)
         if(await urlExists(path)){
           btn.href = path + cacheBust(); btn.download = path.split('/').pop(); btn.removeAttribute('disabled')
           status.textContent = ''
+          console.log('Resume found at', path)
+          console.groupEnd()
           return
         }
       }
       status.textContent = 'No resume found yet — place a PDF in /assets with “resume” in the name.'
+      console.warn('No resume found in any candidate path')
+      console.groupEnd()
     }
 
     // ====== AUTO-DETECT: HEADSHOT ======
     async function wireHeadshot(){
       const img = $('#headshotImg')
-      const bases = ['headshot','Headshot','erick','Erick-Dronski','erick-dronski']
+      const bases = ['assets/headshot','assets/Headshot','assets/erick','assets/Erick-Dronski','assets/erick-dronski','headshot','Erick-Dronski']
       const exts = ['jpg','jpeg','png','webp']
-      for(const b of bases){
+      console.groupCollapsed('Headshot autodetect')
+      for(const base of bases){
         for(const e of exts){
-          const path = encodePath(`assets/${b}.${e}`)
+          const path = encodePath(`${base}.${e}`)
+          console.log('Probing', path)
           if(await urlExists(path)){
-            img.src = path + cacheBust(); img.style.display='block'; return
+            img.src = path + cacheBust(); img.style.display='block'
+            console.log('Headshot found at', path)
+            console.groupEnd()
+            return
           }
         }
       }
-      // leave hidden if nothing found
+      console.warn('No headshot found')
+      console.groupEnd()
     }
 
     // ====== AUTO-DETECT: GALLERY ======
     async function collectGallery(){
       const found = []
       const exts = ['jpg','jpeg','png','webp']
-      // probe gallery-1..gallery-24 with multiple extensions
+      console.groupCollapsed('Gallery autodetect')
+      // probe gallery-1..24 under /assets and root (as a fallback)
       for(let i=1;i<=24;i++){
         let added = false
         for(const e of exts){
-          const path = encodePath(`assets/gallery-${i}.${e}`)
-          if(await urlExists(path)) { found.push(path); added = true; break }
+          const p1 = encodePath(`assets/gallery-${i}.${e}`)
+          const p2 = encodePath(`gallery-${i}.${e}`)
+          for(const path of [p1,p2]){
+            if(await urlExists(path)) { found.push(path); added = true; console.log('Found', path); break }
+          }
+          if(added) break
         }
-        // stop early if we miss 5 in a row (likely end)
-        if(i>6 && !added && !found.length){ /* keep scanning a bit at start */ }
       }
-      // Also try generic names if numbering not used
+      // Also try a few generic names if numbering not used
       const extras = ['cover','hero','portfolio','work-1','work-2']
       for(const name of extras){
         for(const e of exts){
-          const path = encodePath(`assets/${name}.${e}`)
-          if(await urlExists(path)) found.push(path)
+          const p1 = encodePath(`assets/${name}.${e}`)
+          const p2 = encodePath(`${name}.${e}`)
+          for(const path of [p1,p2]){
+            if(await urlExists(path)) { found.push(path); console.log('Found', path) }
+          }
         }
       }
+      console.groupEnd()
       return found
     }
 
@@ -484,8 +515,8 @@
     // ====== INIT ======
     ;(async function init(){
       buildTicker()
-      wireResume()
-      wireHeadshot()
+      await wireResume()
+      await wireHeadshot()
       const gallery = await collectGallery()
       buildSlideshow(gallery)
       buildGalleryGrid(gallery)
