@@ -145,7 +145,7 @@
     form{display:grid;gap:12px}
     input, textarea{background:var(--panel);border:1px solid color-mix(in oklab, var(--text) 12%, transparent);color:var(--text);border-radius:12px;padding:12px}
     textarea{min-height:140px;resize:vertical}
-    .btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(90deg, var(--brand), var(--accent));border:none;color:#0b1220;font-weight:700;padding:12px 16px;border-radius:12px;cursor:pointer}
+    .btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(90deg, var(--brand), var(--accent));border:none;color:var(--text);font-weight:700;padding:12px 16px;border-radius:12px;cursor:pointer}
     .btn:disabled{opacity:.6;cursor:not-allowed}
 
     /* Subpage: Precision Algorithms */
@@ -182,7 +182,7 @@
     /* Gradient borders + sheen */
     .tile{position:relative;overflow:hidden;background:linear-gradient(var(--tile),var(--tile)) padding-box, linear-gradient(135deg, color-mix(in oklab, var(--brand) 20%, transparent), color-mix(in oklab, var(--accent) 25%, transparent)) border-box; border:1px solid transparent}
     .tile:hover{background:linear-gradient(var(--tile-hover),var(--tile-hover)) padding-box, linear-gradient(135deg, color-mix(in oklab, var(--brand) 35%, transparent), color-mix(in oklab, var(--accent) 40%, transparent)) border-box}
-    .btn{position:relative;display:inline-flex;align-items:center;gap:8px;background:linear-gradient(var(--panel),var(--panel)) padding-box, linear-gradient(90deg, var(--brand), var(--accent)) border-box;border:1px solid transparent;color:#0b1220;font-weight:700;padding:12px 16px;border-radius:12px;cursor:pointer;box-shadow:var(--shadow);overflow:hidden}
+    .btn{position:relative;display:inline-flex;align-items:center;gap:8px;background:linear-gradient(var(--panel),var(--panel)) padding-box, linear-gradient(90deg, var(--brand), var(--accent)) border-box;border:1px solid transparent;color:var(--text);font-weight:700;padding:12px 16px;border-radius:12px;cursor:pointer;box-shadow:var(--shadow);overflow:hidden}
     .btn::after{content:"";position:absolute;inset:-120% -30%;background:linear-gradient(115deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%);transform:translateX(-60%);transition:transform .6s ease;pointer-events:none}
     .btn:hover::after{transform:translateX(60%)}
 
@@ -222,7 +222,6 @@
       <div class="mode-buttons">
         <button class="icon-btn" id="lightBtn" title="Light mode">☀️</button>
         <button class="icon-btn" id="darkBtn" title="Dark mode">🌙</button>
-        <button class="icon-btn" id="fxBtn" title="Visual effects">A</button>
         <button class="icon-btn" id="partyBtn" title="Party mode">🎉</button>
       </div>
     </div>
@@ -403,12 +402,10 @@
     $('#lightBtn').addEventListener('click',()=>setTheme('light'))
     $('#darkBtn').addEventListener('click',()=>setTheme('dark'))
 
-    // Visual FX toggle (aurora + grain)
+    // Visual FX (aurora + grain) — always on unless reduced-motion
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function setFx(on){document.body.classList.toggle('fx-off', !on);localStorage.setItem('fx', on?'on':'off')}
-    const savedFx = localStorage.getItem('fx');
-    if(prefersReduced){ setFx(false) } else { setFx(savedFx !== 'off') }
-    $('#fxBtn').addEventListener('click', ()=>{ setFx(document.body.classList.contains('fx-off')) })
+    function setFx(on){ document.body.classList.toggle('fx-off', !on); }
+    setFx(!prefersReduced);
 
     // Party mode
     let partyTimer=null;
