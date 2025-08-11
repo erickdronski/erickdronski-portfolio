@@ -109,7 +109,8 @@
 
     .kicker{color:var(--brand-2);text-transform:uppercase;letter-spacing:.18em;font-weight:600}
     .title{font-size: clamp(28px, 5vw, 56px);line-height:1.08;margin:10px 0}
-    $1.lead{font-size:clamp(16px,2vw,20px);margin-top:10px}.tagline{margin-top:16px;padding:14px 16px;border-left:4px solid var(--accent);background:color-mix(in oklab, var(--brand) 10%, transparent);border-radius:10px}
+    .lead{font-size:clamp(16px,2vw,20px);margin-top:10px}
+    .tagline{margin-top:16px;padding:14px 16px;border-left:4px solid var(--accent);background:color-mix(in oklab, var(--brand) 10%, transparent);border-radius:10px}
 
     /* ========== TILE GRID ========== */
     .section{padding:28px 0 56px}
@@ -181,7 +182,7 @@
     /* Gradient borders + sheen */
     .tile{position:relative;overflow:hidden;background:linear-gradient(var(--tile),var(--tile)) padding-box, linear-gradient(135deg, color-mix(in oklab, var(--brand) 20%, transparent), color-mix(in oklab, var(--accent) 25%, transparent)) border-box; border:1px solid transparent}
     .tile:hover{background:linear-gradient(var(--tile-hover),var(--tile-hover)) padding-box, linear-gradient(135deg, color-mix(in oklab, var(--brand) 35%, transparent), color-mix(in oklab, var(--accent) 40%, transparent)) border-box}
-    .btn{position:relative;display:inline-flex;align-items:center;gap:8px;background:linear-gradient(var(--panel),var(--panel)) padding-box, linear-gradient(90deg, var(--brand), var(--accent)) border-box;border:1px solid transparent;color:#0b1220;font-weight:700;padding:12px 16px;border-radius:12px;cursor:pointer;box-shadow:var(--shadow)}
+    .btn{position:relative;display:inline-flex;align-items:center;gap:8px;background:linear-gradient(var(--panel),var(--panel)) padding-box, linear-gradient(90deg, var(--brand), var(--accent)) border-box;border:1px solid transparent;color:#0b1220;font-weight:700;padding:12px 16px;border-radius:12px;cursor:pointer;box-shadow:var(--shadow);overflow:hidden}
     .btn::after{content:"";position:absolute;inset:-120% -30%;background:linear-gradient(115deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%);transform:translateX(-60%);transition:transform .6s ease;pointer-events:none}
     .btn:hover::after{transform:translateX(60%)}
 
