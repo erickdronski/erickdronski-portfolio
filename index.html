@@ -161,9 +161,41 @@
     .hide{display:none !important}
     .center{display:grid;place-items:center}
     .muted{color:var(--muted)}
+  /* ===== Background FX (aurora + grain) + overrides ===== */
+    .fx-aurora,.fx-grain{position:fixed;inset:0;pointer-events:none;z-index:0}
+    .fx-aurora{opacity:.45;filter:blur(20px);background:
+      radial-gradient(40% 35% at 20% 20%, color-mix(in oklab, var(--brand) 35%, transparent), transparent 60%),
+      radial-gradient(45% 40% at 80% 20%, color-mix(in oklab, var(--accent) 35%, transparent), transparent 60%),
+      radial-gradient(60% 50% at 50% 80%, color-mix(in oklab, var(--brand) 20%, transparent), transparent 60%);
+      animation: aurora 38s linear infinite;}
+    @keyframes aurora{0%{transform:translate3d(0,0,0)}50%{transform:translate3d(2%, -1%, 0) rotate(1deg)}100%{transform:translate3d(0,0,0)}}
+
+    .fx-grain{mix-blend-mode:soft-light;opacity:.18;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'><filter id='n' x='-50%' y='-50%' width='200%' height='200%'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='table' tableValues='0 0 .02 .04 .06'/></feComponentTransfer></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.35'/></svg>");background-size:140px 140px}
+
+    /* Toggle off visuals */
+    .fx-off .fx-aurora, .fx-off .fx-grain{display:none}
+
+    /* Gradient divider override */
+    .divider{height:1px;background:linear-gradient(90deg, transparent, color-mix(in oklab, var(--brand) 25%, transparent) 20%, color-mix(in oklab, var(--accent) 35%, transparent) 80%, transparent);margin:10px 0 30px;border-radius:999px}
+
+    /* Gradient borders + sheen */
+    .tile{position:relative;overflow:hidden;background:linear-gradient(var(--tile),var(--tile)) padding-box, linear-gradient(135deg, color-mix(in oklab, var(--brand) 20%, transparent), color-mix(in oklab, var(--accent) 25%, transparent)) border-box; border:1px solid transparent}
+    .tile:hover{background:linear-gradient(var(--tile-hover),var(--tile-hover)) padding-box, linear-gradient(135deg, color-mix(in oklab, var(--brand) 35%, transparent), color-mix(in oklab, var(--accent) 40%, transparent)) border-box}
+    .btn{position:relative;display:inline-flex;align-items:center;gap:8px;background:linear-gradient(var(--panel),var(--panel)) padding-box, linear-gradient(90deg, var(--brand), var(--accent)) border-box;border:1px solid transparent;color:#0b1220;font-weight:700;padding:12px 16px;border-radius:12px;cursor:pointer;box-shadow:var(--shadow)}
+    .btn::after{content:"";position:absolute;inset:-120% -30%;background:linear-gradient(115deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%);transform:translateX(-60%);transition:transform .6s ease;pointer-events:none}
+    .btn:hover::after{transform:translateX(60%)}
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .ticker, .fx-aurora{animation:none}
+      .btn::after{display:none}
+    }
   </style>
 </head>
 <body>
+  <!-- Background FX -->
+  <div class="fx-aurora" aria-hidden="true"></div>
+  <div class="fx-grain" aria-hidden="true"></div>
   <!-- Party overlay for spotlights and confetti -->
   <div class="party-overlay" aria-hidden="true"></div>
 
@@ -189,6 +221,7 @@
       <div class="mode-buttons">
         <button class="icon-btn" id="lightBtn" title="Light mode">☀️</button>
         <button class="icon-btn" id="darkBtn" title="Dark mode">🌙</button>
+        <button class="icon-btn" id="fxBtn" title="Visual effects">A</button>
         <button class="icon-btn" id="partyBtn" title="Party mode">🎉</button>
       </div>
     </div>
@@ -368,6 +401,13 @@
     if(saved){setTheme(saved)}
     $('#lightBtn').addEventListener('click',()=>setTheme('light'))
     $('#darkBtn').addEventListener('click',()=>setTheme('dark'))
+
+    // Visual FX toggle (aurora + grain)
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function setFx(on){document.body.classList.toggle('fx-off', !on);localStorage.setItem('fx', on?'on':'off')}
+    const savedFx = localStorage.getItem('fx');
+    if(prefersReduced){ setFx(false) } else { setFx(savedFx !== 'off') }
+    $('#fxBtn').addEventListener('click', ()=>{ setFx(document.body.classList.contains('fx-off')) })
 
     // Party mode
     let partyTimer=null;
