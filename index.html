@@ -57,7 +57,6 @@
     /* ========== PARTY MODE OVERLAY ========== */
     .party-overlay{position:fixed;inset:0;pointer-events:none;opacity:0;transition:opacity .35s ease}
     .party-active .party-overlay{opacity:.9}
-    /* neon spotlights */
     .party-overlay::before,
     .party-overlay::after{
       content:"";position:absolute;inset:-20%;filter:blur(40px);mix-blend-mode:screen;
@@ -78,7 +77,7 @@
     header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg, var(--bg), color-mix(in oklab, var(--bg) 75%, transparent));
       backdrop-filter:saturate(1.1) blur(6px);border-bottom:1px solid color-mix(in oklab, var(--text) 8%, transparent)}
 
-    /* Top Ticker */
+    /* Top Ticker (single track) */
     .ticker-wrap{white-space:nowrap;overflow:hidden;border-bottom:1px solid color-mix(in oklab, var(--text) 10%, transparent);}
     .ticker{display:inline-block;padding-block:8px;animation: ticker 30s linear infinite}
     .ticker:hover{animation-play-state: paused}
@@ -106,8 +105,8 @@
 
     /* ========== HERO ========== */
     .hero{display:grid;grid-template-columns: 1.2fr 1fr;gap:40px;align-items:center;padding:56px 0 28px}
-    .hero .photo{aspect-ratio: 4/5;border-radius:24px;overflow:hidden;background:var(--panel);box-shadow: var(--shadow);display:grid;place-items:center}
-    .hero .photo img{object-fit:cover;height:100%;width:100%}
+    .photo{aspect-ratio: 4/5;border-radius:24px;overflow:hidden;background:var(--panel);box-shadow: var(--shadow);display:grid;place-items:center}
+    .photo img{object-fit:cover;width:100%;height:100%}
 
     .kicker{color:var(--brand-2);text-transform:uppercase;letter-spacing:.18em;font-weight:600}
     .title{font-size: clamp(28px, 5vw, 56px);line-height:1.08;margin:10px 0}
@@ -138,7 +137,7 @@
 
     /* Gallery */
     .gallery{display:grid;grid-template-columns: repeat(3, 1fr);gap:12px}
-    .gallery figure{background:var(--panel);border-radius:16px;overflow:hidden;display:grid;place-items:center;box-shadow:var(--shadow)}
+    .gallery figure{aspect-ratio:1/1;background:var(--panel);border-radius:16px;overflow:hidden;display:grid;place-items:center;box-shadow:var(--shadow)}
     .gallery img{width:100%;height:100%;object-fit:cover}
     @media (max-width: 980px){.gallery{grid-template-columns: repeat(2, 1fr)}}
     @media (max-width: 640px){.gallery{grid-template-columns: 1fr}}
@@ -174,10 +173,7 @@
     <!-- Top Ticker -->
     <div class="ticker-wrap">
       <div class="container">
-        <div class="ticker" id="ticker">
-          <div class="track" id="tickerTrack"></div>
-          <div class="track" id="tickerTrackClone"></div>
-        </div>
+        <div class="ticker" id="ticker"></div>
       </div>
     </div>
 
@@ -219,7 +215,7 @@
         <div class="tagline">“Build in public, share the journey, inspire the next builder.”</div>
       </div>
       <div class="photo">
-        <img src="assets/headshot.jpg" alt="Headshot of Erick Dronski" onerror="this.parentElement.innerHTML='\n        <div class=\'center muted\' style=\'padding:30px\'>Add your headshot to <code>assets/headshot.jpg</code></div>'"/>
+        <img src="assets/headshot.jpg" alt="Headshot of Erick Dronski" loading="eager" onerror="this.outerHTML=''<div class=\'center muted\' style=\'padding:30px\'>Missing <code>assets/headshot.jpg</code></div>''">
       </div>
     </section>
 
@@ -241,7 +237,7 @@
     <section id="about" class="section">
       <h2>About Me</h2>
       <div style="display:grid;grid-template-columns: 1fr 1.2fr;gap:22px;align-items:start">
-        <div class="photo"><img src="assets/headshot.jpg" alt="Erick Dronski headshot" onerror="this.parentElement.innerHTML='\n        <div class=\'center muted\' style=\'padding:30px\'>Add your headshot to <code>assets/headshot.jpg</code></div>'"></div>
+        <div class="photo"><img src="assets/headshot.jpg" alt="Erick Dronski headshot" loading="lazy" onerror="this.outerHTML=''<div class=\'center muted\' style=\'padding:30px\'>Missing <code>assets/headshot.jpg</code></div>''"></div>
         <article>
           <p>We never really know where life will take us. Moments and situations define us, and the choices we make along with the experiences we collect shape the next chapter. What we think is the “right” path often isn’t the one we end up walking.</p>
           <p>I’m grateful to say my journey has been anything but ordinary. Every twist and turn, both personally and professionally, has taught me to zoom out and ask: What will I take from this moment? How will it translate into the next thing I’m building? How does it fit into the trends, patterns, and constant changes in the world around me?</p>
@@ -262,7 +258,7 @@
         <a class="btn" href="assets/erick-dronski-resume.pdf" target="_blank" rel="noopener">🗂️ Open in New Tab</a>
       </div>
       <div class="photo" style="aspect-ratio:auto">
-        <iframe src="assets/erick-dronski-resume.pdf" style="width:100%;height:720px;border:0;border-radius:16px" onerror="this.parentElement.innerHTML='\n        <div class=\'center muted\' style=\'padding:30px\'>Add your resume PDF to <code>assets/erick-dronski-resume.pdf</code></div>'"></iframe>
+        <iframe src="assets/erick-dronski-resume.pdf" style="width:100%;height:720px;border:0;border-radius:16px"></iframe>
       </div>
     </section>
 
@@ -289,12 +285,12 @@
     <section id="gallery" class="section">
       <h2>Gallery</h2>
       <div class="gallery">
-        <figure><img src="assets/gallery-1.jpg" alt="Gallery 1" onerror="this.parentElement.innerHTML='\n        <div class=\'center muted\' style=\'padding:30px\'>Add <code>assets/gallery-1.jpg</code></div>'"></figure>
-        <figure><img src="assets/gallery-2.jpg" alt="Gallery 2" onerror="this.parentElement.innerHTML='\n        <div class=\'center muted\' style=\'padding:30px\'>Add <code>assets/gallery-2.jpg</code></div>'"></figure>
-        <figure><img src="assets/gallery-3.jpg" alt="Gallery 3" onerror="this.parentElement.innerHTML='\n        <div class=\'center muted\' style=\'padding:30px\'>Add <code>assets/gallery-3.jpg</code></div>'"></figure>
-        <figure><img src="assets/gallery-4.jpg" alt="Gallery 4" onerror="this.parentElement.innerHTML='\n        <div class=\'center muted\' style=\'padding:30px\'>Add <code>assets/gallery-4.jpg</code></div>'"></figure>
-        <figure><img src="assets/gallery-5.jpg" alt="Gallery 5" onerror="this.parentElement.innerHTML='\n        <div class=\'center muted\' style=\'padding:30px\'>Add <code>assets/gallery-5.jpg</code></div>'"></figure>
-        <figure><img src="assets/gallery-6.jpg" alt="Gallery 6" onerror="this.parentElement.innerHTML='\n        <div class=\'center muted\' style=\'padding:30px\'>Add <code>assets/gallery-6.jpg</code></div>'"></figure>
+        <figure><img loading="lazy" src="assets/gallery-1.jpg" alt="Gallery 1" onerror="this.outerHTML=''<div class=\'center muted\' style=\'padding:30px\'>Missing <code>assets/gallery-1.jpg</code></div>''"></figure>
+        <figure><img loading="lazy" src="assets/gallery-2.jpg" alt="Gallery 2" onerror="this.outerHTML=''<div class=\'center muted\' style=\'padding:30px\'>Missing <code>assets/gallery-2.jpg</code></div>''"></figure>
+        <figure><img loading="lazy" src="assets/gallery-3.jpg" alt="Gallery 3" onerror="this.outerHTML=''<div class=\'center muted\' style=\'padding:30px\'>Missing <code>assets/gallery-3.jpg</code></div>''"></figure>
+        <figure><img loading="lazy" src="assets/gallery-4.jpg" alt="Gallery 4" onerror="this.outerHTML=''<div class=\'center muted\' style=\'padding:30px\'>Missing <code>assets/gallery-4.jpg</code></div>''"></figure>
+        <figure><img loading="lazy" src="assets/gallery-5.jpg" alt="Gallery 5" onerror="this.outerHTML=''<div class=\'center muted\' style=\'padding:30px\'>Missing <code>assets/gallery-5.jpg</code></div>''"></figure>
+        <figure><img loading="lazy" src="assets/gallery-6.jpg" alt="Gallery 6" onerror="this.outerHTML=''<div class=\'center muted\' style=\'padding:30px\'>Missing <code>assets/gallery-6.jpg</code></div>''"></figure>
       </div>
     </section>
 
@@ -359,56 +355,27 @@
   </footer>
 
   <script>
-    // ===================== Utilities =====================
-    const $ = (sel, ctx=document) => ctx.querySelector(sel);
-    const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
+    const $ = (s, c=document)=>c.querySelector(s);
+    const $$ = (s, c=document)=>Array.from(c.querySelectorAll(s));
 
     // Year in footer
     $('#year').textContent = new Date().getFullYear();
 
-    // ===================== Theme Toggle =====================
+    // Theme toggle
     const root = document.documentElement;
-    const prefersLight = window.matchMedia('(prefers-color-scheme: light)');
-    function setTheme(mode){
-      root.classList.toggle('light', mode === 'light');
-      localStorage.setItem('theme', mode);
-    }
+    function setTheme(mode){root.classList.toggle('light', mode==='light');localStorage.setItem('theme', mode)}
     const saved = localStorage.getItem('theme');
-    if(saved){ setTheme(saved); } else if(prefersLight.matches){ setTheme('light'); }
-    $('#lightBtn').addEventListener('click', ()=> setTheme('light'));
-    $('#darkBtn').addEventListener('click', ()=> setTheme('dark'));
+    if(saved){setTheme(saved)}
+    $('#lightBtn').addEventListener('click',()=>setTheme('light'))
+    $('#darkBtn').addEventListener('click',()=>setTheme('dark'))
 
-    // ===================== Party Mode =====================
-    let partyTimer=null;
-    function makeConfetti(){
-      const n = 120; // number of pieces
-      for(let i=0;i<n;i++){
-        const piece = document.createElement('div');
-        piece.style.cssText = `position:fixed;bottom:-20px;left:${(i/n*100)}vw;width:8px;height:14px;border-radius:2px;`+
-          `background:hsl(${Math.random()*360},90%,60%);transform:rotate(${Math.random()*360}deg);`+
-          `opacity:1;pointer-events:none;z-index:60`;
-        document.body.appendChild(piece);
-        const dx = (Math.random()*2-1)*60; // horizontal drift
-        const up = 80 + Math.random()*220; // how high to shoot
-        piece.animate([
-          {transform:`translate(0,0) rotate(0deg)`, opacity:1},
-          {transform:`translate(${dx}px,-${up}vh) rotate(${Math.random()*720-360}deg)`, opacity:1, offset:.6},
-          {transform:`translate(${dx*1.2}px, 5vh) rotate(${Math.random()*720}deg)`, opacity:0}
-        ], {duration:1800+Math.random()*1200, easing:'cubic-bezier(.2,.7,.2,1)'}).onfinish = ()=> piece.remove();
-      }
-    }
-    $('#partyBtn').addEventListener('click', () => {
-      document.body.classList.toggle('party-active');
-      if(document.body.classList.contains('party-active')){
-        makeConfetti();
-        partyTimer = setInterval(makeConfetti, 4000);
-      }else{
-        clearInterval(partyTimer);
-      }
-    });
+    // Party mode
+    let partyTimer=null;const overlay=$('.party-overlay');
+    function confetti(){const n=120;for(let i=0;i<n;i++){const d=document.createElement('div');d.style.cssText=`position:fixed;bottom:-20px;left:${(i/n*100)}vw;width:8px;height:14px;border-radius:2px;background:hsl(${Math.random()*360},90%,60%);transform:rotate(${Math.random()*360}deg);opacity:1;pointer-events:none;z-index:60`;document.body.appendChild(d);const dx=(Math.random()*2-1)*60;const up=80+Math.random()*220;d.animate([{transform:`translate(0,0) rotate(0deg)`,opacity:1},{transform:`translate(${dx}px,-${up}vh) rotate(${Math.random()*720-360}deg)`,opacity:1,offset:.6},{transform:`translate(${dx*1.2}px, 5vh) rotate(${Math.random()*720}deg)`,opacity:0}],{duration:1800+Math.random()*1200,easing:'cubic-bezier(.2,.7,.2,1)'}).onfinish=()=>d.remove();}}
+    $('#partyBtn').addEventListener('click',()=>{document.body.classList.toggle('party-active');if(document.body.classList.contains('party-active')){confetti();partyTimer=setInterval(confetti,4000)}else{clearInterval(partyTimer)}})
 
-    // ===================== Stock Ticker =====================
-    const items = [
+    // ============ Single Ticker (no duplicate) ============
+    const items=[
       {t:'$Coffee intake', d:'↑ 25%', up:true},
       {t:'$Laundry backlog', d:'↑ 80%', up:true},
       {t:'$Netflix watchlist', d:'↑ 300%', up:true},
@@ -421,58 +388,22 @@
       {t:'$Pet cuddles', d:'↑ 60%', up:true},
       {t:'$Emails unread', d:'↑ 110%', up:true},
     ];
-    function renderTicker(track){
-      track.innerHTML='';
-      items.forEach((it)=>{
-        const el=document.createElement('span');
-        el.className='tick '+(it.up?'up':'down');
-        el.innerHTML = `<span>${it.t}</span> <span class="arrow">${it.up?'▲':'▼'}</span> <strong>${it.d}</strong>`;
-        track.appendChild(el);
-      });
-    }
-    renderTicker($('#tickerTrack'));
-    // clone for seamless loop
-    renderTicker($('#tickerTrackClone'));
+    const ticker=$('#ticker');
+    function renderTicker(){ticker.innerHTML='';items.forEach(it=>{const el=document.createElement('span');el.className='tick '+(it.up?'up':'down');el.innerHTML=`<span>${it.t}</span> <span class="arrow">${it.up?'▲':'▼'}</span> <strong>${it.d}</strong>`;ticker.appendChild(el);});}
+    renderTicker();
 
-    // ===================== Router (hash-based) =====================
-    function route(){
-      const hash = location.hash.replace('#','');
-      // subpage
-      const isPrecision = hash.startsWith('project/precision-algorithms');
-      $('#project-precision').classList.toggle('hide', !isPrecision);
-      // main sections
-      const sections = ['home','about','resume','projects','gallery','contact'];
-      sections.forEach(id=> $('#'+id).classList.toggle('hide', isPrecision || (hash && hash!==id)));
-      if(!hash) sections.forEach(id=> $('#'+id).classList.remove('hide'));
-      // focus scroll to top on navigation
-      if(hash) window.scrollTo({top:0, behavior:'smooth'});
-    }
-    window.addEventListener('hashchange', route);
-    route();
+    // Router for subpage
+    function route(){const hash=location.hash.replace('#','');const isPrecision=hash.startsWith('project/precision-algorithms');$('#project-precision').classList.toggle('hide',!isPrecision);['home','about','resume','projects','gallery','contact'].forEach(id=>$('#'+id).classList.toggle('hide',isPrecision||(hash&&hash!==id)));if(!hash)['home','about','resume','projects','gallery','contact'].forEach(id=>$('#'+id).classList.remove('hide'));if(hash)window.scrollTo({top:0,behavior:'smooth'})}
+    window.addEventListener('hashchange',route);route();
 
-    // ===================== Contact (mailto fallback) =====================
-    $('#contactForm').addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(e.target).entries());
-      const subject = encodeURIComponent(`Portfolio message from ${data.name}`);
-      const body = encodeURIComponent(`Name: ${data.name}\nEmail: ${data.email}\n\n${data.message}`);
-      const mailto = `mailto:esdronski@gmail.com?subject=${subject}&body=${body}`;
-      window.location.href = mailto; // open mail client
-      $('#contactThanks').classList.remove('hide');
-    });
+    // Contact (mailto)
+    $('#contactForm').addEventListener('submit',e=>{e.preventDefault();const d=Object.fromEntries(new FormData(e.target).entries());const subject=encodeURIComponent(`Portfolio message from ${d.name}`);const body=encodeURIComponent(`Name: ${d.name}
+Email: ${d.email}
 
-    // ===================== Precision Assets Auto-Loader =====================
-    // Attempts to pre-load a few known filenames. Add more as needed.
-    const precisionNames = ['a.jpg','b.jpg','c.jpg','d.jpg'];
-    const pWrap = $('#precisionAssets');
-    precisionNames.forEach(name=>{
-      const path = `assets/precision/${name}`;
-      const fig = document.createElement('figure');
-      const img = document.createElement('img');
-      img.alt = name; img.src = path;
-      img.onerror = ()=> fig.remove();
-      fig.appendChild(img); pWrap.appendChild(fig);
-    });
+${d.message}`);location.href=`mailto:esdronski@gmail.com?subject=${subject}&body=${body}`;$('#contactThanks').classList.remove('hide')});
+
+    // Precision assets auto loader — attempt a few known names
+    const pWrap=$('#precisionAssets');['a.jpg','b.jpg','c.jpg','d.jpg'].forEach(name=>{const path=`assets/precision/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);pWrap.appendChild(fig)});
   </script>
 </body>
 </html>
