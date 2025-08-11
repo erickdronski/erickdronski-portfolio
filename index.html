@@ -180,12 +180,12 @@
     <div class="container nav">
       <div class="logo" style="font-weight:800;letter-spacing:.02em">ED</div>
       <nav class="nav-center" aria-label="Primary">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#resume">Resume / CV</a>
-        <a href="#projects">Portfolio / Projects</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#contact">Contact</a>
+        <a href="#home" class="scroll-link">Home</a>
+        <a href="#about" class="scroll-link">About</a>
+        <a href="#resume" class="scroll-link">Resume / CV</a>
+        <a href="#projects" class="scroll-link">Portfolio / Projects</a>
+        <a href="#gallery" class="scroll-link">Gallery</a>
+        <a href="#contact" class="scroll-link">Contact</a>
       </nav>
       <div class="mode-buttons">
         <button class="icon-btn" id="lightBtn" title="Light mode">☀️</button>
@@ -211,7 +211,8 @@
         <h1 class="title">Erick Dronski</h1>
         <p class="subtitle">Unicorn @ <span id="companyName" class="chip">[Your Company Name Here]</span></p>
         <p class="muted" style="margin-top:10px">MBA ᐧ Data Analytics ᐧ Sales ᐧ Marketing ᐧ AI ᐧ IT ᐧ Coding ᐧ Social Media</p>
-        <div class="tagline">“Build in public, share the journey, inspire the next builder.”</div>
+        $1
+        <p class="muted" style="margin-top:10px">This is my personal portfolio. A place to explore my projects, passions, and ideas. Let’s connect and build something meaningful.</p>
       </div>
       <div class="photo">
         <img data-base="assets/headshot" alt="Headshot of Erick Dronski" loading="eager" class="asset">
@@ -223,12 +224,12 @@
     <!-- Quick Tiles -->
     <section class="section" aria-label="Quick links">
       <div class="tiles">
-        <a class="tile" href="#resume"><div class="left"><span class="emoji">📄</span><span class="name">Resume / CV</span></div><span class="arrow">→</span></a>
-        <a class="tile" href="#about"><div class="left"><span class="emoji">👤</span><span class="name">About Me</span></div><span class="arrow">→</span></a>
-        <a class="tile" href="#projects"><div class="left"><span class="emoji">🧩</span><span class="name">Projects</span></div><span class="arrow">→</span></a>
-        <a class="tile" href="#gallery"><div class="left"><span class="emoji">🖼️</span><span class="name">Gallery</span></div><span class="arrow">→</span></a>
-        <a class="tile" href="#contact"><div class="left"><span class="emoji">✉️</span><span class="name">Contact</span></div><span class="arrow">→</span></a>
-        <a class="tile" href="#top"><div class="left"><span class="emoji">⬆️</span><span class="name">Back to Top</span></div><span class="arrow">→</span></a>
+        <a class="tile scroll-link" href="#resume"><div class="left"><span class="emoji">📄</span><span class="name">Resume / CV</span></div><span class="arrow">→</span></a>
+        <a class="tile scroll-link" href="#about"><div class="left"><span class="emoji">👤</span><span class="name">About Me</span></div><span class="arrow">→</span></a>
+        <a class="tile scroll-link" href="#projects"><div class="left"><span class="emoji">🧩</span><span class="name">Projects</span></div><span class="arrow">→</span></a>
+        <a class="tile scroll-link" href="#gallery"><div class="left"><span class="emoji">🖼️</span><span class="name">Gallery</span></div><span class="arrow">→</span></a>
+        <a class="tile scroll-link" href="#contact"><div class="left"><span class="emoji">✉️</span><span class="name">Contact</span></div><span class="arrow">→</span></a>
+        <a class="tile" href="#top" id="backToTopTile"><div class="left"><span class="emoji">⬆️</span><span class="name">Back to Top</span></div><span class="arrow">→</span></a>
       </div>
     </section>
 
@@ -236,7 +237,8 @@
     <section id="about" class="section">
       <h2>About Me</h2>
       <div style="display:grid;grid-template-columns: 1fr 1.2fr;gap:22px;align-items:start">
-        <div class="photo"><img data-base="assets/headshot" alt="Erick Dronski headshot" loading="lazy" class="asset"></div>
+        <!-- DIFFERENT IMAGE FOR ABOUT: gallery-1 -->
+        <div class="photo"><img data-base="assets/gallery-1" alt="Erick Dronski" loading="lazy" class="asset"></div>
         <article>
           <p>We never really know where life will take us. Moments and situations define us, and the choices we make along with the experiences we collect shape the next chapter. What we think is the “right” path often isn’t the one we end up walking.</p>
           <p>I’m grateful to say my journey has been anything but ordinary. Every twist and turn, both personally and professionally, has taught me to zoom out and ask: What will I take from this moment? How will it translate into the next thing I’m building? How does it fit into the trends, patterns, and constant changes in the world around me?</p>
@@ -391,15 +393,36 @@
     function renderTicker(){ticker.innerHTML='';items.forEach(it=>{const el=document.createElement('span');el.className='tick '+(it.up?'up':'down');el.innerHTML=`<span>${it.t}</span> <span class="arrow">${it.up?'▲':'▼'}</span> <strong>${it.d}</strong>`;ticker.appendChild(el);});}
     renderTicker();
 
-    // Router for subpage
-    function route(){const hash=location.hash.replace('#','');const isPrecision=hash.startsWith('project/precision-algorithms');$('#project-precision').classList.toggle('hide',!isPrecision);['home','about','resume','projects','gallery','contact'].forEach(id=>$('#'+id).classList.toggle('hide',isPrecision||(hash&&hash!==id)));if(!hash)['home','about','resume','projects','gallery','contact'].forEach(id=>$('#'+id).classList.remove('hide'));if(hash)window.scrollTo({top:0,behavior:'smooth'})}
-    window.addEventListener('hashchange',route);route();
+    // ===== Smooth scroll links (keep all sections visible) =====
+    $$('.scroll-link').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const id = a.getAttribute('href').replace('#','');
+        const el = document.getElementById(id);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); history.replaceState(null,null,'#'+id); }
+      });
+    });
 
-    // Contact (mailto)
-    $('#contactForm').addEventListener('submit',e=>{e.preventDefault();const d=Object.fromEntries(new FormData(e.target).entries());const subject=encodeURIComponent(`Portfolio message from ${d.name}`);const body=encodeURIComponent(`Name: ${d.name}
-Email: ${d.email}
+    // Back to Top tile should always work
+    $('#backToTopTile').addEventListener('click', (e)=>{
+      e.preventDefault();
+      window.scrollTo({top:0, behavior:'smooth'});
+      history.replaceState(null,null,'#');
+    });
 
-${d.message}`);location.href=`mailto:esdronski@gmail.com?subject=${subject}&body=${body}`;$('#contactThanks').classList.remove('hide')});
+    // ===== Router: only toggles Precision subpage; leaves sections scrollable =====
+    function route(){
+      const hash = location.hash.replace('#','');
+      const sections = ['home','about','resume','projects','gallery','contact'];
+      const isPrecision = hash.startsWith('project/precision-algorithms');
+      $('#project-precision').classList.toggle('hide', !isPrecision);
+      sections.forEach(id=> $('#'+id).classList.toggle('hide', isPrecision));
+      if(isPrecision){ window.scrollTo({top:0, behavior:'smooth'}); return; }
+      if(sections.includes(hash)){
+        document.getElementById(hash)?.scrollIntoView({behavior:'smooth'});
+      }
+    }
+    window.addEventListener('hashchange', route);
+    route();
 
     // ===== Image loader with extension fallbacks + clear placeholders =====
     function placeholder(msg){const p=document.createElement('div');p.className='placeholder muted';p.innerHTML=msg;return p}
@@ -417,7 +440,7 @@ ${d.message}`);location.href=`mailto:esdronski@gmail.com?subject=${subject}&body
         }
         const src = base + exts[i++];
         img.onerror = tryNext;
-        img.onload = ()=>{ /* loaded */ };
+        img.onload = ()=>{};
         img.src = src;
       }
       tryNext();
