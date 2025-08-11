@@ -83,9 +83,7 @@
     .ticker:hover{animation-play-state: paused}
     @keyframes ticker {from{transform:translateX(0)} to{transform:translateX(-50%)} }
     .tick{display:inline-flex;gap:8px;align-items:center;margin-right:28px;padding:6px 10px;border-radius:999px;background:var(--panel);box-shadow: var(--shadow)}
-    .tick.up{color:var(--up);}
-    .tick.down{color:var(--down);}
-    .arrow{font-weight:700}
+    .tick.up{color:var(--up);} .tick.down{color:var(--down);} .arrow{font-weight:700}
 
     /* Nav */
     .nav{display:flex;align-items:center;gap:16px;padding:14px 0}
@@ -107,6 +105,7 @@
     .hero{display:grid;grid-template-columns: 1.2fr 1fr;gap:40px;align-items:center;padding:56px 0 28px}
     .photo{aspect-ratio: 4/5;border-radius:24px;overflow:hidden;background:var(--panel);box-shadow: var(--shadow);display:grid;place-items:center}
     .photo img{object-fit:cover;width:100%;height:100%}
+    .placeholder{display:grid;place-items:center;width:100%;height:100%;color:var(--muted)}
 
     .kicker{color:var(--brand-2);text-transform:uppercase;letter-spacing:.18em;font-weight:600}
     .title{font-size: clamp(28px, 5vw, 56px);line-height:1.08;margin:10px 0}
@@ -215,7 +214,7 @@
         <div class="tagline">“Build in public, share the journey, inspire the next builder.”</div>
       </div>
       <div class="photo">
-        <img src="assets/headshot.jpg" alt="Headshot of Erick Dronski" loading="eager" onerror="this.outerHTML=''<div class=\'center muted\' style=\'padding:30px\'>Missing <code>assets/headshot.jpg</code></div>''">
+        <img data-base="assets/headshot" alt="Headshot of Erick Dronski" loading="eager" class="asset">
       </div>
     </section>
 
@@ -237,7 +236,7 @@
     <section id="about" class="section">
       <h2>About Me</h2>
       <div style="display:grid;grid-template-columns: 1fr 1.2fr;gap:22px;align-items:start">
-        <div class="photo"><img src="assets/headshot.jpg" alt="Erick Dronski headshot" loading="lazy" onerror="this.outerHTML=''<div class=\'center muted\' style=\'padding:30px\'>Missing <code>assets/headshot.jpg</code></div>''"></div>
+        <div class="photo"><img data-base="assets/headshot" alt="Erick Dronski headshot" loading="lazy" class="asset"></div>
         <article>
           <p>We never really know where life will take us. Moments and situations define us, and the choices we make along with the experiences we collect shape the next chapter. What we think is the “right” path often isn’t the one we end up walking.</p>
           <p>I’m grateful to say my journey has been anything but ordinary. Every twist and turn, both personally and professionally, has taught me to zoom out and ask: What will I take from this moment? How will it translate into the next thing I’m building? How does it fit into the trends, patterns, and constant changes in the world around me?</p>
@@ -285,12 +284,12 @@
     <section id="gallery" class="section">
       <h2>Gallery</h2>
       <div class="gallery">
-        <figure><img loading="lazy" src="assets/gallery-1.jpg" alt="Gallery 1" onerror="this.outerHTML=''<div class=\'center muted\' style=\'padding:30px\'>Missing <code>assets/gallery-1.jpg</code></div>''"></figure>
-        <figure><img loading="lazy" src="assets/gallery-2.jpg" alt="Gallery 2" onerror="this.outerHTML=''<div class=\'center muted\' style=\'padding:30px\'>Missing <code>assets/gallery-2.jpg</code></div>''"></figure>
-        <figure><img loading="lazy" src="assets/gallery-3.jpg" alt="Gallery 3" onerror="this.outerHTML=''<div class=\'center muted\' style=\'padding:30px\'>Missing <code>assets/gallery-3.jpg</code></div>''"></figure>
-        <figure><img loading="lazy" src="assets/gallery-4.jpg" alt="Gallery 4" onerror="this.outerHTML=''<div class=\'center muted\' style=\'padding:30px\'>Missing <code>assets/gallery-4.jpg</code></div>''"></figure>
-        <figure><img loading="lazy" src="assets/gallery-5.jpg" alt="Gallery 5" onerror="this.outerHTML=''<div class=\'center muted\' style=\'padding:30px\'>Missing <code>assets/gallery-5.jpg</code></div>''"></figure>
-        <figure><img loading="lazy" src="assets/gallery-6.jpg" alt="Gallery 6" onerror="this.outerHTML=''<div class=\'center muted\' style=\'padding:30px\'>Missing <code>assets/gallery-6.jpg</code></div>''"></figure>
+        <figure><img class="asset" data-base="assets/gallery-1" alt="Gallery 1" loading="lazy"></figure>
+        <figure><img class="asset" data-base="assets/gallery-2" alt="Gallery 2" loading="lazy"></figure>
+        <figure><img class="asset" data-base="assets/gallery-3" alt="Gallery 3" loading="lazy"></figure>
+        <figure><img class="asset" data-base="assets/gallery-4" alt="Gallery 4" loading="lazy"></figure>
+        <figure><img class="asset" data-base="assets/gallery-5" alt="Gallery 5" loading="lazy"></figure>
+        <figure><img class="asset" data-base="assets/gallery-6" alt="Gallery 6" loading="lazy"></figure>
       </div>
     </section>
 
@@ -370,7 +369,7 @@
     $('#darkBtn').addEventListener('click',()=>setTheme('dark'))
 
     // Party mode
-    let partyTimer=null;const overlay=$('.party-overlay');
+    let partyTimer=null;
     function confetti(){const n=120;for(let i=0;i<n;i++){const d=document.createElement('div');d.style.cssText=`position:fixed;bottom:-20px;left:${(i/n*100)}vw;width:8px;height:14px;border-radius:2px;background:hsl(${Math.random()*360},90%,60%);transform:rotate(${Math.random()*360}deg);opacity:1;pointer-events:none;z-index:60`;document.body.appendChild(d);const dx=(Math.random()*2-1)*60;const up=80+Math.random()*220;d.animate([{transform:`translate(0,0) rotate(0deg)`,opacity:1},{transform:`translate(${dx}px,-${up}vh) rotate(${Math.random()*720-360}deg)`,opacity:1,offset:.6},{transform:`translate(${dx*1.2}px, 5vh) rotate(${Math.random()*720}deg)`,opacity:0}],{duration:1800+Math.random()*1200,easing:'cubic-bezier(.2,.7,.2,1)'}).onfinish=()=>d.remove();}}
     $('#partyBtn').addEventListener('click',()=>{document.body.classList.toggle('party-active');if(document.body.classList.contains('party-active')){confetti();partyTimer=setInterval(confetti,4000)}else{clearInterval(partyTimer)}})
 
@@ -401,6 +400,29 @@
 Email: ${d.email}
 
 ${d.message}`);location.href=`mailto:esdronski@gmail.com?subject=${subject}&body=${body}`;$('#contactThanks').classList.remove('hide')});
+
+    // ===== Image loader with extension fallbacks + clear placeholders =====
+    function placeholder(msg){const p=document.createElement('div');p.className='placeholder muted';p.innerHTML=msg;return p}
+    function loadWithFallback(img){
+      const base = img.dataset.base; // e.g., assets/headshot
+      const exts = ['.jpg','.JPG','.jpeg','.png','.webp'];
+      let i=0;
+      function tryNext(){
+        if(i>=exts.length){
+          const name = base.split('/').pop();
+          console.warn('Missing image for', base);
+          const ph = placeholder(`Add <code>${base}.jpg</code>`);
+          img.replaceWith(ph);
+          return;
+        }
+        const src = base + exts[i++];
+        img.onerror = tryNext;
+        img.onload = ()=>{ /* loaded */ };
+        img.src = src;
+      }
+      tryNext();
+    }
+    $$('.asset').forEach(loadWithFallback);
 
     // Precision assets auto loader — attempt a few known names
     const pWrap=$('#precisionAssets');['a.jpg','b.jpg','c.jpg','d.jpg'].forEach(name=>{const path=`assets/precision/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);pWrap.appendChild(fig)});
