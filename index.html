@@ -87,19 +87,35 @@
   <p>© 2025 Erick Dronski — All rights reserved.</p>
 </footer>
 <script>
-  document.getElementById('resumeLink').href = 'assets/erick-dronski-resume.pdf';
+  // --- Global cache-buster (change this when you deploy to force-refresh) ---
+  const cacheBuster = `?v=${Date.now()}`; // dev: always fresh. For prod, replace with a fixed version string.
+
+  // --- Resume link (cache-busted) ---
+  const resumeEl = document.getElementById('resumeLink');
+  if (resumeEl) resumeEl.href = `assets/erick-dronski-resume.pdf${cacheBuster}`;
+
+  // --- Hero & Headshot (cache-busted) ---
+  const heroImg = document.querySelector('.hero-image img');
+  if (heroImg) heroImg.src = `assets/gallery-1.jpg${cacheBuster}`;
+
+  const headshotImg = document.querySelector('.about-image img');
+  if (headshotImg) headshotImg.src = `assets/headshot.jpg${cacheBuster}`;
+
+  // --- Build gallery (cache-busted) ---
   const galleryGrid = document.getElementById('galleryGrid');
-  for (let i = 2; i <= 6; i++) {
-    const img = new Image();
-    img.src = `assets/gallery-${i}.jpg`;
-    img.alt = `Gallery image ${i}`;
-    img.onload = () => {
-      const wrapper = document.createElement('div');
-      wrapper.className = 'gallery-item';
-      wrapper.appendChild(img);
-      galleryGrid.appendChild(wrapper);
-    };
-    img.onerror = () => { console.warn(`Gallery image ${i} not found, skipping.`); };
+  if (galleryGrid) {
+    for (let i = 2; i <= 6; i++) {
+      const img = new Image();
+      img.src = `assets/gallery-${i}.jpg${cacheBuster}`;
+      img.alt = `Gallery image ${i}`;
+      img.onload = () => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'gallery-item';
+        wrapper.appendChild(img);
+        galleryGrid.appendChild(wrapper);
+      };
+      img.onerror = () => { /* Skip missing images silently */ };
+    }
   }
 </script>
 </body>
