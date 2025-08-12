@@ -218,36 +218,6 @@
       .deco-emoji.bot{right:-10px;top:-10px}
       .deco-emoji.rocket{left:-8px;bottom:-8px}
     }
-  /* Emoji animation upgrades */
-    .deco-emoji{position:absolute;pointer-events:none;user-select:none;filter:drop-shadow(0 8px 18px rgba(0,0,0,.35));line-height:1}
-    .deco-emoji.front{z-index:3}
-    .deco-emoji.behind{z-index:1;opacity:.95}
-    /* Positions (responsive via clamp font sizing already set earlier) */
-    .deco-emoji.camera{left:-12px;top:-12px;transform:rotate(-10deg);font-size:clamp(32px,6vw,72px)}
-    .deco-emoji.light{right:-10px;bottom:-8px;transform:rotate(8deg);font-size:clamp(28px,5vw,56px);opacity:.9}
-    .deco-emoji.bot{right:-16px;top:-18px;transform:rotate(12deg);font-size:clamp(32px,6vw,64px);position:absolute}
-    .deco-emoji.rocket{left:-14px;bottom:-14px;transform:rotate(-14deg);font-size:clamp(28px,5.5vw,60px);will-change:transform}
-
-    /* Rocket booster flame */
-    .deco-emoji.rocket::after{content:"";position:absolute;left:-.05em;bottom:.05em;width:.65em;height:.65em;border-radius:60% 40% 60% 40%;background:conic-gradient(from 200deg, #fff 0deg, #ffd166 40deg, #fb923c 230deg, #ef4444 300deg, transparent 330deg);filter:blur(2px) saturate(1.2);transform-origin:left bottom;animation:thruster .36s ease-in-out infinite alternate}
-    @keyframes thruster{0%{transform:scale(.75) translateX(0);opacity:.85}100%{transform:scale(1.1) translateX(-1px);opacity:1}}
-
-    /* Camera flash pulse */
-    .deco-emoji.camera::after{content:"";position:absolute;top:.1em;left:.45em;width:1.5em;height:1.5em;border-radius:50%;background:radial-gradient(circle, rgba(255,255,255,.95) 0%, rgba(255,255,255,.55) 38%, rgba(255,255,255,0) 70%);opacity:0;transform:scale(.6);animation:flash 6s ease-in-out infinite}
-    @keyframes flash{0%,92%,100%{opacity:0;transform:scale(.5)}93%{opacity:.9;transform:scale(1)}95%{opacity:0;transform:scale(.6)}}
-
-    /* Bot eyes (color cycle) */
-    .deco-emoji.bot{position:absolute}
-    .deco-emoji.bot .eye{position:absolute;width:.28em;height:.28em;border-radius:50%;color:#22c55e;background:currentColor;box-shadow:0 0 .35em currentColor;animation:eyeHue 8s linear infinite}
-    .deco-emoji.bot .eye.left{top:.42em;left:.42em}
-    .deco-emoji.bot .eye.right{top:.42em;right:.46em}
-    @keyframes eyeHue{0%{color:#22c55e}25%{color:#a78bfa}50%{color:#fb923c}75%{color:#3b82f6}100%{color:#22c55e}}
-
-    /* Motion safety */
-    @media (prefers-reduced-motion: reduce){
-      .deco-emoji.rocket::after,.deco-emoji.camera::after{animation:none;opacity:.0}
-      .deco-emoji.bot .eye{animation:none}
-    }
   </style>
 </head>
 <body>
@@ -330,11 +300,11 @@
           <img data-base="assets/headshot" alt="Headshot of Erick Dronski" loading="eager" class="asset">
         </div>
         <!-- Bot with animated eyes (color cycle) -->
-        <span class="deco-emoji front bot" aria-hidden="true">🤖<span class="eye left"></span><span class="eye right"></span></span>
+        <span class="eye right"></span></span>
         <!-- Rocket with animated booster flame -->
-        <span class="deco-emoji front rocket" aria-hidden="true">🚀</span>
+        
         <!-- Soft bulb behind for depth -->
-        <span class="deco-emoji behind light" aria-hidden="true">💡</span>
+        
       </div>
       <span class="deco-emoji front bot" aria-hidden="true">🤖</span>
         <span class="deco-emoji front rocket" aria-hidden="true">🚀</span>
