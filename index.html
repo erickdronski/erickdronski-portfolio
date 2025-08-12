@@ -191,6 +191,13 @@
       .ticker, .fx-aurora{animation:none}
       .btn::after{display:none}
     }
+  /* Social proof band */
+    .proof{position:relative;margin-top:-8px;margin-bottom:8px;background:linear-gradient(180deg, color-mix(in oklab, var(--brand) 6%, transparent), transparent 70%);border:1px solid color-mix(in oklab, var(--text) 10%, transparent);border-radius:18px;padding:12px 14px;display:flex;align-items:center;gap:16px;box-shadow:var(--shadow)}
+    .proof-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;background:color-mix(in oklab, var(--panel) 92%, transparent);border:1px solid color-mix(in oklab, var(--text) 10%, transparent)}
+    .proof .icon{width:32px;height:32px;display:grid;place-items:center;border-radius:10px;background:color-mix(in oklab, var(--brand) 18%, var(--panel));font-weight:800}
+    .proof .count{font-weight:800;letter-spacing:.01em}
+    .proof .label{font-size:12px;color:var(--muted);margin-top:-2px}
+    .proof .stamp{margin-left:auto;font-size:12px}
   </style>
 </head>
 <body>
@@ -268,6 +275,34 @@
       </div>
       <div class="photo">
         <img data-base="assets/headshot" alt="Headshot of Erick Dronski" loading="eager" class="asset">
+      </div>
+    </section>
+
+    <!-- SOCIAL PROOF BAND (loads counts from stats.json if present) -->
+    <section id="social-proof" class="section" style="padding-top:0">
+      <div class="proof container">
+        <div class="proof-item">
+          <div class="icon">in</div>
+          <div class="meta">
+            <div class="count" id="count-linkedin">17K+</div>
+            <div class="label">LinkedIn</div>
+          </div>
+        </div>
+        <div class="proof-item">
+          <div class="icon">🎵</div>
+          <div class="meta">
+            <div class="count" id="count-tiktok">50K+</div>
+            <div class="label">TikTok</div>
+          </div>
+        </div>
+        <div class="proof-item">
+          <div class="icon">𝕏</div>
+          <div class="meta">
+            <div class="count" id="count-x">5K+</div>
+            <div class="label">X</div>
+          </div>
+        </div>
+        <div class="stamp muted" id="counts-stamp" aria-live="polite"></div>
       </div>
     </section>
 
@@ -526,6 +561,23 @@
 
     // Precision assets auto loader — attempt a few known names
     const pWrap=$('#precisionAssets');['a.jpg','b.jpg','c.jpg','d.jpg'].forEach(name=>{const path=`assets/precision/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);pWrap.appendChild(fig)});
-  </script>
-</body>
-</html>
+
+    // ===== Load live-ish social counts (from /stats.json) =====
+    // Create a file at repo root named stats.json with:
+    // { "linkedin_followers": 17000, "tiktok_followers": 55000, "updated_at": "2025-08-11T19:00:00Z" }
+    async function loadCounts(){
+      try{
+        const res = await fetch('stats.json', {cache:'no-store'});
+        if(!res.ok) return;
+        const data = await res.json();
+        const fmt = n => (typeof n==='number' ? (n>=1e6? (n/1e6).toFixed(1)+'M' : n>=1e3? Math.round(n/100)/10+'K' : n)+'+' : n);
+        if(data.linkedin_followers) $('#count-linkedin').textContent = fmt(data.linkedin_followers);
+        if(data.tiktok_followers) $('#count-tiktok').textContent = fmt(data.tiktok_followers);
+        if(data.x_followers) $('#count-x').textContent = fmt(data.x_followers);
+        if(data.updated_at){
+          const d = new Date(data.updated_at);
+          $('#counts-stamp').textContent = 'Updated ' + d.toLocaleDateString(undefined,{month:'short', day:'numeric'})
+        }
+      }catch(e){/* silent fallback */}
+    }
+    loadCounts();
