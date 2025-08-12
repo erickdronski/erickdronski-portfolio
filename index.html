@@ -6,9 +6,7 @@
   <title>Erick Dronski — Portfolio</title>
   <meta name="description" content="Portfolio of Erick Dronski" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-  <!-- Favicon: 😎 sunglasses emoji as inline SVG -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><!-- Favicon: 😎 sunglasses emoji as inline SVG -->
   <link rel="icon" type="image/svg+xml" href='data:image/svg+xml;utf8,
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
     <rect width="100" height="100" rx="18" fill="%230b1220"/>
@@ -110,7 +108,7 @@
 
     .kicker{color:var(--brand-2);text-transform:uppercase;letter-spacing:.18em;font-weight:600}
     .title{font-size: clamp(28px, 5vw, 56px);line-height:1.08;margin:10px 0}
-    .lead{font-size:clamp(18px,2.6vw,24px);margin-top:10px}
+    .lead{font-size:clamp(16px,2vw,20px);margin-top:10px}
     .tagline{margin-top:16px;padding:14px 16px;border-left:4px solid var(--accent);background:color-mix(in oklab, var(--brand) 10%, transparent);border-radius:10px}
 
     /* ========== TILE GRID ========== */
@@ -247,7 +245,7 @@
 
     <!-- Nav -->
     <div class="container nav">
-      <div class="logo sig" title="Erick Dronski signature">Erick Dronski</div>
+      <div class="logo" style="font-weight:800;letter-spacing:.02em">ED</div>
       <nav class="nav-center" aria-label="Primary">
         <a href="#home" class="scroll-link">Home</a>
         <a href="#about" class="scroll-link">About</a>
@@ -299,7 +297,6 @@
         <div class="kicker">Welcome <span class="wave" aria-hidden="true">👋</span></div>
         <h1 class="title">Erick Dronski</h1>
         <p class="subtitle">Unicorn @ <span id="companyName" class="chip">[Your Company Name Here]</span></p>
-        <p class="muted location">📍 Mount Laurel, NJ</p>
         <p class="muted" style="margin-top:10px">MBA ᐧ Data Analytics ᐧ Sales ᐧ Marketing ᐧ AI ᐧ IT ᐧ Coding ᐧ Social Media</p>
         <div class="tagline">“Build in public, share the journey, inspire the next builder.”</div>
         <p class="lead">This is my personal portfolio. A place to explore my projects, passions, and ideas. Let’s connect and build something meaningful.</p>
@@ -324,7 +321,7 @@
         <a class="tile scroll-link" href="#projects"><div class="left"><span class="emoji">🧩</span><span class="name">Projects</span></div><span class="arrow">→</span></a>
         <a class="tile scroll-link" href="#gallery"><div class="left"><span class="emoji">🖼️</span><span class="name">Gallery</span></div><span class="arrow">→</span></a>
         <a class="tile scroll-link" href="#contact"><div class="left"><span class="emoji">✉️</span><span class="name">Contact</span></div><span class="arrow">→</span></a>
-        <a class="tile scroll-link" href="#certifications"><div class="left"><span class="emoji">🎖️</span><span class="name">Certifications</span></div><span class="arrow">→</span></a>
+        <a class="tile" href="#top" id="backToTopTile"><div class="left"><span class="emoji">⬆️</span><span class="name">Back to Top</span></div><span class="arrow">→</span></a>
       </div>
     </section>
 
@@ -386,12 +383,6 @@
     </section>
 
     <!-- CERTIFICATIONS -->
-    <section id="certifications" class="section">
-      <h2>Certifications</h2>
-      <div class="cert-grid" id="certGrid">
-        <!-- Auto-filled by JS: assets/certs/cert-1..cert-12.(jpg|png|webp) -->
-      </div>
-    </section>
 
     <!-- GALLERY -->
     <section id="gallery" class="section">
@@ -437,11 +428,6 @@
         <a class="btn" href="https://bsky.app/profile/precisionalgorithms" target="_blank" rel="noopener">BlueSky</a>
         <a class="btn" href="https://www.threads.net/@precisionalgorithms" target="_blank" rel="noopener">Threads</a>
         <a class="btn" href="https://www.tiktok.com/@precisionalgorithms" target="_blank" rel="noopener">TikTok</a>
-      </div>
-
-      <!-- Logo block -->
-      <div class="photo" style="width:min(360px, 60%);aspect-ratio:1/1;margin:0 auto 12px;display:grid;place-items:center">
-        <img class="asset" data-base="assets/precision/logo" alt="Precision Algorithms logo" loading="lazy" style="object-fit:contain; padding:12px">
       </div>
 
       <div style="display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:start">
@@ -613,25 +599,6 @@
     }
     window.addEventListener('hashchange', route);
     route();
-
-    // Build Certifications grid
-    (function(){
-      const grid = document.getElementById('certGrid');
-      if(!grid) return;
-      for(let i=1;i<=12;i++){
-        const fig=document.createElement('figure');
-        fig.className='cert-card';
-        const img=document.createElement('img');
-        img.className='asset';
-        img.loading='lazy';
-        img.alt='Certification '+i;
-        img.dataset.base=`assets/certs/cert-${i}`;
-        fig.appendChild(img);
-        grid.appendChild(fig);
-      }
-      // run loader for these new images
-      $$('.cert-card .asset').forEach(loadWithFallback);
-    })();
 
     // ===== Gentle hero parallax =====
     (function(){
