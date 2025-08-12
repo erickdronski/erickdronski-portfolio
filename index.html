@@ -650,5 +650,56 @@
     const sWrap=$('#signalAssets'); if(sWrap){['a.jpg','b.jpg'].forEach(name=>{const path=`assets/signal/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);sWrap.appendChild(fig)})}
     const rWrap=$('#resumeAIAssets'); if(rWrap){['a.jpg','b.jpg'].forEach(name=>{const path=`assets/resumeai/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);rWrap.appendChild(fig)})}
   </script>
+<script>
+// --- Hotfix: resilient image loader (covers case-sensitive extensions) ---
+(function(){
+  if (window.__assetLoaderPatched) return; window.__assetLoaderPatched = true;
+  function load(img){
+    const base = img.getAttribute('data-base');
+    if(!base){ return; }
+    const exts = ['.jpg','.JPG','.jpeg','.png','.webp'];
+    if(img.getAttribute('src')) return; // already set by prior loader
+    let i=0;
+    function tryNext(){
+      if(i>=exts.length){ console.warn('Image not found for', base); return; }
+      const src = base + exts[i++];
+      img.onerror = tryNext; img.src = src;
+    }
+    tryNext();
+  }
+  document.querySelectorAll('img[data-base]').forEach(load);
+})();
+
+// --- Robust router so project pages open/close reliably ---
+(function(){
+  function newRoute(){
+    const hash = decodeURIComponent(location.hash.replace('#',''));
+    const mains = ['home','about','resume','projects','gallery','contact'];
+    const map = {
+      'project/precision-algorithms':'project-precision',
+      'project/trading-signal-notifier':'project-signal',
+      'project/ai-resume-analyzer':'project-resumeai'
+    };
+    const sub = map[hash] || (hash.startsWith('project/precision-algorithms') ? 'project-precision' : null);
+    const isSub = !!sub;
+
+    // Toggle visibility
+    ['project-precision','project-signal','project-resumeai'].forEach(id=>{
+      const el=document.getElementById(id); if(el) el.classList.add('hide');
+    });
+    if(isSub){
+      mains.forEach(id=>document.getElementById(id)?.classList.add('hide'));
+      document.getElementById(sub)?.classList.remove('hide');
+      window.scrollTo({top:0,behavior:'auto'});
+      return;
+    }
+    mains.forEach(id=>document.getElementById(id)?.classList.remove('hide'));
+    if(mains.includes(hash)) document.getElementById(hash)?.scrollIntoView({behavior:'smooth'});
+  }
+  window.addEventListener('hashchange', newRoute);
+  // run once on load
+  newRoute();
+})();
+</script>
 </body>
 </html>
