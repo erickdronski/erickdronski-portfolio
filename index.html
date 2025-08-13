@@ -108,7 +108,7 @@
 
     .kicker{color:var(--brand-2);text-transform:uppercase;letter-spacing:.18em;font-weight:600}
     .title{font-size: clamp(28px, 5vw, 56px);line-height:1.08;margin:10px 0}
-    .lead{font-size:clamp(18px,2.6vw,24px);margin-top:10px}
+    .lead{font-size:clamp(16px,2vw,20px);margin-top:10px}
     .tagline{margin-top:16px;padding:14px 16px;border-left:4px solid var(--accent);background:color-mix(in oklab, var(--brand) 10%, transparent);border-radius:10px}
 
     /* ========== TILE GRID ========== */
@@ -211,28 +211,18 @@
   /* Signature logo */
     .logo.sig{font-family:'Great Vibes', cursive;font-size:clamp(26px,3vw,36px);line-height:1;white-space:nowrap;color:var(--text);font-weight:400}
 
-    
+    /* Certifications grid */
+    .cert-pdf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .cert-pdf{display:flex;gap:10px;align-items:center;background:var(--tile);border:1px solid color-mix(in oklab, var(--text) 10%, transparent);border-radius:14px;padding:12px;box-shadow:var(--shadow);text-decoration:none;color:var(--text)}
+    .cert-pdf .icon{font-size:20px}
+    .cert-pdf .name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    @media(max-width:900px){.cert-pdf-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:600px){.cert-pdf-grid{grid-template-columns:1fr}}
   /* Hero — gold shine + size */
     .goldshine{background:linear-gradient(90deg,#f8e39a 0%,#ffd84d 20%,#ffbf3e 40%,#ffd84d 60%,#f8e39a 80%,#fff4c2 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:goldshine 6s linear infinite;font-weight:700}
     @keyframes goldshine{0%{background-position:0% 50%}100%{background-position:200% 50%}}
     @media (prefers-reduced-motion: reduce){.goldshine{animation:none}}
     .hero-desc{font-size:clamp(18px,2.6vw,24px)}
-  /* Gold glisten for Unicorn line */
-    .goldshine{
-      background:linear-gradient(90deg,#f8e39a 0%,#ffd84d 20%,#ffbf3e 40%,#ffd84d 60%,#f8e39a 80%,#fff4c2 100%);
-      background-size:200% 100%;
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-      animation:goldshine 6s linear infinite;
-      font-weight:700;
-    }
-    @keyframes goldshine{0%{background-position:0% 50%}100%{background-position:200% 50%}}
-    @media (prefers-reduced-motion: reduce){.goldshine{animation:none}}
-  /* Ensure front-layer emoji sits above photo */
-    .deco-emoji.front{z-index:3}
-  /* Pop labels inside muted lines */
-    .muted .pop{color:var(--text);font-weight:700}
   </style>
 </head>
 <body>
@@ -305,9 +295,9 @@
         <h1 class="title">Erick Dronski</h1>
         <p class="subtitle goldshine">Unicorn @ [Your Company Name Here]</p>
         <p class="muted location">📍 Mount Laurel, NJ</p>
-        <p class="muted" style="margin-top:10px"><span class="pop">Business:</span> MBA, GTM, Sales, Marketing 📈</p>
-        <p class="muted"><span class="pop">Technical:</span> AI, Analytics, Python, IT 💻</p>
-        <p class="muted"><span class="pop">Creative:</span> Social Media, Branding 🎨</p><div class="tagline">“Build in public, share the journey, inspire the next builder.”</div>
+        <p class="muted" style="margin-top:10px">Business: MBA, GTM, Sales, Marketing 📈</p>
+        <p class="muted">Technical: AI, Analytics, Python, IT 💻</p>
+        <p class="muted">Creative: Social Media, Branding 🎨</p><div class="tagline">“Build in public, share the journey, inspire the next builder.”</div>
         <p class="hero-desc">This is my personal portfolio. A place to explore my projects, passions, and ideas. Let’s connect and build something meaningful.</p>
       </div>
       <div class="hero-media">
@@ -330,7 +320,7 @@
         <a class="tile scroll-link" href="#projects"><div class="left"><span class="emoji">🧩</span><span class="name">Projects</span></div><span class="arrow">→</span></a>
         <a class="tile scroll-link" href="#gallery"><div class="left"><span class="emoji">🖼️</span><span class="name">Gallery</span></div><span class="arrow">→</span></a>
         <a class="tile scroll-link" href="#contact"><div class="left"><span class="emoji">✉️</span><span class="name">Contact</span></div><span class="arrow">→</span></a>
-        <a class="tile" href="#top" id="backToTopTile"><div class="left"><span class="emoji">⬆️</span><span class="name">Back to Top</span></div><span class="arrow">→</span></a>
+        <a class="tile scroll-link" href="#certifications"><div class="left"><span class="emoji">📜</span><span class="name">Certifications</span></div><span class="arrow">→</span></a>
       </div>
     </section>
 
@@ -392,28 +382,33 @@
     </section>
 
     <!-- Certifications (PDF) -->
-    <section id="gallery" class="section">
-      <h2>Gallery</h2>
-      <div class="gallery">
-        <figure><img class="asset" data-base="assets/gallery-1" alt="Gallery 1" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-2" alt="Gallery 2" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-3" alt="Gallery 3" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-4" alt="Gallery 4" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-5" alt="Gallery 5" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-6" alt="Gallery 6" loading="lazy"></figure>
-      </div>
-      <!-- Hidden extra rows revealed on demand -->
-      <div id="galleryExtra" class="gallery hide" style="margin-top:12px">
-        <figure><img class="asset" data-base="assets/gallery-7"  alt="Gallery 7"  loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-8"  alt="Gallery 8"  loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-9"  alt="Gallery 9"  loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-10" alt="Gallery 10" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-11" alt="Gallery 11" loading="lazy"></figure>
-      </div>
-      <div class="center" style="margin-top:14px">
-        <button id="moreGalleryBtn" class="btn" type="button">Show more</button>
-      </div>
+    <section id="certifications" class="section">
+      <h2>Certifications <span class="emoji">📜</span></h2>
+      <div id="certPdfGrid" class="cert-pdf-grid"></div>
+      <p class="muted" style="margin-top:8px">Place files at <code>assets/certs/</code> named <code>cert-1.pdf</code> … <code>cert-12.pdf</code>. Detected files will appear here automatically.</p>
     </section>
+
+    <section id="gallery" class="section">
+  <h2>Gallery</h2>
+  <div class="gallery">
+    <figure><img class="asset" data-base="assets/gallery-1" alt="Gallery 1" loading="lazy"></figure>
+    <figure><img class="asset" data-base="assets/gallery-2" alt="Gallery 2" loading="lazy"></figure>
+    <figure><img class="asset" data-base="assets/gallery-3" alt="Gallery 3" loading="lazy"></figure>
+    <figure><img class="asset" data-base="assets/gallery-4" alt="Gallery 4" loading="lazy"></figure>
+    <figure><img class="asset" data-base="assets/gallery-5" alt="Gallery 5" loading="lazy"></figure>
+    <figure><img class="asset" data-base="assets/gallery-6" alt="Gallery 6" loading="lazy"></figure>
+  </div>
+  <div id="galleryExtra" class="gallery hide" style="margin-top:12px">
+    <figure><img class="asset" data-base="assets/gallery-7" alt="Gallery 7" loading="lazy"></figure>
+    <figure><img class="asset" data-base="assets/gallery-8" alt="Gallery 8" loading="lazy"></figure>
+    <figure><img class="asset" data-base="assets/gallery-9" alt="Gallery 9" loading="lazy"></figure>
+    <figure><img class="asset" data-base="assets/gallery-10" alt="Gallery 10" loading="lazy"></figure>
+    <figure><img class="asset" data-base="assets/gallery-11" alt="Gallery 11" loading="lazy"></figure>
+  </div>
+  <div class="center" style="margin-top:14px">
+    <button id="moreGalleryBtn" class="btn" type="button">Show more</button>
+  </div>
+</section>
 
     <!-- SUBPAGE: Precision Algorithms -->
     <section id="project-precision" class="subpage hide" aria-label="Precision Algorithms">
@@ -435,17 +430,8 @@
           <p class="muted">Algorithmic trading automation venture focused on research-driven signals, execution, and education. More copy can go here as you continue to build out the story, roadmap, and outcomes.</p>
           <p>Use the folder on the right to stash marketing/content assets. Drop images into <code>assets/precision/</code> and they’ll appear automatically.</p>
         </article>
-        <div>
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span>🏷️</span><strong>Logo</strong></div>
-          <div class="tile" style="display:grid;place-items:center;aspect-ratio:1/1;padding:12px">
-            <img class="asset" data-base="assets/precision/logo" alt="Precision Algorithms logo" loading="lazy" style="object-fit:contain;width:100%;height:100%">
-          </div>
-          <div class="folder" style="margin-top:12px">
-            <div style="display:flex;align-items:center;gap:10px"><span>📁</span><strong>Assets</strong></div>
-            <div id="precisionAssets" class="gallery" style="grid-template-columns:1fr 1fr"></div>
-            <div class="muted">Place images at <code>assets/precision/</code></div>
-          </div>
-        </div>
+        <div class="folder">
+          <div style="display:flex;align-items:center;gap:10px"><span>📁</span><strong>Assets</strong></div>
           <div id="precisionAssets" class="gallery" style="grid-template-columns:1fr 1fr"></div>
           <div class="muted">Place images at <code>assets/precision/</code></div>
         </div>
@@ -519,22 +505,6 @@
   </footer>
 
   <script>
-    // === Canonical image loader with cache-busting ===
-    window.ASSET_VER = '10';
-    function loadWithFallback(img){
-      const base = img.getAttribute('data-base');
-      if(!base) return;
-      const exts = ['.webp','.jpg','.jpeg','.png','.JPG'];
-      let i=0;
-      function tryNext(){
-        if(i>=exts.length){ return; }
-        const src = base + exts[i++] + '?v=' + window.ASSET_VER;
-        img.onerror = tryNext;
-        img.src = src;
-      }
-      if(!img.getAttribute('src')) tryNext();
-    }
-
     const $ = (s, c=document)=>c.querySelector(s);
     const $$ = (s, c=document)=>Array.from(c.querySelectorAll(s));
 
@@ -588,7 +558,10 @@
     // Back to Top tile should always work (guarded)
     const topTile = $('#backToTopTile');
     if(topTile){ topTile.addEventListener('click', (e)=>{
-      e.preventDefault(); }
+      e.preventDefault();
+      window.scrollTo({top:0, behavior:'smooth'});
+      history.replaceState(null,null,'#');
+    }); }
     
       window.scrollTo({top:0, behavior:'smooth'});
       history.replaceState(null,null,'#');
@@ -597,7 +570,7 @@
     // ===== Router: only toggles Precision subpage; leaves sections scrollable =====
     function route(){
       const hash = location.hash.replace('#','');
-      const sections = ['home','about','resume','projects','gallery','contact'];
+      const sections = ['home','about','resume','projects','certifications','gallery','contact'];
       const subpages = {
         'project/precision-algorithms': '#project-precision',
         'project/trading-signal-notifier': '#project-signal',
@@ -643,9 +616,52 @@
       onScroll();
     })();
 
+    // ===== Image loader with extension fallbacks + clear placeholders =====
+    function placeholder(msg){const p=document.createElement('div');p.className='placeholder muted';p.innerHTML=msg;return p}
+    function loadWithFallback(img){
+      const base = img.dataset.base; // e.g., assets/headshot
+      const exts = ['.jpg','.JPG','.jpeg','.png','.webp'];
+      let i=0;
+      function tryNext(){
+        if(i>=exts.length){
+          const name = base.split('/').pop();
+          console.warn('Missing image for', base);
+          const ph = placeholder(`Add <code>${base}.jpg</code>`);
+          img.replaceWith(ph);
+          return;
+        }
+        const src = base + exts[i++];
+        img.onerror = tryNext;
+        img.onload = ()=>{};
+        img.src = src;
+      }
+      tryNext();
+    }
     $$('.asset').forEach(loadWithFallback);
 
-    // Gallery — Show more / less (safe init)
+    // Precision assets auto loader — attempt a few known names
+    const pWrap=$('#precisionAssets');['a.jpg','b.jpg','c.jpg','d.jpg'].forEach(name=>{const path=`assets/precision/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);pWrap.appendChild(fig)});
+
+    // Optional: auto-load Signal and ResumeAI assets if present
+    const sWrap=$('#signalAssets'); if(sWrap){['a.jpg','b.jpg'].forEach(name=>{const path=`assets/signal/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);sWrap.appendChild(fig)})}
+    const rWrap=$('#resumeAIAssets'); if(rWrap){['a.jpg','b.jpg'].forEach(name=>{const path=`assets/resumeai/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);rWrap.appendChild(fig)})}
+
+    // Build Certifications (PDFs) grid by probing cert-1..cert-12.pdf
+    (function(){
+      const grid = document.getElementById('certPdfGrid');
+      if(!grid) return;
+      const files = Array.from({length:12}, (_,i)=> `assets/certs/cert-${i+1}.pdf`);
+      files.forEach(url=>{
+        fetch(url, {method:'HEAD'}).then(r=>{ if(!r.ok) return; 
+          const a=document.createElement('a');
+          a.className='cert-pdf'; a.href=url; a.target='_blank'; a.rel='noopener';
+          a.innerHTML = `<span class="icon">📄</span><span class="name">${url.split('/').pop()}</span>`;
+          grid.appendChild(a);
+        }).catch(()=>{});
+      });
+    })();
+
+    // Gallery — Show more / less
     (function(){
       const btn = document.getElementById('moreGalleryBtn');
       const extra = document.getElementById('galleryExtra');
@@ -659,11 +675,6 @@
         }
       });
     })();
-
-    // Precision assets auto loader — attempt a few known names
-    const pWrap=$('#precisionAssets');['a.jpg','b.jpg','c.jpg','d.jpg'].forEach(name=>{const path=`assets/precision/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);pWrap.appendChild(fig)});
-
-    // Optional: auto-load Signal and ResumeAI assets if present
-    const sWrap=$('#signalAssets'); if(sWrap){['a.jpg','b.jpg'].forEach(name=>{const path=`assets/signal/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);sWrap.appendChild(fig)})}
-    const rWrap=$('#resumeAIAssets'); if(rWrap){['a.jpg','b.jpg'].forEach(name=>{const path=`assets/resumeai/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);rWrap.appendChild(fig)})}
-
+  </script>
+</body>
+</html>
