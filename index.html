@@ -212,18 +212,12 @@
     .logo.sig{font-family:'Great Vibes', cursive;font-size:clamp(26px,3vw,36px);line-height:1;white-space:nowrap;color:var(--text);font-weight:400}
 
     /* Certifications grid */
-    .cert-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-    .cert-card{background:var(--tile);border:1px solid color-mix(in oklab, var(--text) 10%, transparent);border-radius:14px;display:grid;place-items:center;aspect-ratio:4/3;overflow:hidden;box-shadow:var(--shadow)}
-    .cert-card img{width:100%;height:100%;object-fit:contain;padding:10px;background:linear-gradient(180deg, color-mix(in oklab, var(--brand) 6%, transparent), transparent)}
-    @media(max-width:980px){.cert-grid{grid-template-columns:repeat(3,1fr)}}
-    @media(max-width:640px){.cert-grid{grid-template-columns:repeat(2,1fr)}}
-  /* Gold shine effect for subtitle */
-    .goldshine{background:linear-gradient(90deg,#f8e39a 0%,#ffd84d 20%,#ffbf3e 40%,#ffd84d 60%,#f8e39a 80%,#fff4c2 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:goldshine 6s linear infinite;font-weight:700}
-    @keyframes goldshine{0%{background-position:0% 50%}100%{background-position:200% 50%}}
-    @media (prefers-reduced-motion: reduce){.goldshine{animation:none}}
-
-    /* Larger hero description */
-    .hero-desc{font-size:clamp(18px,2.4vw,24px)}
+    .cert-pdf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .cert-pdf{display:flex;gap:10px;align-items:center;background:var(--tile);border:1px solid color-mix(in oklab, var(--text) 10%, transparent);border-radius:14px;padding:12px;box-shadow:var(--shadow);text-decoration:none;color:var(--text)}
+    .cert-pdf .icon{font-size:20px}
+    .cert-pdf .name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    @media(max-width:900px){.cert-pdf-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:600px){.cert-pdf-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -321,7 +315,7 @@
         <a class="tile scroll-link" href="#projects"><div class="left"><span class="emoji">🧩</span><span class="name">Projects</span></div><span class="arrow">→</span></a>
         <a class="tile scroll-link" href="#gallery"><div class="left"><span class="emoji">🖼️</span><span class="name">Gallery</span></div><span class="arrow">→</span></a>
         <a class="tile scroll-link" href="#contact"><div class="left"><span class="emoji">✉️</span><span class="name">Contact</span></div><span class="arrow">→</span></a>
-        <a class="tile" href="#top" id="backToTopTile"><div class="left"><span class="emoji">⬆️</span><span class="name">Back to Top</span></div><span class="arrow">→</span></a>
+        <a class="tile scroll-link" href="#certifications"><div class="left"><span class="emoji">📜</span><span class="name">Certifications</span></div><span class="arrow">→</span></a>
       </div>
     </section>
 
@@ -385,6 +379,13 @@
     <!-- CERTIFICATIONS -->
 
     <!-- GALLERY -->
+    <!-- Certifications (PDF) -->
+    <section id="certifications" class="section">
+      <h2>Certifications <span class="emoji">📜</span></h2>
+      <div id="certPdfGrid" class="cert-pdf-grid"></div>
+      <p class="muted" style="margin-top:8px">Place files at <code>assets/certs/</code> named <code>cert-1.pdf</code> … <code>cert-12.pdf</code>. Detected files will appear here automatically.</p>
+    </section>
+
     <section id="gallery" class="section">
       <h2>Gallery</h2>
       <div class="gallery">
@@ -394,6 +395,16 @@
         <figure><img class="asset" data-base="assets/gallery-4" alt="Gallery 4" loading="lazy"></figure>
         <figure><img class="asset" data-base="assets/gallery-5" alt="Gallery 5" loading="lazy"></figure>
         <figure><img class="asset" data-base="assets/gallery-6" alt="Gallery 6" loading="lazy"></figure>
+      </div>
+      <div id="galleryExtra" class="gallery hide" style="margin-top:12px">
+        <figure><img class="asset" data-base="assets/gallery-7" alt="Gallery 7" loading="lazy"></figure>
+        <figure><img class="asset" data-base="assets/gallery-8" alt="Gallery 8" loading="lazy"></figure>
+        <figure><img class="asset" data-base="assets/gallery-9" alt="Gallery 9" loading="lazy"></figure>
+        <figure><img class="asset" data-base="assets/gallery-10" alt="Gallery 10" loading="lazy"></figure>
+        <figure><img class="asset" data-base="assets/gallery-11" alt="Gallery 11" loading="lazy"></figure>
+      </div>
+      <div class="center" style="margin-top:14px">
+        <button id="moreGalleryBtn" class="btn" type="button">Show more</button>
       </div>
     </section>
 
@@ -645,5 +656,34 @@
     // Optional: auto-load Signal and ResumeAI assets if present
     const sWrap=$('#signalAssets'); if(sWrap){['a.jpg','b.jpg'].forEach(name=>{const path=`assets/signal/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);sWrap.appendChild(fig)})}
     const rWrap=$('#resumeAIAssets'); if(rWrap){['a.jpg','b.jpg'].forEach(name=>{const path=`assets/resumeai/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);rWrap.appendChild(fig)})}
-  </script>
 
+    // Build Certifications (PDFs) grid by probing cert-1..cert-12.pdf
+    (function(){
+      const grid = document.getElementById('certPdfGrid');
+      if(!grid) return;
+      const files = Array.from({length:12}, (_,i)=> `assets/certs/cert-${i+1}.pdf`);
+      files.forEach(url=>{
+        fetch(url, {method:'HEAD'}).then(r=>{ if(r.ok){
+          const a=document.createElement('a');
+          a.className='cert-pdf'; a.href=url; a.target='_blank'; a.rel='noopener';
+          a.innerHTML = `<span class="icon">📄</span><span class="name">${url.split('/').pop()}</span>`;
+          grid.appendChild(a);
+        }}).catch(()=>{});
+      });
+    })();
+
+    // Gallery — Show more / less
+    (function(){
+      const btn = document.getElementById('moreGalleryBtn');
+      const extra = document.getElementById('galleryExtra');
+      if(!btn || !extra) return;
+      btn.addEventListener('click', ()=>{
+        const open = !extra.classList.contains('hide');
+        extra.classList.toggle('hide');
+        btn.textContent = open ? 'Show more' : 'Show less';
+        if(!open){ // just revealed; ensure images load with our fallback
+          $$('#galleryExtra .asset').forEach(loadWithFallback);
+        }
+      });
+    })();
+  </script>
