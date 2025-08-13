@@ -206,7 +206,7 @@
     .hero-media{position:relative}
     .hero-media .photo{position:relative;z-index:2}
     .deco-emoji{position:absolute;pointer-events:none;user-select:none;filter:drop-shadow(0 8px 18px rgba(0,0,0,.35))}
-    .deco-emoji.camera{left:-12px;top:-12px;transform:rotate(-10deg);font-size:clamp(32px,6vw,72px)}
+    .deco-emoji.camera{left:-12px;top:-12px;transform:rotate(-10deg);font-size:clamp(32px,6vw,72px);z-index:3}
     @media (max-width:640px){.deco-emoji.camera{left:-6px;top:-8px}}
   /* Signature logo */
     .logo.sig{font-family:'Great Vibes', cursive;font-size:clamp(26px,3vw,36px);line-height:1;white-space:nowrap;color:var(--text);font-weight:400}
@@ -217,6 +217,13 @@
     .cert-card img{width:100%;height:100%;object-fit:contain;padding:10px;background:linear-gradient(180deg, color-mix(in oklab, var(--brand) 6%, transparent), transparent)}
     @media(max-width:980px){.cert-grid{grid-template-columns:repeat(3,1fr)}}
     @media(max-width:640px){.cert-grid{grid-template-columns:repeat(2,1fr)}}
+  /* Gold shine effect for subtitle */
+    .goldshine{background:linear-gradient(90deg,#f8e39a 0%,#ffd84d 20%,#ffbf3e 40%,#ffd84d 60%,#f8e39a 80%,#fff4c2 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:goldshine 6s linear infinite;font-weight:700}
+    @keyframes goldshine{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+    @media (prefers-reduced-motion: reduce){.goldshine{animation:none}}
+
+    /* Larger hero description */
+    .hero-desc{font-size:clamp(18px,2.4vw,24px)}
   </style>
 </head>
 <body>
@@ -287,12 +294,12 @@
       <div>
         <div class="kicker">Welcome <span class="wave" aria-hidden="true">👋</span></div>
         <h1 class="title">Erick Dronski</h1>
-        <p class="subtitle">Unicorn @ <span id="companyName" class="chip">[Your Company Name Here]</span></p>
+        <p class="subtitle goldshine">Unicorn @ [Your Company Name Here]</p>
         <p class="muted location">📍 Mount Laurel, NJ</p>
         <p class="muted" style="margin-top:10px">Business: MBA, GTM, Sales, Marketing 📈</p>
         <p class="muted">Technical: AI, Analytics, Python, IT 💻</p>
         <p class="muted">Creative: Social Media, Branding 🎨</p><div class="tagline">“Build in public, share the journey, inspire the next builder.”</div>
-        <p class="lead">This is my personal portfolio. A place to explore my projects, passions, and ideas. Let’s connect and build something meaningful.</p>
+        <p class="hero-desc">This is my personal portfolio. A place to explore my projects, passions, and ideas. Let’s connect and build something meaningful.</p>
       </div>
       <div class="hero-media">
         <span class="deco-emoji front camera" aria-hidden="true">📸</span>
