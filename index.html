@@ -202,21 +202,12 @@
       .wave{animation:wave 2.4s ease-in-out infinite}
       @keyframes wave{0%,100%{transform:rotate(0)}10%{transform:rotate(18deg)}20%{transform:rotate(-6deg)}30%{transform:rotate(12deg)}40%{transform:rotate(-3deg)}50%{transform:rotate(6deg)}60%{transform:rotate(0)}}
     }
+    /* Camera emoji only */
     .hero-media{position:relative}
     .hero-media .photo{position:relative;z-index:2}
     .deco-emoji{position:absolute;pointer-events:none;user-select:none;filter:drop-shadow(0 8px 18px rgba(0,0,0,.35))}
-    .deco-emoji.front{z-index:3}
-    .deco-emoji.behind{z-index:1;opacity:.95}
     .deco-emoji.camera{left:-12px;top:-12px;transform:rotate(-10deg);font-size:clamp(32px,6vw,72px)}
-    .deco-emoji.light{right:-10px;bottom:-8px;transform:rotate(8deg);font-size:clamp(28px,5vw,56px);opacity:.9}
-    .deco-emoji.bot{right:-16px;top:-18px;transform:rotate(12deg);font-size:clamp(32px,6vw,64px)}
-    .deco-emoji.rocket{left:-14px;bottom:-14px;transform:rotate(-14deg);font-size:clamp(28px,5.5vw,60px)}
-    @media (max-width:640px){
-      .deco-emoji.camera{left:-6px;top:-8px}
-      .deco-emoji.light{right:-6px;bottom:-6px}
-      .deco-emoji.bot{right:-10px;top:-10px}
-      .deco-emoji.rocket{left:-8px;bottom:-8px}
-    }
+    @media (max-width:640px){.deco-emoji.camera{left:-6px;top:-8px}}
   /* Signature logo */
     .logo.sig{font-family:'Great Vibes', cursive;font-size:clamp(26px,3vw,36px);line-height:1;white-space:nowrap;color:var(--text);font-weight:400}
 
@@ -300,8 +291,7 @@
         <p class="muted location">📍 Mount Laurel, NJ</p>
         <p class="muted" style="margin-top:10px">Business: MBA, GTM, Sales, Marketing 📈</p>
         <p class="muted">Technical: AI, Analytics, Python, IT 💻</p>
-        <p class="muted">Creative: Social Media, Branding �
-        <div class="tagline">“Build in public, share the journey, inspire the next builder.”</div>
+        <p class="muted">Creative: Social Media, Branding 🎨</p><div class="tagline">“Build in public, share the journey, inspire the next builder.”</div>
         <p class="lead">This is my personal portfolio. A place to explore my projects, passions, and ideas. Let’s connect and build something meaningful.</p>
       </div>
       <div class="hero-media">
@@ -560,13 +550,9 @@
       a.addEventListener('click', (e)=>{
         e.preventDefault();
         const id = a.getAttribute('href').replace('#','');
-        // Always drive via the hash so subpages close properly
-        location.hash = '#'+id;
-      });
-    }); history.replaceState(null,null,'#'+id); }
+        location.hash = id ? '#'+id : '#';
       });
     });
-
     // Back to Top tile should always work
     $('#backToTopTile').addEventListener('click', (e)=>{
       e.preventDefault();
@@ -653,20 +639,4 @@
     const sWrap=$('#signalAssets'); if(sWrap){['a.jpg','b.jpg'].forEach(name=>{const path=`assets/signal/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);sWrap.appendChild(fig)})}
     const rWrap=$('#resumeAIAssets'); if(rWrap){['a.jpg','b.jpg'].forEach(name=>{const path=`assets/resumeai/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);rWrap.appendChild(fig)})}
   </script>
-<script>
-// --- Hotfix: resilient image loader (covers case-sensitive extensions) ---
-(function(){
-  if (window.__assetLoaderPatched) return; window.__assetLoaderPatched = true;
-  function load(img){
-    const base = img.getAttribute('data-base');
-    if(!base){ return; }
-    const exts = ['.jpg','.JPG','.jpeg','.png','.webp'];
-    if(img.getAttribute('src')) return; // already set by prior loader
-    let i=0;
-    function tryNext(){
-      if(i>=exts.length){ console.warn('Image not found for', base); return; }
-      const src = base + exts[i++];
-      img.onerror = tryNext; img.src = src;
-    }
-    tryNext();
-  }
+
