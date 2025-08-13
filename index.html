@@ -505,6 +505,22 @@
   </footer>
 
   <script>
+    // === Canonical image loader with cache-busting ===
+    window.ASSET_VER = '10';
+    function loadWithFallback(img){
+      const base = img.getAttribute('data-base');
+      if(!base) return;
+      const exts = ['.webp','.jpg','.jpeg','.png','.JPG'];
+      let i=0;
+      function tryNext(){
+        if(i>=exts.length){ return; }
+        const src = base + exts[i++] + '?v=' + window.ASSET_VER;
+        img.onerror = tryNext;
+        img.src = src;
+      }
+      if(!img.getAttribute('src')) tryNext();
+    }
+
     const $ = (s, c=document)=>c.querySelector(s);
     const $$ = (s, c=document)=>Array.from(c.querySelectorAll(s));
 
@@ -675,6 +691,7 @@
         }
       });
     })();
+  (function(){document.querySelectorAll('img.asset[data-base]').forEach(loadWithFallback);})();
   </script>
 </body>
 </html>
