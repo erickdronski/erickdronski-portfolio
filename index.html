@@ -218,6 +218,11 @@
     .cert-pdf .name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     @media(max-width:900px){.cert-pdf-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:600px){.cert-pdf-grid{grid-template-columns:1fr}}
+  /* Hero — gold shine + size */
+    .goldshine{background:linear-gradient(90deg,#f8e39a 0%,#ffd84d 20%,#ffbf3e 40%,#ffd84d 60%,#f8e39a 80%,#fff4c2 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:goldshine 6s linear infinite;font-weight:700}
+    @keyframes goldshine{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+    @media (prefers-reduced-motion: reduce){.goldshine{animation:none}}
+    .hero-desc{font-size:clamp(18px,2.6vw,24px)}
   </style>
 </head>
 <body>
@@ -376,9 +381,6 @@
       </div>
     </section>
 
-    <!-- CERTIFICATIONS -->
-
-    <!-- GALLERY -->
     <!-- Certifications (PDF) -->
     <section id="certifications" class="section">
       <h2>Certifications <span class="emoji">📜</span></h2>
@@ -387,44 +389,26 @@
     </section>
 
     <section id="gallery" class="section">
-      <h2>Gallery</h2>
-      <div class="gallery">
-        <figure><img class="asset" data-base="assets/gallery-1" alt="Gallery 1" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-2" alt="Gallery 2" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-3" alt="Gallery 3" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-4" alt="Gallery 4" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-5" alt="Gallery 5" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-6" alt="Gallery 6" loading="lazy"></figure>
-      </div>
-      <div id="galleryExtra" class="gallery hide" style="margin-top:12px">
-        <figure><img class="asset" data-base="assets/gallery-7" alt="Gallery 7" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-8" alt="Gallery 8" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-9" alt="Gallery 9" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-10" alt="Gallery 10" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-11" alt="Gallery 11" loading="lazy"></figure>
-      </div>
-      <div class="center" style="margin-top:14px">
-        <button id="moreGalleryBtn" class="btn" type="button">Show more</button>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="section">
-      <h2>Contact</h2>
-      <p class="muted">Send a message below. On GitHub Pages this uses your email client (mailto). For a hosted form, replace the action with a Formspree endpoint.</p>
-      <form id="contactForm">
-        <input type="text" name="name" placeholder="Your name" required>
-        <input type="email" name="email" placeholder="Your email" required>
-        <textarea name="message" placeholder="Your message" required></textarea>
-        <button class="btn" type="submit">Send Message</button>
-      </form>
-      <div id="contactThanks" class="hide" style="margin-top:14px">
-        <div class="photo" style="aspect-ratio:auto;padding:18px" >
-          <p>✅ Your message has been queued in your email client. We’re excited to get back to you!</p>
-          <p><a class="btn" href="#home">🏠 Back to Home</a></p>
-        </div>
-      </div>
-    </section>
+  <h2>Gallery</h2>
+  <div class="gallery">
+    <figure><img class="asset" data-base="assets/gallery-1" alt="Gallery 1" loading="lazy"></figure>
+    <figure><img class="asset" data-base="assets/gallery-2" alt="Gallery 2" loading="lazy"></figure>
+    <figure><img class="asset" data-base="assets/gallery-3" alt="Gallery 3" loading="lazy"></figure>
+    <figure><img class="asset" data-base="assets/gallery-4" alt="Gallery 4" loading="lazy"></figure>
+    <figure><img class="asset" data-base="assets/gallery-5" alt="Gallery 5" loading="lazy"></figure>
+    <figure><img class="asset" data-base="assets/gallery-6" alt="Gallery 6" loading="lazy"></figure>
+  </div>
+  <div id="galleryExtra" class="gallery hide" style="margin-top:12px">
+    <figure><img class="asset" data-base="assets/gallery-7" alt="Gallery 7" loading="lazy"></figure>
+    <figure><img class="asset" data-base="assets/gallery-8" alt="Gallery 8" loading="lazy"></figure>
+    <figure><img class="asset" data-base="assets/gallery-9" alt="Gallery 9" loading="lazy"></figure>
+    <figure><img class="asset" data-base="assets/gallery-10" alt="Gallery 10" loading="lazy"></figure>
+    <figure><img class="asset" data-base="assets/gallery-11" alt="Gallery 11" loading="lazy"></figure>
+  </div>
+  <div class="center" style="margin-top:14px">
+    <button id="moreGalleryBtn" class="btn" type="button">Show more</button>
+  </div>
+</section>
 
     <!-- SUBPAGE: Precision Algorithms -->
     <section id="project-precision" class="subpage hide" aria-label="Precision Algorithms">
@@ -571,9 +555,14 @@
         location.hash = id ? '#'+id : '#';
       });
     });
-    // Back to Top tile should always work
-    $('#backToTopTile').addEventListener('click', (e)=>{
+    // Back to Top tile should always work (guarded)
+    const topTile = $('#backToTopTile');
+    if(topTile){ topTile.addEventListener('click', (e)=>{
       e.preventDefault();
+      window.scrollTo({top:0, behavior:'smooth'});
+      history.replaceState(null,null,'#');
+    }); }
+    
       window.scrollTo({top:0, behavior:'smooth'});
       history.replaceState(null,null,'#');
     });
@@ -581,7 +570,7 @@
     // ===== Router: only toggles Precision subpage; leaves sections scrollable =====
     function route(){
       const hash = location.hash.replace('#','');
-      const sections = ['home','about','resume','projects','gallery','contact'];
+      const sections = ['home','about','resume','projects','certifications','gallery','contact'];
       const subpages = {
         'project/precision-algorithms': '#project-precision',
         'project/trading-signal-notifier': '#project-signal',
@@ -663,12 +652,12 @@
       if(!grid) return;
       const files = Array.from({length:12}, (_,i)=> `assets/certs/cert-${i+1}.pdf`);
       files.forEach(url=>{
-        fetch(url, {method:'HEAD'}).then(r=>{ if(r.ok){
+        fetch(url, {method:'HEAD'}).then(r=>{ if(!r.ok) return; 
           const a=document.createElement('a');
           a.className='cert-pdf'; a.href=url; a.target='_blank'; a.rel='noopener';
           a.innerHTML = `<span class="icon">📄</span><span class="name">${url.split('/').pop()}</span>`;
           grid.appendChild(a);
-        }}).catch(()=>{});
+        }).catch(()=>{});
       });
     })();
 
@@ -681,9 +670,11 @@
         const open = !extra.classList.contains('hide');
         extra.classList.toggle('hide');
         btn.textContent = open ? 'Show more' : 'Show less';
-        if(!open){ // just revealed; ensure images load with our fallback
-          $$('#galleryExtra .asset').forEach(loadWithFallback);
+        if(!open){
+          document.querySelectorAll('#galleryExtra img.asset[data-base]').forEach(loadWithFallback);
         }
       });
     })();
   </script>
+</body>
+</html>
