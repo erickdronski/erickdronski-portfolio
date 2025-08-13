@@ -297,7 +297,10 @@
         <div class="kicker">Welcome <span class="wave" aria-hidden="true">👋</span></div>
         <h1 class="title">Erick Dronski</h1>
         <p class="subtitle">Unicorn @ <span id="companyName" class="chip">[Your Company Name Here]</span></p>
-        <p class="muted" style="margin-top:10px">MBA ᐧ Data Analytics ᐧ Sales ᐧ Marketing ᐧ AI ᐧ IT ᐧ Coding ᐧ Social Media</p>
+        <p class="muted location">📍 Mount Laurel, NJ</p>
+        <p class="muted" style="margin-top:10px">Business: MBA, GTM, Sales, Marketing 📈</p>
+        <p class="muted">Technical: AI, Analytics, Python, IT 💻</p>
+        <p class="muted">Creative: Social Media, Branding �
         <div class="tagline">“Build in public, share the journey, inspire the next builder.”</div>
         <p class="lead">This is my personal portfolio. A place to explore my projects, passions, and ideas. Let’s connect and build something meaningful.</p>
       </div>
@@ -667,39 +670,3 @@
     }
     tryNext();
   }
-  document.querySelectorAll('img[data-base]').forEach(load);
-})();
-
-// --- Robust router so project pages open/close reliably ---
-(function(){
-  function newRoute(){
-    const hash = decodeURIComponent(location.hash.replace('#',''));
-    const mains = ['home','about','resume','projects','gallery','contact'];
-    const map = {
-      'project/precision-algorithms':'project-precision',
-      'project/trading-signal-notifier':'project-signal',
-      'project/ai-resume-analyzer':'project-resumeai'
-    };
-    const sub = map[hash] || (hash.startsWith('project/precision-algorithms') ? 'project-precision' : null);
-    const isSub = !!sub;
-
-    // Toggle visibility
-    ['project-precision','project-signal','project-resumeai'].forEach(id=>{
-      const el=document.getElementById(id); if(el) el.classList.add('hide');
-    });
-    if(isSub){
-      mains.forEach(id=>document.getElementById(id)?.classList.add('hide'));
-      document.getElementById(sub)?.classList.remove('hide');
-      window.scrollTo({top:0,behavior:'auto'});
-      return;
-    }
-    mains.forEach(id=>document.getElementById(id)?.classList.remove('hide'));
-    if(mains.includes(hash)) document.getElementById(hash)?.scrollIntoView({behavior:'smooth'});
-  }
-  window.addEventListener('hashchange', newRoute);
-  // run once on load
-  newRoute();
-})();
-</script>
-</body>
-</html>
