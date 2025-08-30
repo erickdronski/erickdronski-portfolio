@@ -101,7 +101,7 @@
     @media (max-width: 1020px){.rail{display:none}}
 
     /* ========== HERO ========== */
-    .hero{display:grid;grid-template-columns: 1fr 0.8fr;gap:40px;align-items:center;padding:56px 0 28px}
+    .hero{display:grid;grid-template-columns: 1.2fr 1fr;gap:40px;align-items:center;padding:56px 0 28px}
     .photo{aspect-ratio: 4/5;border-radius:24px;overflow:hidden;background:var(--panel);box-shadow: var(--shadow);display:grid;place-items:center;will-change:transform}
     .photo img{object-fit:cover;width:100%;height:100%}
     .placeholder{display:grid;place-items:center;width:100%;height:100%;color:var(--muted)}
@@ -134,7 +134,7 @@
     @media (max-width: 640px){.projects-grid{grid-template-columns: 1fr} .projects-grid .project.main{grid-column: span 1}}
 
     /* Gallery */
-    .gallery{display:grid;grid-template-columns: repeat(3, 1fr);gap:12px;justify-items:center}
+    .gallery{display:grid;grid-template-columns: repeat(3, 1fr);gap:12px}
     .gallery figure{aspect-ratio:1/1;background:var(--panel);border-radius:16px;overflow:hidden;display:grid;place-items:center;box-shadow:var(--shadow)}
     .gallery img{width:100%;height:100%;object-fit:cover}
     @media (max-width: 980px){.gallery{grid-template-columns: repeat(2, 1fr)}}
@@ -172,19 +172,8 @@
 
     .fx-grain{mix-blend-mode:soft-light;opacity:.18;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'><filter id='n' x='-50%' y='-50%' width='200%' height='200%'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='table' tableValues='0 0 .02 .04 .06'/></feComponentTransfer></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.35'/></svg>");background-size:140px 140px}
 
-    /* Floating particles */
-    .particles-container{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
-    .particle{position:absolute;background:radial-gradient(circle, rgba(90,176,255,0.08) 0%, transparent 70%);border-radius:50%;animation:float-up linear infinite}
-    :root.light .particle{background:radial-gradient(circle, rgba(0,102,204,0.05) 0%, transparent 70%)}
-    @keyframes float-up{
-      0%{transform:translateY(100vh) translateX(0) scale(0);opacity:0}
-      10%{opacity:0.6}
-      90%{opacity:0.6}
-      100%{transform:translateY(-100vh) translateX(100px) scale(1);opacity:0}
-    }
-
     /* Toggle off visuals */
-    .fx-off .fx-aurora, .fx-off .fx-grain, .fx-off .particles-container{display:none}
+    .fx-off .fx-aurora, .fx-off .fx-grain{display:none}
 
     /* Gradient divider override */
     .divider{height:1px;background:linear-gradient(90deg, transparent, color-mix(in oklab, var(--brand) 25%, transparent) 20%, color-mix(in oklab, var(--accent) 35%, transparent) 80%, transparent);margin:10px 0 30px;border-radius:999px}
@@ -245,7 +234,6 @@
   <!-- Background FX -->
   <div class="fx-aurora" aria-hidden="true"></div>
   <div class="fx-grain" aria-hidden="true"></div>
-  <div class="particles-container" aria-hidden="true"></div>
   <!-- Party overlay for spotlights and confetti -->
   <div class="party-overlay" aria-hidden="true"></div>
 
@@ -266,7 +254,6 @@
         <a href="#resume" class="scroll-link">Resume / CV</a>
         <a href="#projects" class="scroll-link">Portfolio / Projects</a>
         <a href="#gallery" class="scroll-link">Gallery</a>
-        <a href="#certifications" class="scroll-link">Certifications</a>
         <a href="#contact" class="scroll-link">Contact</a>
       </nav>
       <div class="mode-buttons">
@@ -311,12 +298,12 @@
       <div>
         <div class="kicker">Welcome <span class="wave" aria-hidden="true">👋</span></div>
         <h1 class="title">Erick Dronski</h1>
-        <p class="subtitle goldshine">Aspiring Data Scientist</p>
+        <p class="subtitle goldshine">Unicorn @ [Your Company Name Here]</p>
         <p class="muted location">📍 Mount Laurel, NJ</p>
         <p class="muted" style="margin-top:10px"><span class="pop">Business:</span> MBA, GTM, Sales, Marketing 📈</p>
         <p class="muted"><span class="pop">Technical:</span> AI, Analytics, Python, IT 💻</p>
-        <p class="muted"><span class="pop">Creative:</span> Social Media, Branding 🎨</p><div class="tagline">"Build in public, share the journey, inspire the next builder."</div>
-        <p class="hero-desc">This is my personal portfolio. A place to explore my projects, passions, and ideas. Let's connect and build something meaningful.</p>
+        <p class="muted"><span class="pop">Creative:</span> Social Media, Branding 🎨</p><div class="tagline">“Build in public, share the journey, inspire the next builder.”</div>
+        <p class="hero-desc">This is my personal portfolio. A place to explore my projects, passions, and ideas. Let’s connect and build something meaningful.</p>
       </div>
       <div class="hero-media">
         <span class="deco-emoji front camera" aria-hidden="true">📸</span>
@@ -335,8 +322,8 @@
         <a class="tile scroll-link" href="#about"><div class="left"><span class="emoji">👤</span><span class="name">About Me</span></div><span class="arrow">→</span></a>
         <a class="tile scroll-link" href="#projects"><div class="left"><span class="emoji">🧩</span><span class="name">Projects</span></div><span class="arrow">→</span></a>
         <a class="tile scroll-link" href="#gallery"><div class="left"><span class="emoji">🖼️</span><span class="name">Gallery</span></div><span class="arrow">→</span></a>
-        <a class="tile scroll-link" href="#certifications"><div class="left"><span class="emoji">📜</span><span class="name">Certifications</span></div><span class="arrow">→</span></a>
         <a class="tile scroll-link" href="#contact"><div class="left"><span class="emoji">✉️</span><span class="name">Contact</span></div><span class="arrow">→</span></a>
+        <a class="tile" href="#top" id="backToTopTile"><div class="left"><span class="emoji">⬆️</span><span class="name">Back to Top</span></div><span class="arrow">→</span></a>
       </div>
     </section>
 
@@ -346,12 +333,12 @@
       <div style="display:grid;grid-template-columns: 1fr 1.2fr;gap:22px;align-items:start">
         <div class="photo"><img data-base="assets/gallery-1" alt="Erick Dronski" loading="lazy" class="asset"></div>
         <article>
-          <p>We never really know where life will take us. Moments and situations define us, and the choices we make along with the experiences we collect shape the next chapter. What we think is the "right" path often isn't the one we end up walking.</p>
-          <p>I'm grateful to say my journey has been anything but ordinary. Every twist and turn, both personally and professionally, has taught me to zoom out and ask: What will I take from this moment? How will it translate into the next thing I'm building? How does it fit into the trends, patterns, and constant changes in the world around me?</p>
+          <p>We never really know where life will take us. Moments and situations define us, and the choices we make along with the experiences we collect shape the next chapter. What we think is the “right” path often isn’t the one we end up walking.</p>
+          <p>I’m grateful to say my journey has been anything but ordinary. Every twist and turn, both personally and professionally, has taught me to zoom out and ask: What will I take from this moment? How will it translate into the next thing I’m building? How does it fit into the trends, patterns, and constant changes in the world around me?</p>
           <p>I started in banking, picturing myself as the Patagonia vest guy networking on the golf course. But life had other plans. I shifted into SaaS as an Account Executive, then into IT as a Strategic Consultant, all while exploring social media — partly for personal reasons, partly because my wife happens to be a social media and photography savant.</p>
-          <p>Somehow, all these experiences blended perfectly. They shaped the skills I've built, the work I've done, and most importantly the people I've been able to connect with around the world. Along the way, my presence grew: 17K+ connections on LinkedIn, 55K+ followers on TikTok, and a steadily growing audience on X. But more valuable than numbers has been the conversations, stories, and ideas shared with others.</p>
-          <p>I'm not a content wizard. I don't have some secret formula. I just put myself out there. And now, I'm still building, still learning, and this site is just another step in that journey.</p>
-          <p>If you've made it this far, I hope you explore, learn more about me, and maybe even connect. After all, the best chapters are the ones we write together.</p>
+          <p>Somehow, all these experiences blended perfectly. They shaped the skills I’ve built, the work I’ve done, and most importantly the people I’ve been able to connect with around the world. Along the way, my presence grew: 17K+ connections on LinkedIn, 55K+ followers on TikTok, and a steadily growing audience on X. But more valuable than numbers has been the conversations, stories, and ideas shared with others.</p>
+          <p>I’m not a content wizard. I don’t have some secret formula. I just put myself out there. And now, I’m still building, still learning, and this site is just another step in that journey.</p>
+          <p>If you’ve made it this far, I hope you explore, learn more about me, and maybe even connect. After all, the best chapters are the ones we write together.</p>
         </article>
       </div>
     </section>
@@ -423,55 +410,21 @@
       </div>
     </section>
 
-    <!-- CERTIFICATIONS -->
-    <section id="certifications" class="section">
-      <h2>Certifications 📜</h2>
-      <div class="cert-grid">
-        <div class="cert-card">
-          <div class="placeholder">
-            <p style="font-size:2em;margin-bottom:10px">📄</p>
-            <p style="font-size:0.9em;text-align:center">Certification 1<br><span style="font-size:0.8em;opacity:0.7">PDF placeholder</span></p>
-          </div>
-        </div>
-        <div class="cert-card">
-          <div class="placeholder">
-            <p style="font-size:2em;margin-bottom:10px">📄</p>
-            <p style="font-size:0.9em;text-align:center">Certification 2<br><span style="font-size:0.8em;opacity:0.7">PDF placeholder</span></p>
-          </div>
-        </div>
-        <div class="cert-card">
-          <div class="placeholder">
-            <p style="font-size:2em;margin-bottom:10px">📄</p>
-            <p style="font-size:0.9em;text-align:center">Certification 3<br><span style="font-size:0.8em;opacity:0.7">PDF placeholder</span></p>
-          </div>
-        </div>
-        <div class="cert-card">
-          <div class="placeholder">
-            <p style="font-size:2em;margin-bottom:10px">📄</p>
-            <p style="font-size:0.9em;text-align:center">Certification 4<br><span style="font-size:0.8em;opacity:0.7">PDF placeholder</span></p>
-          </div>
-        </div>
-        <div class="cert-card">
-          <div class="placeholder">
-            <p style="font-size:2em;margin-bottom:10px">📄</p>
-            <p style="font-size:0.9em;text-align:center">Certification 5<br><span style="font-size:0.8em;opacity:0.7">PDF placeholder</span></p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- CONTACT -->
     <section id="contact" class="section">
       <h2>Contact</h2>
-      <form id="contactForm" action="mailto:esdronski@gmail.com" method="post" enctype="text/plain">
+      <p class="muted">Send a message below. On GitHub Pages this uses your email client (mailto). For a hosted form, replace the action with a Formspree endpoint.</p>
+      <form id="contactForm">
         <input type="text" name="name" placeholder="Your name" required>
         <input type="email" name="email" placeholder="Your email" required>
-        <input type="text" name="subject" placeholder="Subject" required>
         <textarea name="message" placeholder="Your message" required></textarea>
         <button class="btn" type="submit">Send Message</button>
       </form>
-      <div style="text-align:center;margin-top:20px">
-        <p class="muted">Or reach out directly at: <a href="mailto:esdronski@gmail.com" style="color:var(--brand);text-decoration:none">esdronski@gmail.com</a></p>
+      <div id="contactThanks" class="hide" style="margin-top:14px">
+        <div class="photo" style="aspect-ratio:auto;padding:18px" >
+          <p>✅ Your message has been queued in your email client. We’re excited to get back to you!</p>
+          <p><a class="btn" href="#home">🏠 Back to Home</a></p>
+        </div>
       </div>
     </section>
 
@@ -498,7 +451,7 @@
           </div>
 
           <p class="muted">Algorithmic trading automation venture focused on research-driven signals, execution, and education. More copy can go here as you continue to build out the story, roadmap, and outcomes.</p>
-          <p>Use the folder on the right to stash marketing/content assets. Drop images into <code>assets/precision/</code> and they'll appear automatically.</p>
+          <p>Use the folder on the right to stash marketing/content assets. Drop images into <code>assets/precision/</code> and they’ll appear automatically.</p>
         </article>
         <div class="folder">
           <div style="display:flex;align-items:center;gap:10px"><span>📁</span><strong>Assets</strong></div>
@@ -576,7 +529,7 @@
 
   <script>
     const $ = (s, c=document)=>c.querySelector(s);
-    const $ = (s, c=document)=>Array.from(c.querySelectorAll(s));
+    const $$ = (s, c=document)=>Array.from(c.querySelectorAll(s));
 
     // Year in footer
     $('#year').textContent = new Date().getFullYear();
@@ -594,37 +547,6 @@
     function setFx(on){ document.body.classList.toggle('fx-off', !on); }
     setFx(!prefersReduced);
 
-    // Floating particles animation
-    (function createParticles(){
-      if(prefersReduced) return;
-      const container = document.querySelector('.particles-container');
-      if(!container) return;
-      
-      const particleCount = 12;
-      
-      for(let i = 0; i < particleCount; i++){
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        
-        // Random size between 30px and 150px
-        const size = Math.random() * 120 + 30;
-        particle.style.width = size + 'px';
-        particle.style.height = size + 'px';
-        
-        // Random horizontal position
-        particle.style.left = Math.random() * 100 + '%';
-        
-        // Random animation duration between 20s and 40s
-        const duration = Math.random() * 20 + 20;
-        particle.style.animationDuration = duration + 's';
-        
-        // Random delay
-        particle.style.animationDelay = Math.random() * 20 + 's';
-        
-        container.appendChild(particle);
-      }
-    })();
-
     // Party mode
     let partyTimer=null;
     function confetti(){const n=120;for(let i=0;i<n;i++){const d=document.createElement('div');d.style.cssText=`position:fixed;bottom:-20px;left:${(i/n*100)}vw;width:8px;height:14px;border-radius:2px;background:hsl(${Math.random()*360},90%,60%);transform:rotate(${Math.random()*360}deg);opacity:1;pointer-events:none;z-index:60`;document.body.appendChild(d);const dx=(Math.random()*2-1)*60;const up=80+Math.random()*220;d.animate([{transform:`translate(0,0) rotate(0deg)`,opacity:1},{transform:`translate(${dx}px,-${up}vh) rotate(${Math.random()*720-360}deg)`,opacity:1,offset:.6},{transform:`translate(${dx*1.2}px, 5vh) rotate(${Math.random()*720}deg)`,opacity:0}],{duration:1800+Math.random()*1200,easing:'cubic-bezier(.2,.7,.2,1)'}).onfinish=()=>d.remove();}}
@@ -633,43 +555,40 @@
     // ============ Single Ticker (no duplicate) ============
     const items=[
       {t:'$Coffee intake', d:'↑ 25%', up:true},
-      {t:'$Model accuracy', d:'↓ 15%', up:false},
+      {t:'$Laundry backlog', d:'↑ 80%', up:true},
       {t:'$Netflix watchlist', d:'↑ 300%', up:true},
-      {t:'$GPU memory', d:'↓ 95%', up:false},
       {t:'$Tabs open', d:'↑ 500%', up:true},
-      {t:'$Training patience', d:'↓ 87%', up:false},
+      {t:'$Deadline pressure', d:'↑ 90%', up:true},
       {t:'$Dad jokes', d:'↑ 12%', up:true},
       {t:'$Crypto portfolio', d:'↓ 99%', up:false},
-      {t:'$Stack Overflow visits', d:'↑ 420%', up:true},
-      {t:'$Sleep schedule', d:'↓ 68%', up:false},
+      {t:'$Impulse Amazon orders', d:'↑ 55%', up:true},
       {t:'$Ideas in backlog', d:'↑ 200%', up:true},
-      {t:'$Model convergence', d:'↓ 34%', up:false},
-      {t:'$Kaggle ranking', d:'↓ 156%', up:false},
-      {t:'$ChatGPT queries', d:'↑ 850%', up:true},
-      {t:'$ETH gas fees', d:'↓ 72%', up:false},
-      {t:'$Jupyter notebooks', d:'↑ 67%', up:true},
-      {t:'$Data quality', d:'↓ 45%', up:false},
-      {t:'$LinkedIn recruiters', d:'↑ 180%', up:true},
-      {t:'$NFT value', d:'↓ 92%', up:false},
-      {t:'$Python errors', d:'↑ 234%', up:true},
+      {t:'$Pet cuddles', d:'↑ 60%', up:true},
+      {t:'$Emails unread', d:'↑ 110%', up:true},
     ];
     const ticker=$('#ticker');
     function renderTicker(){ticker.innerHTML='';items.forEach(it=>{const el=document.createElement('span');el.className='tick '+(it.up?'up':'down');el.innerHTML=`<span>${it.t}</span> <span class="arrow">${it.up?'▲':'▼'}</span> <strong>${it.d}</strong>`;ticker.appendChild(el);});}
     renderTicker();
 
     // ===== Smooth scroll links (keep all sections visible) =====
-    $('.scroll-link').forEach(a=>{
+    $$('.scroll-link').forEach(a=>{
       a.addEventListener('click', (e)=>{
         e.preventDefault();
         const id = a.getAttribute('href').replace('#','');
         location.hash = id ? '#'+id : '#';
       });
     });
+    // Back to Top tile should always work
+    $('#backToTopTile').addEventListener('click', (e)=>{
+      e.preventDefault();
+      window.scrollTo({top:0, behavior:'smooth'});
+      history.replaceState(null,null,'#');
+    });
 
     // ===== Router: only toggles Precision subpage; leaves sections scrollable =====
     function route(){
       const hash = location.hash.replace('#','');
-      const sections = ['home','about','resume','projects','gallery','certifications','contact'];
+      const sections = ['home','about','resume','projects','gallery','contact'];
       const subpages = {
         'project/precision-algorithms': '#project-precision',
         'project/trading-signal-notifier': '#project-signal',
@@ -683,10 +602,7 @@
         if(el) el.classList.toggle('hide', !isSub || subpages[activeSub] !== sel);
       });
 
-      sections.forEach(id=> {
-        const el = document.getElementById(id);
-        if(el) el.classList.toggle('hide', isSub);
-      });
+      sections.forEach(id=> document.getElementById(id).classList.toggle('hide', isSub));
 
       if(isSub){ window.scrollTo({top:0, behavior:'smooth'}); return; }
       if(sections.includes(hash)){
@@ -755,7 +671,7 @@
       }
       tryNext();
     }
-    $('.asset').forEach(loadWithFallback);
+    $$('.asset').forEach(loadWithFallback);
 
     // Precision assets auto loader — attempt a few known names
     const pWrap=$('#precisionAssets');['a.jpg','b.jpg','c.jpg','d.jpg'].forEach(name=>{const path=`assets/precision/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);pWrap.appendChild(fig)});
