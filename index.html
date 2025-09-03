@@ -1,4 +1,394 @@
-<!doctype html>
+
+        </article>
+      </div>
+    </section>
+
+    <!-- RESUME -->
+    <section id="resume" class="section">
+      <h2>Resume / CV</h2>
+      <p class="muted">Download the latest PDF or view it inline below.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 14px">
+        <a class="btn" href="assets/erick-dronski-resume.pdf" download>⬇️ Download Resume</a>
+        <a class="btn" href="assets/erick-dronski-resume.pdf" target="_blank" rel="noopener">🗂️ Open in New Tab</a>
+      </div>
+      <div class="photo" style="aspect-ratio:auto">
+        <iframe src="assets/erick-dronski-resume.pdf" style="width:100%;height:720px;border:0;border-radius:16px"></iframe>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+      <h2>Portfolio / Projects</h2>
+      <div class="projects-grid">
+        <a class="project main" href="#project/precision-algorithms">
+          <h3>Precision Algorithms <span class="live-dot" title="Live" aria-hidden="true"></span></h3>
+          <p class="muted">Algorithmic trading automation, research, and tools.</p>
+        </a>
+        <a class="project" href="#project/trading-signal-notifier">
+          <h3>Trading Signal Notifier (Telegram) <span class="soon-badge">Coming soon</span></h3>
+          <p class="muted">Real-time trade alerts to Telegram with risk controls.</p>
+        </a>
+        <a class="project" href="#project/ai-resume-analyzer">
+          <h3>AI Resume Analyzer <span class="soon-badge">Coming soon</span></h3>
+          <p class="muted">Instant insights, keyword match, and role fit scoring.</p>
+        </a>
+        <a class="project" href="#">
+          <h3>Personal Website</h3>
+          <p class="muted">This site you are browsing. Design system, components, and UX.</p>
+        </a>
+        <a class="project" href="#">
+          <h3>AI Comic Universe</h3>
+          <p class="muted">Short-form comic panels powered by AI-assisted workflows.</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="section">
+      <h2>Gallery</h2>
+
+      <div class="gallery" id="galleryMain">
+        <figure><img class="asset" data-base="assets/gallery-1" alt="Gallery 1" loading="lazy"></figure>
+        <figure><img class="asset" data-base="assets/gallery-2" alt="Gallery 2" loading="lazy"></figure>
+        <figure><img class="asset" data-base="assets/gallery-3" alt="Gallery 3" loading="lazy"></figure>
+        <figure><img class="asset" data-base="assets/gallery-4" alt="Gallery 4" loading="lazy"></figure>
+        <figure><img class="asset" data-base="assets/gallery-5" alt="Gallery 5" loading="lazy"></figure>
+        <figure><img class="asset" data-base="assets/gallery-6" alt="Gallery 6" loading="lazy"></figure>
+      </div>
+
+      <!-- Hidden extras (7–11) -->
+      <div class="gallery hide" id="galleryMore">
+        <figure><img class="asset" data-base="assets/gallery-7" alt="Gallery 7" loading="lazy"></figure>
+        <figure><img class="asset" data-base="assets/gallery-8" alt="Gallery 8" loading="lazy"></figure>
+        <figure><img class="asset" data-base="assets/gallery-9" alt="Gallery 9" loading="lazy"></figure>
+        <figure><img class="asset" data-base="assets/gallery-10" alt="Gallery 10" loading="lazy"></figure>
+        <figure><img class="asset" data-base="assets/gallery-11" alt="Gallery 11" loading="lazy"></figure>
+      </div>
+
+      <div class="center" style="margin-top:14px">
+        <button class="btn" id="showMoreGallery">Show more</button>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <p class="muted">Send a message below. On GitHub Pages this uses your email client (mailto). For a hosted form, replace the action with a Formspree endpoint.</p>
+      <form id="contactForm">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Your email" required>
+        <textarea name="message" placeholder="Your message" required></textarea>
+        <button class="btn" type="submit">Send Message</button>
+      </form>
+      <div id="contactThanks" class="hide" style="margin-top:14px">
+        <div class="photo" style="aspect-ratio:auto;padding:18px" >
+          <p>✅ Your message has been queued in your email client. We're excited to get back to you!</p>
+          <p><a class="btn" href="#home">🏠 Back to Home</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUBPAGE: Precision Algorithms -->
+    <section id="project-precision" class="subpage hide" aria-label="Precision Algorithms">
+      <div class="sub-header">
+        <h2>Precision Algorithms</h2>
+        <span class="chip">Project</span>
+      </div>
+      <div class="sub-rail" style="margin-bottom:10px">
+        <a class="btn" href="https://whop.com/precision-algorithms/precisionalgorithms/" target="_blank" rel="noopener">Whop</a>
+        <a class="btn" href="https://x.com/precisionalgo" target="_blank" rel="noopener">X</a>
+        <a class="btn" href="https://instagram.com/precisionalgorithms" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn" href="https://bsky.app/profile/precisionalgorithms" target="_blank" rel="noopener">BlueSky</a>
+        <a class="btn" href="https://www.threads.net/@precisionalgorithms" target="_blank" rel="noopener">Threads</a>
+        <a class="btn" href="https://www.tiktok.com/@precisionalgorithms" target="_blank" rel="noopener">TikTok</a>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:start">
+        <article>
+          <!-- Inline logo shown early for brand recognition while reading -->
+          <div class="photo" style="max-width:220px;margin:0 0 12px 0;aspect-ratio:1/1;display:grid;place-items:center">
+            <img class="asset" data-base="assets/precision/logo" alt="Precision Algorithms Logo" loading="lazy" style="object-fit:contain;padding:10px">
+          </div>
+
+          <p class="muted">Algorithmic trading automation venture focused on research-driven signals, execution, and education. More copy can go here as you continue to build out the story, roadmap, and outcomes.</p>
+          <p>Use the folder on the right to stash marketing/content assets. Drop images into <code>assets/precision/</code> and they'll appear automatically.</p>
+        </article>
+        <div class="folder">
+          <div style="display:flex;align-items:center;gap:10px"><span>📁</span><strong>Assets</strong></div>
+          <div id="precisionAssets" class="gallery" style="grid-template-columns:1fr 1fr"></div>
+          <div class="muted">Place images at <code>assets/precision/</code></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUBPAGE: Trading Signal Notifier (Telegram) -->
+    <section id="project-signal" class="subpage hide" aria-label="Trading Signal Notifier">
+      <div class="sub-header">
+        <h2>Trading Signal Notifier (Telegram)</h2>
+        <span class="chip">Project</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:start">
+        <article>
+          <p class="muted">A lightweight alerting pipeline that forwards entry/exit, risk, and TP/SL updates to Telegram in real time.</p>
+          <ul>
+            <li>Symbols, side, price, confidence, and risk per trade</li>
+            <li>Optional cool‑down and max concurrent positions</li>
+            <li>Rich message formatting + quick action buttons</li>
+          </ul>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+            <a class="btn" href="#contact">Get access</a>
+          </div>
+        </article>
+        <div class="folder">
+          <div style="display:flex;align-items:center;gap:10px"><span>📁</span><strong>Assets</strong></div>
+          <div id="signalAssets" class="gallery" style="grid-template-columns:1fr 1fr"></div>
+          <div class="muted">Place images at <code>assets/signal/</code></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUBPAGE: AI Resume Analyzer -->
+    <section id="project-resumeai" class="subpage hide" aria-label="AI Resume Analyzer">
+      <div class="sub-header">
+        <h2>AI Resume Analyzer</h2>
+        <span class="chip">Project</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:start">
+        <article>
+          <p class="muted">Upload a resume + job post, get instant feedback: keyword coverage, quantifiable gaps, and tailored bullet rewrites.</p>
+          <ul>
+            <li>ATS-style keyword and skills match</li>
+            <li>Impact rewrite suggestions with STAR hints</li>
+            <li>Export improvements to clipboard</li>
+          </ul>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+            <a class="btn" href="#contact">Request a demo</a>
+          </div>
+        </article>
+        <div class="folder">
+          <div style="display:flex;align-items:center;gap:10px"><span>📁</span><strong>Assets</strong></div>
+          <div id="resumeAIAssets" class="gallery" style="grid-template-columns:1fr 1fr"></div>
+          <div class="muted">Place images at <code>assets/resumeai/</code></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div>© <span id="year"></span> Erick Dronski • Built with care</div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <a href="https://x.com/dronskierick" target="_blank" rel="noopener" class="muted">𝕏</a>
+        <a href="https://instagram.com/erickdronski" target="_blank" rel="noopener" class="muted">Instagram</a>
+        <a href="https://www.linkedin.com/in/erickdronski" target="_blank" rel="noopener" class="muted">LinkedIn</a>
+        <a href="https://www.tiktok.com/@dr0nski" target="_blank" rel="noopener" class="muted">TikTok</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const $ = (s, c=document)=>c.querySelector(s);
+    const $ = (s, c=document)=>Array.from(c.querySelectorAll(s));
+
+    // Year in footer
+    $('#year').textContent = new Date().getFullYear();
+
+    // Interactive rotating welcome message
+    const welcomeMessages = ['Welcome', 'Hey there', 'Hello', 'Hi friend', 'Greetings', 'Howdy'];
+    let welcomeIndex = 0;
+    const welcomeEl = $('.rotating-welcome');
+    if(welcomeEl) {
+      setInterval(() => {
+        welcomeIndex = (welcomeIndex + 1) % welcomeMessages.length;
+        welcomeEl.style.animation = 'none';
+        setTimeout(() => {
+          welcomeEl.textContent = welcomeMessages[welcomeIndex];
+          welcomeEl.style.animation = 'fadeSlide 3s ease-in-out';
+        }, 50);
+      }, 3000);
+    }
+
+    // Rotating typewriter subtitles
+    const subtitles = [
+      'Builder. Creator. Problem Solver.',
+      'MBA meets Code meets Creativity.',
+      'Turning ideas into reality.',
+      'Part strategist, part developer.',
+      'Coffee in, code out.'
+    ];
+    let subtitleIndex = 0;
+    const typewriterEl = $('.typewriter');
+    if(typewriterEl) {
+      setInterval(() => {
+        subtitleIndex = (subtitleIndex + 1) % subtitles.length;
+        typewriterEl.style.animation = 'none';
+        typewriterEl.style.width = '0';
+        setTimeout(() => {
+          typewriterEl.textContent = subtitles[subtitleIndex];
+          typewriterEl.style.animation = 'typing 3.5s steps(40, end), blink-caret .75s step-end infinite';
+          typewriterEl.style.width = '100%';
+        }, 100);
+      }, 7000);
+    }
+
+    // Theme toggle
+    const root = document.documentElement;
+    function setTheme(mode){root.classList.toggle('light', mode==='light');localStorage.setItem('theme', mode)}
+    const saved = localStorage.getItem('theme');
+    if(saved){setTheme(saved)}
+    $('#lightBtn').addEventListener('click',()=>setTheme('light'))
+    $('#darkBtn').addEventListener('click',()=>setTheme('dark'))
+
+    // Visual FX (aurora + grain) — always on unless reduced-motion
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function setFx(on){ document.body.classList.toggle('fx-off', !on); }
+    setFx(!prefersReduced);
+
+    // Party mode
+    let partyTimer=null;
+    function confetti(){const n=120;for(let i=0;i<n;i++){const d=document.createElement('div');d.style.cssText=`position:fixed;bottom:-20px;left:${(i/n*100)}vw;width:8px;height:14px;border-radius:2px;background:hsl(${Math.random()*360},90%,60%);transform:rotate(${Math.random()*360}deg);opacity:1;pointer-events:none;z-index:60`;document.body.appendChild(d);const dx=(Math.random()*2-1)*60;const up=80+Math.random()*220;d.animate([{transform:`translate(0,0) rotate(0deg)`,opacity:1},{transform:`translate(${dx}px,-${up}vh) rotate(${Math.random()*720-360}deg)`,opacity:1,offset:.6},{transform:`translate(${dx*1.2}px, 5vh) rotate(${Math.random()*720}deg)`,opacity:0}],{duration:1800+Math.random()*1200,easing:'cubic-bezier(.2,.7,.2,1)'}).onfinish=()=>d.remove();}}
+    $('#partyBtn').addEventListener('click',()=>{document.body.classList.toggle('party-active');if(document.body.classList.contains('party-active')){confetti();partyTimer=setInterval(confetti,4000)}else{clearInterval(partyTimer)}})
+
+    // ============ Single Ticker (no duplicate) ============
+    const items=[
+      {t:'$Coffee intake', d:'↑ 25%', up:true},
+      {t:'$Sleep schedule', d:'↓ 45%', up:false},
+      {t:'$Laundry backlog', d:'↑ 80%', up:true},
+      {t:'$Netflix watchlist', d:'↑ 300%', up:true},
+      {t:'$Gym attendance', d:'↓ 67%', up:false},
+      {t:'$Tabs open', d:'↑ 500%', up:true},
+      {t:'$Work-life balance', d:'↓ 38%', up:false},
+      {t:'$Deadline pressure', d:'↑ 90%', up:true},
+      {t:'$Inbox zero', d:'↓ 92%', up:false},
+      {t:'$Dad jokes', d:'↑ 12%', up:true},
+      {t:'$Crypto portfolio', d:'↓ 99%', up:false},
+      {t:'$Phone battery', d:'↓ 73%', up:false},
+      {t:'$Impulse Amazon orders', d:'↑ 55%', up:true},
+      {t:'$Motivation Monday', d:'↓ 84%', up:false},
+      {t:'$Ideas in backlog', d:'↑ 200%', up:true},
+      {t:'$Free time', d:'↓ 61%', up:false},
+      {t:'$Pet cuddles', d:'↑ 60%', up:true},
+      {t:'$Cooking attempts', d:'↓ 77%', up:false},
+      {t:'$Emails unread', d:'↑ 110%', up:true},
+      {t:'$Bank account', d:'↓ 42%', up:false},
+    ];
+    const ticker=$('#ticker');
+    function renderTicker(){ticker.innerHTML='';items.forEach(it=>{const el=document.createElement('span');el.className='tick '+(it.up?'up':'down');el.innerHTML=`<span>${it.t}</span> <span class="arrow">${it.up?'▲':'▼'}</span> <strong>${it.d}</strong>`;ticker.appendChild(el);});}
+    renderTicker();
+
+    // ===== Smooth scroll links (keep all sections visible) =====
+    $('.scroll-link').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const id = a.getAttribute('href').replace('#','');
+        location.hash = id ? '#'+id : '#';
+      });
+    });
+    // Back to Top tile should always work
+    $('#backToTopTile').addEventListener('click', (e)=>{
+      e.preventDefault();
+      window.scrollTo({top:0, behavior:'smooth'});
+      history.replaceState(null,null,'#');
+    });
+
+    // ===== Router: only toggles Precision subpage; leaves sections scrollable =====
+    function route(){
+      const hash = location.hash.replace('#','');
+      const sections = ['home','about','resume','projects','gallery','contact'];
+      const subpages = {
+        'project/precision-algorithms': '#project-precision',
+        'project/trading-signal-notifier': '#project-signal',
+        'project/ai-resume-analyzer': '#project-resumeai'
+      };
+      const activeSub = Object.keys(subpages).find(k => hash.startsWith(k));
+      const isSub = !!activeSub;
+
+      ['#project-precision','#project-signal','#project-resumeai'].forEach(sel => {
+        const el = document.querySelector(sel);
+        if(el) el.classList.toggle('hide', !isSub || subpages[activeSub] !== sel);
+      });
+
+      sections.forEach(id=> document.getElementById(id).classList.toggle('hide', isSub));
+
+      if(isSub){ window.scrollTo({top:0, behavior:'smooth'}); return; }
+      if(sections.includes(hash)){
+        document.getElementById(hash)?.scrollIntoView({behavior:'smooth'});
+      }
+    }
+    window.addEventListener('hashchange', route);
+    route();
+
+    // ===== Gentle hero parallax =====
+    (function(){
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(prefersReduced) return;
+      const el = document.querySelector('#home .photo');
+      if(!el) return;
+      let ticking=false;
+      function onScroll(){
+        if(ticking) return; ticking=true;
+        requestAnimationFrame(()=>{
+          const y = window.scrollY || 0;
+          const offset = Math.max(-6, Math.min(10, y*0.04));
+          el.style.transform = `translateY(${offset}px)`;
+          ticking=false;
+        });
+      }
+      window.addEventListener('scroll', onScroll, {passive:true});
+      onScroll();
+    })();
+
+    // ===== Gallery: Show more =====
+    (() => {
+      const btn = document.getElementById('showMoreGallery');
+      const more = document.getElementById('galleryMore');
+      if(!btn || !more) return;
+      btn.addEventListener('click', () => {
+        more.classList.toggle('hide');
+        btn.textContent = more.classList.contains('hide') ? 'Show more' : 'Show less';
+        if(!more.classList.contains('hide')) {
+          Array.from(more.querySelectorAll('img.asset')).forEach(img => {
+            if(!img.src && typeof loadWithFallback === 'function') {
+              loadWithFallback(img);
+            }
+          });
+        }
+      });
+    })();
+
+    // ===== Image loader with extension fallbacks + clear placeholders =====
+    function placeholder(msg){const p=document.createElement('div');p.className='placeholder muted';p.innerHTML=msg;return p}
+    function loadWithFallback(img){
+      const base = img.dataset.base; // e.g., assets/headshot
+      const exts = ['.jpg','.JPG','.jpeg','.png','.webp'];
+      let i=0;
+      function tryNext(){
+        if(i>=exts.length){
+          const name = base.split('/').pop();
+          console.warn('Missing image for', base);
+          const ph = placeholder(`Add <code>${base}.jpg</code>`);
+          img.replaceWith(ph);
+          return;
+        }
+        const src = base + exts[i++];
+        img.onerror = tryNext;
+        img.onload = ()=>{};
+        img.src = src;
+      }
+      tryNext();
+    }
+    $('.asset').forEach(loadWithFallback);
+
+    // Precision assets auto loader — attempt a few known names
+    const pWrap=$('#precisionAssets');['a.jpg','b.jpg','c.jpg','d.jpg'].forEach(name=>{const path=`assets/precision/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);pWrap.appendChild(fig)});
+
+    // Optional: auto-load Signal and ResumeAI assets if present
+    const sWrap=$('#signalAssets'); if(sWrap){['a.jpg','b.jpg'].forEach(name=>{const path=`assets/signal/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);sWrap.appendChild(fig)})}
+    const rWrap=$('#resumeAIAssets'); if(rWrap){['a.jpg','b.jpg'].forEach(name=>{const path=`assets/resumeai/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);rWrap.appendChild(fig)})}
+  </script>
+</body>
+</html><!doctype html>
 <html lang="en" id="top">
 <head>
   <meta charset="utf-8" />
@@ -298,12 +688,11 @@
       <div>
         <div class="kicker">Welcome <span class="wave" aria-hidden="true">👋</span></div>
         <h1 class="title">Erick Dronski</h1>
-        <p class="subtitle goldshine">Unicorn @ [Your Company Name Here]</p>
         <p class="muted location">📍 Mount Laurel, NJ</p>
         <p class="muted" style="margin-top:10px"><span class="pop">Business:</span> MBA, GTM, Sales, Marketing 📈</p>
         <p class="muted"><span class="pop">Technical:</span> AI, Analytics, Python, IT 💻</p>
-        <p class="muted"><span class="pop">Creative:</span> Social Media, Branding 🎨</p><div class="tagline">“Build in public, share the journey, inspire the next builder.”</div>
-        <p class="hero-desc">This is my personal portfolio. A place to explore my projects, passions, and ideas. Let’s connect and build something meaningful.</p>
+        <p class="muted"><span class="pop">Creative:</span> Social Media, Branding 🎨</p><div class="tagline">"Build in public, share the journey, inspire the next builder."</div>
+        <p class="hero-desc">This is my personal portfolio. A place to explore my projects, passions, and ideas. Let's connect and build something meaningful.</p>
       </div>
       <div class="hero-media">
         <span class="deco-emoji front camera" aria-hidden="true">📸</span>
@@ -333,352 +722,7 @@
       <div style="display:grid;grid-template-columns: 1fr 1.2fr;gap:22px;align-items:start">
         <div class="photo"><img data-base="assets/gallery-1" alt="Erick Dronski" loading="lazy" class="asset"></div>
         <article>
-          <p>We never really know where life will take us. Moments and situations define us, and the choices we make along with the experiences we collect shape the next chapter. What we think is the “right” path often isn’t the one we end up walking.</p>
-          <p>I’m grateful to say my journey has been anything but ordinary. Every twist and turn, both personally and professionally, has taught me to zoom out and ask: What will I take from this moment? How will it translate into the next thing I’m building? How does it fit into the trends, patterns, and constant changes in the world around me?</p>
+          <p>We never really know where life will take us. Moments and situations define us, and the choices we make along with the experiences we collect shape the next chapter. What we think is the "right" path often isn't the one we end up walking.</p>
+          <p>I'm grateful to say my journey has been anything but ordinary. Every twist and turn, both personally and professionally, has taught me to zoom out and ask: What will I take from this moment? How will it translate into the next thing I'm building? How does it fit into the trends, patterns, and constant changes in the world around me?</p>
           <p>I started in banking, picturing myself as the Patagonia vest guy networking on the golf course. But life had other plans. I shifted into SaaS as an Account Executive, then into IT as a Strategic Consultant, all while exploring social media — partly for personal reasons, partly because my wife happens to be a social media and photography savant.</p>
-          <p>Somehow, all these experiences blended perfectly. They shaped the skills I’ve built, the work I’ve done, and most importantly the people I’ve been able to connect with around the world. Along the way, my presence grew: 17K+ connections on LinkedIn, 55K+ followers on TikTok, and a steadily growing audience on X. But more valuable than numbers has been the conversations, stories, and ideas shared with others.</p>
-          <p>I’m not a content wizard. I don’t have some secret formula. I just put myself out there. And now, I’m still building, still learning, and this site is just another step in that journey.</p>
-          <p>If you’ve made it this far, I hope you explore, learn more about me, and maybe even connect. After all, the best chapters are the ones we write together.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- RESUME -->
-    <section id="resume" class="section">
-      <h2>Resume / CV</h2>
-      <p class="muted">Download the latest PDF or view it inline below.</p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 14px">
-        <a class="btn" href="assets/erick-dronski-resume.pdf" download>⬇️ Download Resume</a>
-        <a class="btn" href="assets/erick-dronski-resume.pdf" target="_blank" rel="noopener">🗂️ Open in New Tab</a>
-      </div>
-      <div class="photo" style="aspect-ratio:auto">
-        <iframe src="assets/erick-dronski-resume.pdf" style="width:100%;height:720px;border:0;border-radius:16px"></iframe>
-      </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects" class="section">
-      <h2>Portfolio / Projects</h2>
-      <div class="projects-grid">
-        <a class="project main" href="#project/precision-algorithms">
-          <h3>Precision Algorithms <span class="live-dot" title="Live" aria-hidden="true"></span></h3>
-          <p class="muted">Algorithmic trading automation, research, and tools.</p>
-        </a>
-        <a class="project" href="#project/trading-signal-notifier">
-          <h3>Trading Signal Notifier (Telegram) <span class="soon-badge">Coming soon</span></h3>
-          <p class="muted">Real-time trade alerts to Telegram with risk controls.</p>
-        </a>
-        <a class="project" href="#project/ai-resume-analyzer">
-          <h3>AI Resume Analyzer <span class="soon-badge">Coming soon</span></h3>
-          <p class="muted">Instant insights, keyword match, and role fit scoring.</p>
-        </a>
-        <a class="project" href="#">
-          <h3>Personal Website</h3>
-          <p class="muted">This site you are browsing. Design system, components, and UX.</p>
-        </a>
-        <a class="project" href="#">
-          <h3>AI Comic Universe</h3>
-          <p class="muted">Short-form comic panels powered by AI-assisted workflows.</p>
-        </a>
-      </div>
-    </section>
-
-    <!-- GALLERY -->
-    <section id="gallery" class="section">
-      <h2>Gallery</h2>
-
-      <div class="gallery" id="galleryMain">
-        <figure><img class="asset" data-base="assets/gallery-1" alt="Gallery 1" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-2" alt="Gallery 2" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-3" alt="Gallery 3" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-4" alt="Gallery 4" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-5" alt="Gallery 5" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-6" alt="Gallery 6" loading="lazy"></figure>
-      </div>
-
-      <!-- Hidden extras (7–11) -->
-      <div class="gallery hide" id="galleryMore">
-        <figure><img class="asset" data-base="assets/gallery-7" alt="Gallery 7" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-8" alt="Gallery 8" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-9" alt="Gallery 9" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-10" alt="Gallery 10" loading="lazy"></figure>
-        <figure><img class="asset" data-base="assets/gallery-11" alt="Gallery 11" loading="lazy"></figure>
-      </div>
-
-      <div class="center" style="margin-top:14px">
-        <button class="btn" id="showMoreGallery">Show more</button>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="section">
-      <h2>Contact</h2>
-      <p class="muted">Send a message below. On GitHub Pages this uses your email client (mailto). For a hosted form, replace the action with a Formspree endpoint.</p>
-      <form id="contactForm">
-        <input type="text" name="name" placeholder="Your name" required>
-        <input type="email" name="email" placeholder="Your email" required>
-        <textarea name="message" placeholder="Your message" required></textarea>
-        <button class="btn" type="submit">Send Message</button>
-      </form>
-      <div id="contactThanks" class="hide" style="margin-top:14px">
-        <div class="photo" style="aspect-ratio:auto;padding:18px" >
-          <p>✅ Your message has been queued in your email client. We’re excited to get back to you!</p>
-          <p><a class="btn" href="#home">🏠 Back to Home</a></p>
-        </div>
-      </div>
-    </section>
-
-    <!-- SUBPAGE: Precision Algorithms -->
-    <section id="project-precision" class="subpage hide" aria-label="Precision Algorithms">
-      <div class="sub-header">
-        <h2>Precision Algorithms</h2>
-        <span class="chip">Project</span>
-      </div>
-      <div class="sub-rail" style="margin-bottom:10px">
-        <a class="btn" href="https://whop.com/precision-algorithms/precisionalgorithms/" target="_blank" rel="noopener">Whop</a>
-        <a class="btn" href="https://x.com/precisionalgo" target="_blank" rel="noopener">X</a>
-        <a class="btn" href="https://instagram.com/precisionalgorithms" target="_blank" rel="noopener">Instagram</a>
-        <a class="btn" href="https://bsky.app/profile/precisionalgorithms" target="_blank" rel="noopener">BlueSky</a>
-        <a class="btn" href="https://www.threads.net/@precisionalgorithms" target="_blank" rel="noopener">Threads</a>
-        <a class="btn" href="https://www.tiktok.com/@precisionalgorithms" target="_blank" rel="noopener">TikTok</a>
-      </div>
-
-      <div style="display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:start">
-        <article>
-          <!-- Inline logo shown early for brand recognition while reading -->
-          <div class="photo" style="max-width:220px;margin:0 0 12px 0;aspect-ratio:1/1;display:grid;place-items:center">
-            <img class="asset" data-base="assets/precision/logo" alt="Precision Algorithms Logo" loading="lazy" style="object-fit:contain;padding:10px">
-          </div>
-
-          <p class="muted">Algorithmic trading automation venture focused on research-driven signals, execution, and education. More copy can go here as you continue to build out the story, roadmap, and outcomes.</p>
-          <p>Use the folder on the right to stash marketing/content assets. Drop images into <code>assets/precision/</code> and they’ll appear automatically.</p>
-        </article>
-        <div class="folder">
-          <div style="display:flex;align-items:center;gap:10px"><span>📁</span><strong>Assets</strong></div>
-          <div id="precisionAssets" class="gallery" style="grid-template-columns:1fr 1fr"></div>
-          <div class="muted">Place images at <code>assets/precision/</code></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SUBPAGE: Trading Signal Notifier (Telegram) -->
-    <section id="project-signal" class="subpage hide" aria-label="Trading Signal Notifier">
-      <div class="sub-header">
-        <h2>Trading Signal Notifier (Telegram)</h2>
-        <span class="chip">Project</span>
-      </div>
-      <div style="display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:start">
-        <article>
-          <p class="muted">A lightweight alerting pipeline that forwards entry/exit, risk, and TP/SL updates to Telegram in real time.</p>
-          <ul>
-            <li>Symbols, side, price, confidence, and risk per trade</li>
-            <li>Optional cool‑down and max concurrent positions</li>
-            <li>Rich message formatting + quick action buttons</li>
-          </ul>
-          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
-            <a class="btn" href="#contact">Get access</a>
-          </div>
-        </article>
-        <div class="folder">
-          <div style="display:flex;align-items:center;gap:10px"><span>📁</span><strong>Assets</strong></div>
-          <div id="signalAssets" class="gallery" style="grid-template-columns:1fr 1fr"></div>
-          <div class="muted">Place images at <code>assets/signal/</code></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SUBPAGE: AI Resume Analyzer -->
-    <section id="project-resumeai" class="subpage hide" aria-label="AI Resume Analyzer">
-      <div class="sub-header">
-        <h2>AI Resume Analyzer</h2>
-        <span class="chip">Project</span>
-      </div>
-      <div style="display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:start">
-        <article>
-          <p class="muted">Upload a resume + job post, get instant feedback: keyword coverage, quantifiable gaps, and tailored bullet rewrites.</p>
-          <ul>
-            <li>ATS-style keyword and skills match</li>
-            <li>Impact rewrite suggestions with STAR hints</li>
-            <li>Export improvements to clipboard</li>
-          </ul>
-          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
-            <a class="btn" href="#contact">Request a demo</a>
-          </div>
-        </article>
-        <div class="folder">
-          <div style="display:flex;align-items:center;gap:10px"><span>📁</span><strong>Assets</strong></div>
-          <div id="resumeAIAssets" class="gallery" style="grid-template-columns:1fr 1fr"></div>
-          <div class="muted">Place images at <code>assets/resumeai/</code></div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
-      <div>© <span id="year"></span> Erick Dronski • Built with care</div>
-      <div style="display:flex;gap:10px;align-items:center">
-        <a href="https://x.com/dronskierick" target="_blank" rel="noopener" class="muted">𝕏</a>
-        <a href="https://instagram.com/erickdronski" target="_blank" rel="noopener" class="muted">Instagram</a>
-        <a href="https://www.linkedin.com/in/erickdronski" target="_blank" rel="noopener" class="muted">LinkedIn</a>
-        <a href="https://www.tiktok.com/@dr0nski" target="_blank" rel="noopener" class="muted">TikTok</a>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    const $ = (s, c=document)=>c.querySelector(s);
-    const $$ = (s, c=document)=>Array.from(c.querySelectorAll(s));
-
-    // Year in footer
-    $('#year').textContent = new Date().getFullYear();
-
-    // Theme toggle
-    const root = document.documentElement;
-    function setTheme(mode){root.classList.toggle('light', mode==='light');localStorage.setItem('theme', mode)}
-    const saved = localStorage.getItem('theme');
-    if(saved){setTheme(saved)}
-    $('#lightBtn').addEventListener('click',()=>setTheme('light'))
-    $('#darkBtn').addEventListener('click',()=>setTheme('dark'))
-
-    // Visual FX (aurora + grain) — always on unless reduced-motion
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function setFx(on){ document.body.classList.toggle('fx-off', !on); }
-    setFx(!prefersReduced);
-
-    // Party mode
-    let partyTimer=null;
-    function confetti(){const n=120;for(let i=0;i<n;i++){const d=document.createElement('div');d.style.cssText=`position:fixed;bottom:-20px;left:${(i/n*100)}vw;width:8px;height:14px;border-radius:2px;background:hsl(${Math.random()*360},90%,60%);transform:rotate(${Math.random()*360}deg);opacity:1;pointer-events:none;z-index:60`;document.body.appendChild(d);const dx=(Math.random()*2-1)*60;const up=80+Math.random()*220;d.animate([{transform:`translate(0,0) rotate(0deg)`,opacity:1},{transform:`translate(${dx}px,-${up}vh) rotate(${Math.random()*720-360}deg)`,opacity:1,offset:.6},{transform:`translate(${dx*1.2}px, 5vh) rotate(${Math.random()*720}deg)`,opacity:0}],{duration:1800+Math.random()*1200,easing:'cubic-bezier(.2,.7,.2,1)'}).onfinish=()=>d.remove();}}
-    $('#partyBtn').addEventListener('click',()=>{document.body.classList.toggle('party-active');if(document.body.classList.contains('party-active')){confetti();partyTimer=setInterval(confetti,4000)}else{clearInterval(partyTimer)}})
-
-    // ============ Single Ticker (no duplicate) ============
-    const items=[
-      {t:'$Coffee intake', d:'↑ 25%', up:true},
-      {t:'$Laundry backlog', d:'↑ 80%', up:true},
-      {t:'$Netflix watchlist', d:'↑ 300%', up:true},
-      {t:'$Tabs open', d:'↑ 500%', up:true},
-      {t:'$Deadline pressure', d:'↑ 90%', up:true},
-      {t:'$Dad jokes', d:'↑ 12%', up:true},
-      {t:'$Crypto portfolio', d:'↓ 99%', up:false},
-      {t:'$Impulse Amazon orders', d:'↑ 55%', up:true},
-      {t:'$Ideas in backlog', d:'↑ 200%', up:true},
-      {t:'$Pet cuddles', d:'↑ 60%', up:true},
-      {t:'$Emails unread', d:'↑ 110%', up:true},
-    ];
-    const ticker=$('#ticker');
-    function renderTicker(){ticker.innerHTML='';items.forEach(it=>{const el=document.createElement('span');el.className='tick '+(it.up?'up':'down');el.innerHTML=`<span>${it.t}</span> <span class="arrow">${it.up?'▲':'▼'}</span> <strong>${it.d}</strong>`;ticker.appendChild(el);});}
-    renderTicker();
-
-    // ===== Smooth scroll links (keep all sections visible) =====
-    $$('.scroll-link').forEach(a=>{
-      a.addEventListener('click', (e)=>{
-        e.preventDefault();
-        const id = a.getAttribute('href').replace('#','');
-        location.hash = id ? '#'+id : '#';
-      });
-    });
-    // Back to Top tile should always work
-    $('#backToTopTile').addEventListener('click', (e)=>{
-      e.preventDefault();
-      window.scrollTo({top:0, behavior:'smooth'});
-      history.replaceState(null,null,'#');
-    });
-
-    // ===== Router: only toggles Precision subpage; leaves sections scrollable =====
-    function route(){
-      const hash = location.hash.replace('#','');
-      const sections = ['home','about','resume','projects','gallery','contact'];
-      const subpages = {
-        'project/precision-algorithms': '#project-precision',
-        'project/trading-signal-notifier': '#project-signal',
-        'project/ai-resume-analyzer': '#project-resumeai'
-      };
-      const activeSub = Object.keys(subpages).find(k => hash.startsWith(k));
-      const isSub = !!activeSub;
-
-      ['#project-precision','#project-signal','#project-resumeai'].forEach(sel => {
-        const el = document.querySelector(sel);
-        if(el) el.classList.toggle('hide', !isSub || subpages[activeSub] !== sel);
-      });
-
-      sections.forEach(id=> document.getElementById(id).classList.toggle('hide', isSub));
-
-      if(isSub){ window.scrollTo({top:0, behavior:'smooth'}); return; }
-      if(sections.includes(hash)){
-        document.getElementById(hash)?.scrollIntoView({behavior:'smooth'});
-      }
-    }
-    window.addEventListener('hashchange', route);
-    route();
-
-    // ===== Gentle hero parallax =====
-    (function(){
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if(prefersReduced) return;
-      const el = document.querySelector('#home .photo');
-      if(!el) return;
-      let ticking=false;
-      function onScroll(){
-        if(ticking) return; ticking=true;
-        requestAnimationFrame(()=>{
-          const y = window.scrollY || 0;
-          const offset = Math.max(-6, Math.min(10, y*0.04));
-          el.style.transform = `translateY(${offset}px)`;
-          ticking=false;
-        });
-      }
-      window.addEventListener('scroll', onScroll, {passive:true});
-      onScroll();
-    })();
-
-    // ===== Gallery: Show more =====
-    (() => {
-      const btn = document.getElementById('showMoreGallery');
-      const more = document.getElementById('galleryMore');
-      if(!btn || !more) return;
-      btn.addEventListener('click', () => {
-        more.classList.toggle('hide');
-        btn.textContent = more.classList.contains('hide') ? 'Show more' : 'Show less';
-        if(!more.classList.contains('hide')) {
-          Array.from(more.querySelectorAll('img.asset')).forEach(img => {
-            if(!img.src && typeof loadWithFallback === 'function') {
-              loadWithFallback(img);
-            }
-          });
-        }
-      });
-    })();
-
-    // ===== Image loader with extension fallbacks + clear placeholders =====
-    function placeholder(msg){const p=document.createElement('div');p.className='placeholder muted';p.innerHTML=msg;return p}
-    function loadWithFallback(img){
-      const base = img.dataset.base; // e.g., assets/headshot
-      const exts = ['.jpg','.JPG','.jpeg','.png','.webp'];
-      let i=0;
-      function tryNext(){
-        if(i>=exts.length){
-          const name = base.split('/').pop();
-          console.warn('Missing image for', base);
-          const ph = placeholder(`Add <code>${base}.jpg</code>`);
-          img.replaceWith(ph);
-          return;
-        }
-        const src = base + exts[i++];
-        img.onerror = tryNext;
-        img.onload = ()=>{};
-        img.src = src;
-      }
-      tryNext();
-    }
-    $$('.asset').forEach(loadWithFallback);
-
-    // Precision assets auto loader — attempt a few known names
-    const pWrap=$('#precisionAssets');['a.jpg','b.jpg','c.jpg','d.jpg'].forEach(name=>{const path=`assets/precision/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);pWrap.appendChild(fig)});
-
-    // Optional: auto-load Signal and ResumeAI assets if present
-    const sWrap=$('#signalAssets'); if(sWrap){['a.jpg','b.jpg'].forEach(name=>{const path=`assets/signal/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);sWrap.appendChild(fig)})}
-    const rWrap=$('#resumeAIAssets'); if(rWrap){['a.jpg','b.jpg'].forEach(name=>{const path=`assets/resumeai/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);rWrap.appendChild(fig)})}
-  </script>
-</body>
-</html>
+          <p>Somehow, all these experiences blended perfectly. They shaped the skills I've built, the work I've done, and most importantly the people I've been able to connect with around the world. Along the way, my presence grew
