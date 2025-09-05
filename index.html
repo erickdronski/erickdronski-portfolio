@@ -344,22 +344,8 @@
         <span class="deco-emoji front camera" aria-hidden="true">📸</span>
         <div class="photo">
           <img data-base="assets/headshot" alt="Headshot of Erick Dronski" loading="eager" class="asset">
-        </div><div id="xMount"></div>
-        </div>
-      </div>
-    </section>
-
-    <div class="divider" role="separator" aria-hidden="true"></div>
-
-    <!-- POSTING IN ACTION (X only) -->
-    <section id="posting" class="section" aria-label="Posting in Action">
-      <h2>Posting in Action</h2>
-      <p class="muted">A live peek at my latest on X. Updates daily.</p>
-      <div class="social-grid">
-        <article class="social-card" aria-label="Latest on X">
-          <header class="social-head"><span>𝕏</span><strong>X (Twitter)</strong></header>
-          <div id="xMount" data-screen-name="dronskierick"></div>
-          <div class="fallback muted"><a class="btn" href="https://x.com/dronskierick" target="_blank" rel="noopener">View profile</a></div>
+        </div><a id="xTimeline" class="twitter-timeline" data-tweet-limit="1" data-chrome="noheader nofooter noborders transparent" data-dnt="true" data-theme="dark" href="https://twitter.com/dronskierick">Tweets by @dronskierick</a>
+          <div class="fallback muted"><a class="btn" href="https://x.com/dronskierick" target="_blank" rel="noopener">View profile</a></div> muted"><a class="btn" href="https://x.com/dronskierick" target="_blank" rel="noopener">View profile</a></div>
         </article>
       </div>
     </section>
@@ -894,66 +880,31 @@
       if(Date.now()-last > 24*60*60*1000){ loadScript(render); }
     })();
   </script>
-  <!-- X EMBED SCRIPT START -->
+  <!-- X EMBED: simple, robust -->
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   <script>
     (function(){
-      const DAY = 24*60*60*1000;
-      const mount = document.getElementById('xMount');
-      if(!mount) return;
-
-      function theme(){ return document.documentElement.classList.contains('light') ? 'light' : 'dark'; }
-
-      function loadWidgets(cb){
-        if(window.twttr && window.twttr.widgets){ cb(); return; }
-        const s = document.createElement('script');
-        s.src = 'https://platform.twitter.com/widgets.js';
-        s.async = true; s.onload = cb; s.onerror = cb; // continue even if blocked (we'll show fallback)
-        document.body.appendChild(s);
+      // Rebuild embed on theme change so it matches light/dark
+      function rebuild(){
+        var a=document.getElementById('xTimeline');
+        if(!a || !window.twttr || !window.twttr.widgets) return;
+        var theme=document.documentElement.classList.contains('light')?'light':'dark';
+        a.setAttribute('data-theme', theme);
+        // Force reload by removing existing iframe then reloading
+        var p=a.parentNode; var next=a.nextSibling; p.removeChild(a);
+        var clone=a.cloneNode(true); // keeps attributes
+        if(next){ p.insertBefore(clone,next);} else { p.appendChild(clone);}        
+        window.twttr.widgets.load(p);
       }
+      ['lightBtn','darkBtn'].forEach(id=>{ var b=document.getElementById(id); if(b) b.addEventListener('click', ()=> setTimeout(rebuild,80)); });
 
-      function renderTimeline(){
-        if(!(window.twttr && window.twttr.widgets)) { showFallback(); return; }
-        mount.innerHTML = '';
-        const handle = mount.dataset.screenName || 'dronskierick';
-        window.twttr.widgets.createTimeline(
-          { sourceType: 'profile', screenName: handle },
-          mount,
-          { tweetLimit: 1, theme: theme(), chrome: 'noheader nofooter noborders transparent' }
-        ).then(()=>{
-          localStorage.setItem('x_last_render', Date.now().toString());
-          toggleFallback();
-        }).catch(showFallback);
-      }
-
-      function toggleFallback(){
-        const fb = mount.parentElement.querySelector('.fallback');
-        if(!fb) return;
-        fb.style.display = mount.childElementCount ? 'none' : 'grid';
-      }
-      function showFallback(){ toggleFallback(); }
-
-      function init(){ loadWidgets(renderTimeline); }
-
-      // render now
-      init();
-
-      // re-render on theme change
-      ['lightBtn','darkBtn'].forEach(id=>{
-        const b=document.getElementById(id); if(!b) return;
-        b.addEventListener('click', ()=> setTimeout(renderTimeline, 80));
-      });
-
-      // daily refresh
-      setInterval(init, DAY);
-
-      // refresh on visit if >24h since last render
-      const last = Number(localStorage.getItem('x_last_render')||0);
-      if(Date.now() - last > DAY){ init(); }
-
-      // if nothing appears after 2s (e.g., blocked by an extension), show fallback link
-      setTimeout(toggleFallback, 2000);
+      // Fallback visibility after 2s if blocked
+      setTimeout(function(){
+        var a=document.getElementById('xTimeline');
+        var fb=a && a.parentElement.querySelector('.fallback');
+        if(fb){ fb.style.display = (a && a.nextElementSibling && a.nextElementSibling.tagName==='IFRAME') ? 'none' : 'grid'; }
+      }, 2000);
     })();
   </script>
-  <!-- X EMBED SCRIPT END -->
 </body>
 </html>
