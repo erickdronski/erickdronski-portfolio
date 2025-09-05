@@ -250,6 +250,14 @@
     .tagline-flair{position:relative;display:inline-block}
     .tagline-flair::after{content:"";position:absolute;inset:-2px;z-index:-1;background:linear-gradient(90deg,var(--brand),var(--accent));border-radius:8px;opacity:.25;animation:pulseGlow 4s infinite ease-in-out}
     @keyframes pulseGlow{0%,100%{opacity:.2;transform:scale(1)}50%{opacity:.5;transform:scale(1.05)}}
+      /* Social embeds (X only section) */
+    .social-grid{display:grid;grid-template-columns:1fr;gap:16px}
+    .social-card{background:var(--tile);border:1px solid color-mix(in oklab, var(--text) 10%, transparent);border-radius:18px;padding:12px;box-shadow:var(--shadow)}
+    .social-head{display:flex;align-items:center;gap:8px;margin:6px 6px 10px 6px}
+    .social-head span{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:8px;background:color-mix(in oklab, var(--brand) 18%, transparent);font-weight:800}
+    .social-card iframe{width:100%;border:0;border-radius:12px;}
+    .fallback{display:grid;place-items:center;margin:10px 0}
+
   </style>
 </head>
 <body>
@@ -336,12 +344,23 @@
         <span class="deco-emoji front camera" aria-hidden="true">📸</span>
         <div class="photo">
           <img data-base="assets/headshot" alt="Headshot of Erick Dronski" loading="eager" class="asset">
+        </div><div id="xMount"></div>
         </div>
-        <!-- Latest Tweet (auto-updates) -->
-        <div class="tweet-card" aria-label="Latest tweet">
-          <div class="tweet-head"><span class="x">𝕏</span><span class="muted">Latest</span></div>
-          <div id="tweetMount"></div>
-        </div>
+      </div>
+    </section>
+
+    <div class="divider" role="separator" aria-hidden="true"></div>
+
+    <!-- POSTING IN ACTION (X only) -->
+    <section id="posting" class="section" aria-label="Posting in Action">
+      <h2>Posting in Action</h2>
+      <p class="muted">A live peek at my latest on X. Updates daily.</p>
+      <div class="social-grid">
+        <article class="social-card" aria-label="Latest on X">
+          <header class="social-head"><span>𝕏</span><strong>X (Twitter)</strong></header>
+          <div id="xMount" data-screen-name="dronskierick"></div>
+          <div class="fallback muted"><a class="btn" href="https://x.com/dronskierick" target="_blank" rel="noopener">View profile</a></div>
+        </article>
       </div>
     </section>
 
@@ -832,10 +851,10 @@
     const gWrap=$('#growthAssets'); if(gWrap){['cover-1.jpg','cover-2.jpg'].forEach(name=>{const path=`assets/growth-hacks/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);gWrap.appendChild(fig)})}
   </script>
 
-  <!-- === Latest Tweet Embed (1 tweet, refresh daily, theme-aware) === -->
+  <!-- === X Embed (1 tweet, refresh daily, theme-aware) === -->
   <script>
     (function(){
-      const mount = document.getElementById('tweetMount');
+      const mount = document.getElementById('xMount');
       if(!mount) return;
 
       function loadScript(cb){
