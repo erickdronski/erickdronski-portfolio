@@ -107,9 +107,7 @@
     .photo img{object-fit:cover;width:100%;height:100%}
     .placeholder{display:grid;place-items:center;width:100%;height:100%;color:var(--muted)}
 
-    .kicker{color:var(--brand-2);text-transform:uppercase;letter-spacing:.18em;font-weight:600}
     .title{font-size: clamp(28px, 5vw, 56px);line-height:1.08;margin:10px 0}
-    .lead{font-size:clamp(16px,2vw,20px);margin-top:10px}
     .tagline{margin-top:16px;padding:14px 16px;border-left:4px solid var(--accent);background:color-mix(in oklab, var(--brand) 10%, transparent);border-radius:10px}
 
     /* ========== SECTIONS & TILES ========== */
@@ -145,7 +143,9 @@
     form{display:grid;gap:12px}
     input, textarea{background:var(--panel);border:1px solid color-mix(in oklab, var(--text) 12%, transparent);color:var(--text);border-radius:12px;padding:12px}
     textarea{min-height:140px;resize:vertical}
-    .btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(90deg, var(--brand), var(--accent));border:none;color:var(--text);font-weight:700;padding:12px 16px;border-radius:12px;cursor:pointer}
+    .btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(90deg, var(--brand), var(--accent));border:none;color:var(--text);font-weight:700;padding:12px 16px;border-radius:12px;cursor:pointer;position:relative;box-shadow:var(--shadow);overflow:hidden}
+    .btn::after{content:"";position:absolute;inset:-120% -30%;background:linear-gradient(115deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%);transform:translateX(-60%);transition:transform .6s ease;pointer-events:none}
+    .btn:hover::after{transform:translateX(60%)}
     .btn:disabled{opacity:.6;cursor:not-allowed}
 
     /* Subpages */
@@ -183,9 +183,6 @@
     /* Gradient borders + sheen */
     .tile{position:relative;overflow:hidden;background:linear-gradient(var(--tile),var(--tile)) padding-box, linear-gradient(135deg, color-mix(in oklab, var(--brand) 20%, transparent), color-mix(in oklab, var(--accent) 25%, transparent)) border-box; border:1px solid transparent}
     .tile:hover{background:linear-gradient(var(--tile-hover),var(--tile-hover)) padding-box, linear-gradient(135deg, color-mix(in oklab, var(--brand) 35%, transparent), color-mix(in oklab, var(--accent) 40%, transparent)) border-box}
-    .btn{position:relative;display:inline-flex;align-items:center;gap:8px;background:linear-gradient(var(--panel),var(--panel)) padding-box, linear-gradient(90deg, var(--brand), var(--accent)) border-box;border:1px solid transparent;color:var(--text);font-weight:700;padding:12px 16px;border-radius:12px;cursor:pointer;box-shadow:var(--shadow);overflow:hidden}
-    .btn::after{content:"";position:absolute;inset:-120% -30%;background:linear-gradient(115deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%);transform:translateX(-60%);transition:transform .6s ease;pointer-events:none}
-    .btn:hover::after{transform:translateX(60%)}
 
     /* Respect reduced motion */
     @media (prefers-reduced-motion: reduce){
@@ -223,7 +220,7 @@
     @media(max-width:980px){.cert-grid{grid-template-columns:repeat(3,1fr)}}
     @media(max-width:640px){.cert-grid{grid-template-columns:repeat(2,1fr)}}
 
-    /* Gold shine effect for subtitle */
+    /* Gold shine effect (kept for potential reuse elsewhere) */
     .goldshine{background:linear-gradient(90deg,#f8e39a 0%,#ffd84d 20%,#ffbf3e 40%,#ffd84d 60%,#f8e39a 80%,#fff4c2 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:goldshine 6s linear infinite;font-weight:700}
     @keyframes goldshine{0%{background-position:0% 50%}100%{background-position:200% 50%}}
     @media (prefers-reduced-motion: reduce){.goldshine{animation:none}}
@@ -242,61 +239,17 @@
     .hello-rotator{font-weight:700;letter-spacing:.01em;white-space:nowrap}
     .hello-rotator.fade{animation:helloFade .5s ease}
     @keyframes helloFade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-    .hello-arrow{font-size:clamp(18px,2.5vw,28px);line-height:1;margin:2px 0 6px 6px;display:inline-block;transform:rotate(-25deg);animation:arrowBounce 1.6s ease-in-out infinite}
-    @keyframes arrowBounce{0%,100%{transform:translateY(0) rotate(-25deg)}50%{transform:translateY(3px) rotate(-25deg)}}
     :root.light .hello-wrap{background:var(--tile)}
-    @media (prefers-reduced-motion: reduce){.hello-rotator.fade{animation:none}.hello-arrow{animation:none}}
-    
-    /* Resume flair animations */
-.resume-highlight li {
-  position: relative;
-  list-style: none;
-  padding-left: 28px;
-}
-.resume-highlight li::before {
-  content: "✨";
-  position: absolute;
-  left: 0;
-  top: 0;
-  animation: twinkle 3s infinite ease-in-out;
-}
-@keyframes twinkle {
-  0%,100% { opacity: .6; transform: scale(1) }
-  50% { opacity: 1; transform: scale(1.3) }
-}
+    @media (prefers-reduced-motion: reduce){.hello-rotator.fade{animation:none}}
 
-.tagline-flair {
-  position: relative;
-  display: inline-block;
-}
-.tagline-flair::after {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  z-index: -1;
-  background: linear-gradient(90deg, var(--brand), var(--accent));
-  border-radius: 8px;
-  opacity: .25;
-  animation: pulseGlow 4s infinite ease-in-out;
-}
-@keyframes pulseGlow {
-  0%,100% { opacity: .2; transform: scale(1) }
-  50% { opacity: .5; transform: scale(1.05) }
-}
+    /* ===== Résumé flair (new) ===== */
+    .resume-highlight li{position:relative;list-style:none;padding-left:28px}
+    .resume-highlight li::before{content:"✨";position:absolute;left:0;top:0;animation:twinkle 3s infinite ease-in-out}
+    @keyframes twinkle{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
 
-/* Button hover sweep */
-.btn { position: relative; overflow: hidden }
-.btn::after {
-  content: "";
-  position: absolute;
-  inset: -120% -30%;
-  background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.4) 50%, transparent 70%);
-  transform: translateX(-60%);
-  transition: transform .6s ease;
-  pointer-events: none;
-}
-.btn:hover::after { transform: translateX(60%) }
-
+    .tagline-flair{position:relative;display:inline-block}
+    .tagline-flair::after{content:"";position:absolute;inset:-2px;z-index:-1;background:linear-gradient(90deg,var(--brand),var(--accent));border-radius:8px;opacity:.25;animation:pulseGlow 4s infinite ease-in-out}
+    @keyframes pulseGlow{0%,100%{opacity:.2;transform:scale(1)}50%{opacity:.5;transform:scale(1.05)}}
   </style>
 </head>
 <body>
@@ -365,23 +318,29 @@
     <!-- HOME / HERO -->
     <section id="home" class="hero" aria-label="Intro">
       <div class="hero-left">
-        <!-- Interactive hello pill -->
-<div class="hello-wrap" role="status" aria-live="polite">
-  <span class="hello-emoji" aria-hidden="true">👋</span>
-  <span id="helloMsg" class="hello-rotator">Hi, I’m Erick—glad you’re here.</span>
-</div>
+        <!-- Interactive hello pill (kept) -->
+        <div class="hello-wrap" role="status" aria-live="polite">
+          <span class="hello-emoji" aria-hidden="true">👋</span>
+          <span id="helloMsg" class="hello-rotator">Hi, I’m Erick—glad you’re here.</span>
+        </div>
 
-<h1 class="title">Erick Dronski</h1>
-<p class="muted location">📍 Mount Laurel, NJ</p>
-<p class="muted" style="margin-top:10px"><span class="pop">Business:</span> MBA, GTM, Sales, Marketing 📈</p>
-<p class="muted"><span class="pop">Technical:</span> AI, Analytics, Python, IT 💻</p>
-<p class="muted"><span class="pop">Creative:</span> Social Media, Branding 🎨</p>
-<div class="tagline">“Build in public, share the journey, inspire the next builder.”</div>
-<p class="hero-desc">This is my personal portfolio. A place to explore my projects, passions, and ideas. Let’s connect and build something meaningful.</p>
+        <h1 class="title">Erick Dronski</h1>
+        <p class="muted location">📍 Mount Laurel, NJ</p>
+        <p class="muted" style="margin-top:10px"><span class="pop">Business:</span> MBA, GTM, Sales, Marketing 📈</p>
+        <p class="muted"><span class="pop">Technical:</span> AI, Analytics, Python, IT 💻</p>
+        <p class="muted"><span class="pop">Creative:</span> Social Media, Branding 🎨</p>
+        <div class="tagline">“Build in public, share the journey, inspire the next builder.”</div>
+        <p class="hero-desc">This is my personal portfolio. A place to explore my projects, passions, and ideas. Let’s connect and build something meaningful.</p>
+      </div>
       <div class="hero-media">
         <span class="deco-emoji front camera" aria-hidden="true">📸</span>
         <div class="photo">
           <img data-base="assets/headshot" alt="Headshot of Erick Dronski" loading="eager" class="asset">
+        </div>
+        <!-- Latest Tweet (auto-updates) -->
+        <div class="tweet-card" aria-label="Latest tweet">
+          <div class="tweet-head"><span class="x">𝕏</span><span class="muted">Latest</span></div>
+          <div id="tweetMount"></div>
         </div>
       </div>
     </section>
@@ -417,31 +376,23 @@
     </section>
 
     <!-- RESUME -->
-   <section id="resume" class="section">
-  <h2>Resume / CV</h2>
-  
-  <div class="tagline tagline-flair" style="margin:10px 0 18px">
-    💡 <strong>Why I’m a Top Candidate:</strong> Blending business strategy, technical expertise, and creative vision into impact-driven results.
-  </div>
-  
-  <ul class="muted resume-highlight" style="margin-bottom:18px;line-height:1.8">
-    <li><strong>Business Acumen:</strong> MBA + years of GTM, sales, and marketing leadership</li>
-    <li><strong>Technical Skills:</strong> AI, data analytics, Python, IT strategy, and automation</li>
-    <li><strong>Creative Edge:</strong> Social media growth, branding, and digital storytelling</li>
-  </ul>
-  
-  <p class="muted">Download the latest PDF or view it inline below.</p>
-  
-  <div style="display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 14px">
-    <a class="btn" href="assets/erick-dronski-resume.pdf" download>⬇️ Download Resume</a>
-    <a class="btn" href="assets/erick-dronski-resume.pdf" target="_blank" rel="noopener">🗂️ Open in New Tab</a>
-  </div>
-  
-  <div class="photo" style="aspect-ratio:auto">
-    <iframe src="assets/erick-dronski-resume.pdf" style="width:100%;height:720px;border:0;border-radius:16px"></iframe>
-  </div>
-</section>
-
+    <section id="resume" class="section">
+      <h2>Resume / CV</h2>
+      <div class="tagline tagline-flair" style="margin:10px 0 18px">💡 <strong>Why I’m a Top Candidate:</strong> Blending business strategy, technical expertise, and creative vision into impact-driven results.</div>
+      <ul class="muted resume-highlight" style="margin-bottom:18px;line-height:1.8">
+        <li><strong>Business Acumen:</strong> MBA + years of GTM, sales, and marketing leadership</li>
+        <li><strong>Technical Skills:</strong> AI, data analytics, Python, IT strategy, and automation</li>
+        <li><strong>Creative Edge:</strong> Social media growth, branding, and digital storytelling</li>
+      </ul>
+      <p class="muted">Download the latest PDF or view it inline below.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 14px">
+        <a class="btn" href="assets/erick-dronski-resume.pdf" download>⬇️ Download Resume</a>
+        <a class="btn" href="assets/erick-dronski-resume.pdf" target="_blank" rel="noopener">🗂️ Open in New Tab</a>
+      </div>
+      <div class="photo" style="aspect-ratio:auto">
+        <iframe src="assets/erick-dronski-resume.pdf" style="width:100%;height:720px;border:0;border-radius:16px"></iframe>
+      </div>
+    </section>
 
     <!-- PROJECTS -->
     <section id="projects" class="section">
@@ -749,6 +700,7 @@
         "Thanks for stopping by."
       ];
       let i=0;
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       function rotate(){
         i = (i + 1) % hellos.length;
         helloEl.textContent = hellos[i];
@@ -810,6 +762,7 @@
 
     // ===== Gentle hero parallax =====
     (function(){
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if(prefersReduced) return;
       const el = document.querySelector('#home .photo');
       if(!el) return;
@@ -877,6 +830,50 @@
 
     // Optional: auto-load Growth Hack cover images if present
     const gWrap=$('#growthAssets'); if(gWrap){['cover-1.jpg','cover-2.jpg'].forEach(name=>{const path=`assets/growth-hacks/${name}`;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.alt=name;img.src=path;img.onerror=()=>fig.remove();fig.appendChild(img);gWrap.appendChild(fig)})}
+  </script>
+
+  <!-- === Latest Tweet Embed (1 tweet, refresh daily, theme-aware) === -->
+  <script>
+    (function(){
+      const mount = document.getElementById('tweetMount');
+      if(!mount) return;
+
+      function loadScript(cb){
+        if(window.twttr && window.twttr.widgets){ cb(); return; }
+        const s=document.createElement('script');
+        s.src='https://platform.twitter.com/widgets.js';
+        s.async=true; s.onload=cb; document.body.appendChild(s);
+      }
+
+      function theme(){ return document.documentElement.classList.contains('light') ? 'light' : 'dark'; }
+
+      function render(){
+        if(!window.twttr || !window.twttr.widgets) return;
+        mount.innerHTML='';
+        window.twttr.widgets.createTimeline(
+          { sourceType:'profile', screenName:'dronskierick' },
+          mount,
+          { tweetLimit:1, theme: theme(), chrome:'noheader nofooter noborders transparent' }
+        );
+        localStorage.setItem('tweet_rendered_at', Date.now().toString());
+      }
+
+      // initial
+      loadScript(render);
+
+      // re-render on theme toggle
+      ['lightBtn','darkBtn'].forEach(id=>{
+        const btn=document.getElementById(id); if(!btn) return;
+        btn.addEventListener('click', ()=> setTimeout(()=>{render();}, 50));
+      });
+
+      // 24h refresh
+      setInterval(()=>{ render(); }, 24*60*60*1000);
+
+      // Optional: refresh if >24h since last render (e.g., SPA stay-open)
+      const last=Number(localStorage.getItem('tweet_rendered_at')||0);
+      if(Date.now()-last > 24*60*60*1000){ loadScript(render); }
+    })();
   </script>
 </body>
 </html>
