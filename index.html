@@ -112,6 +112,9 @@
     .lead{font-size:clamp(16px,2vw,20px);margin-top:10px}
     .tagline{margin-top:16px;padding:14px 16px;border-left:4px solid var(--accent);background:color-mix(in oklab, var(--brand) 10%, transparent);border-radius:10px}
 
+    /* Ensure image block hugs right side */
+    .hero-media{position:relative; justify-self:end}
+
     /* ========== SECTIONS & TILES ========== */
     .section{padding:28px 0 56px}
     .divider{height:1px;background:color-mix(in oklab, var(--text) 10%, transparent);margin:10px 0 30px}
@@ -207,7 +210,6 @@
       @keyframes wave{0%,100%{transform:rotate(0)}10%{transform:rotate(18deg)}20%{transform:rotate(-6deg)}30%{transform:rotate(12deg)}40%{transform:rotate(-3deg)}50%{transform:rotate(6deg)}60%{transform:rotate(0)}}
     }
     /* Camera emoji only */
-    .hero-media{position:relative}
     .hero-media .photo{position:relative;z-index:2}
     .deco-emoji{position:absolute;pointer-events:none;user-select:none;filter:drop-shadow(0 8px 18px rgba(0,0,0,.35))}
     .deco-emoji.camera{left:-12px;top:-12px;transform:rotate(-10deg);font-size:clamp(32px,6vw,72px);z-index:3}
@@ -366,18 +368,21 @@
     <section id="home" class="hero" aria-label="Intro">
       <div class="hero-left">
         <!-- Interactive hello pill -->
-<div class="hello-wrap" role="status" aria-live="polite">
-  <span class="hello-emoji" aria-hidden="true">👋</span>
-  <span id="helloMsg" class="hello-rotator">Hi, I’m Erick—glad you’re here.</span>
-</div>
+        <div class="hello-wrap" role="status" aria-live="polite">
+          <span class="hello-emoji" aria-hidden="true">👋</span>
+          <span id="helloMsg" class="hello-rotator">Hi, I’m Erick—glad you’re here.</span>
+        </div>
 
-<h1 class="title">Erick Dronski</h1>
-<p class="muted location">📍 Mount Laurel, NJ</p>
-<p class="muted" style="margin-top:10px"><span class="pop">Business:</span> MBA, GTM, Sales, Marketing 📈</p>
-<p class="muted"><span class="pop">Technical:</span> AI, Analytics, Python, IT 💻</p>
-<p class="muted"><span class="pop">Creative:</span> Social Media, Branding 🎨</p>
-<div class="tagline">“Build in public, share the journey, inspire the next builder.”</div>
-<p class="hero-desc">This is my personal portfolio. A place to explore my projects, passions, and ideas. Let’s connect and build something meaningful.</p>
+        <h1 class="title">Erick Dronski</h1>
+        <p class="muted location">📍 Mount Laurel, NJ</p>
+        <p class="muted" style="margin-top:10px"><span class="pop">Business:</span> MBA, GTM, Sales, Marketing 📈</p>
+        <p class="muted"><span class="pop">Technical:</span> AI, Analytics, Python, IT 💻</p>
+        <p class="muted"><span class="pop">Creative:</span> Social Media, Branding 🎨</p>
+        <div class="tagline">“Build in public, share the journey, inspire the next builder.”</div>
+        <p class="hero-desc">This is my personal portfolio. A place to explore my projects, passions, and ideas. Let’s connect and build something meaningful.</p>
+      </div>
+
+      <!-- Moved outside hero-left so it sits in the right grid column -->
       <div class="hero-media">
         <span class="deco-emoji front camera" aria-hidden="true">📸</span>
         <div class="photo">
@@ -722,7 +727,7 @@
       {t:'$Scope of distractions', d:'↓ 27%', up:false}
     ];
     const ticker=$('#ticker');
-    function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr}
+    function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j]]}return arr}
     function renderTicker(){
       ticker.innerHTML='';
       const shuffled = shuffle([...items]);
